@@ -130,7 +130,7 @@ You are an expert resume formatter. Your task is to take the raw text extracted 
 Preserve EVERY piece of information without paraphrasing.
 Use standard resume sections: Summary, Experience, Skills, Education, Projects.
 If a section is missing from the raw text, leave its placeholder empty or remove the section from the LaTeX.
-Ensure you properly escape LaTeX special characters like &, %, $, #, _, {, }, ~, ^, \.
+Ensure you properly escape LaTeX special characters like &, %, $, #, _, {{, }}, ~, ^, \.
 Output ONLY valid LaTeX code wrapped exactly in <latex>...</latex> tags. Do not output anything else.
 
 Here is the base LaTeX template containing placeholders like {{NAME}}, {{CONTACT_INFO}}, {{SUMMARY}}, {{EDUCATION}}, {{EXPERIENCE}}, {{PROJECTS}}, {{SKILLS}}:
@@ -154,7 +154,7 @@ Instructions:
 3. Rewrite the Summary paragraph to position the candidate perfectly for this specific role.
 4. DO NOT fabricate any experience, certifications, or skills that the candidate doesn't have.
 5. DO NOT remove any experience or projects, only reword and re-prioritize.
-6. Make sure all LaTeX syntax remains valid and error-free. Be very careful with special characters like &, %, $, #, _, {, }, ~, ^, \. Ensure they are escaped.
+6. Make sure all LaTeX syntax remains valid and error-free. Be very careful with special characters like &, %, $, #, _, {{, }}, ~, ^, \. Ensure they are escaped.
 7. Output ONLY valid LaTeX code wrapped exactly in <latex>...</latex> tags. Do not output anything else.
 
 Job Description:

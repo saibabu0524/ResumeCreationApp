@@ -26,10 +26,10 @@ app = FastAPI(title="Resume Tailor API")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
 
-# if GEMINI_API_KEY:
-gemini_client = genai.Client(api_key="")
-# else:
-#     gemini_client = None
+if GEMINI_API_KEY:
+    gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+else:
+    gemini_client = None
 
 # --- Helpers ---
 
@@ -76,7 +76,7 @@ async def call_llm(provider: str, prompt: str) -> str:
         try:
             # Using flash-2.0 or 1.5-flash
             response = gemini_client.models.generate_content(
-                model="gemini-1.5-flash",
+                model="gemini-2.5-flash",
                 contents=prompt,
                 config=types.GenerateContentConfig(temperature=0.2)
             )

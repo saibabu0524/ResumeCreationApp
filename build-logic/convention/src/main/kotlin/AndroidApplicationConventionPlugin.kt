@@ -48,7 +48,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         manifestPlaceholders["appName"] = "ResumeCreationApp DEV"
 
                         val devBaseUrl = project.findProperty("DEV_BASE_URL") as? String
-                            ?: "https://dev-api.example.com/v1/"
+                            ?: "https://474f-2402-e280-213a-15c-6cbe-9b2f-6af9-b529.ngrok-free.app/"
                         buildConfigField("String", "BASE_URL", "\"$devBaseUrl\"")
                     }
 
