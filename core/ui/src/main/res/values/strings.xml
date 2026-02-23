@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ─── General ────────────────────────────────────────────────────── -->
+    <string name="core_ui_ok">OK</string>
+    <string name="core_ui_cancel">Cancel</string>
+    <string name="core_ui_retry">Retry</string>
+    <string name="core_ui_close">Close</string>
+    <string name="core_ui_save">Save</string>
+    <string name="core_ui_delete">Delete</string>
+    <string name="core_ui_edit">Edit</string>
+    <string name="core_ui_done">Done</string>
+    <string name="core_ui_next">Next</string>
+    <string name="core_ui_back">Back</string>
+    <string name="core_ui_loading">Loading…</string>
+
+    <!-- ─── Navigation ─────────────────────────────────────────────────── -->
+    <string name="core_ui_navigate_back">Navigate back</string>
+
+    <!-- ─── Empty State ────────────────────────────────────────────────── -->
+    <string name="core_ui_empty_title">Nothing here yet</string>
+    <string name="core_ui_empty_message">There is no content to display right now.</string>
+
+    <!-- ─── Error State ────────────────────────────────────────────────── -->
+    <string name="core_ui_error_generic">Something went wrong. Please try again.</string>
+    <string name="core_ui_error_network">No internet connection. Check your network and try again.</string>
+    <string name="core_ui_error_timeout">Request timed out. Please try again.</string>
+    <string name="core_ui_error_server">Server error. Please try again later.</string>
+    <string name="core_ui_error_unauthorized">Session expired. Please sign in again.</string>
+
+    <!-- ─── Image ──────────────────────────────────────────────────────── -->
+    <string name="core_ui_image_loading">Loading image</string>
+    <string name="core_ui_image_error">Failed to load image</string>
+</resources>

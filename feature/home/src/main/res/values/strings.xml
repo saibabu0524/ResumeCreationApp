@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Home</string>
+    <string name="home_settings">Settings</string>
+    <string name="home_search_placeholder">Search users…</string>
+    <string name="home_empty_title">No Users Found</string>
+    <string name="home_empty_message">There are no users to display right now.</string>
+    <string name="home_empty_action">Refresh</string>
+</resources>

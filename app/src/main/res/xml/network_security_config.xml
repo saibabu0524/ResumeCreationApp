@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Network Security Configuration
+    ================================
+    Enforces HTTPS for all network connections.
+    Cleartext HTTP is blocked globally — usesCleartextTraffic="false" in the manifest
+    provides an additional layer of enforcement.
+
+    To add certificate pinning for your production API domain:
+    1. Extract pins using the OpenSSL command below.
+    2. Add a <domain-config> block with <pin-set> under the <network-security-config> root.
+
+    Extract pin (run against your server):
+        openssl s_client -connect api.yourdomain.com:443 -showcerts 2>/dev/null \
+            | openssl x509 -pubkey -noout \
+            | openssl pkey -pubin -outform der \
+            | openssl dgst -sha256 -binary \
+            | base64
+
+    Example pin configuration (uncomment and fill in your pins):
+
+    <domain-config>
+        <domain includeSubdomains="true">api.yourdomain.com</domain>
+        <pin-set expiration="YYYY-MM-DD">
+            <pin digest="SHA-256">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</pin>
+            <!- - Backup pin (keep the CA intermediate) - ->
+            <pin digest="SHA-256">BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=</pin>
+        </pin-set>
+    </domain-config>
+
+    Note: Always include at least 2 pins (primary + backup) to prevent lockout
+    if the primary certificate is rotated.
+-->
+<network-security-config>
+
+    <!-- Trust only system CAs for all connections by default (no user-added CAs in release) -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Allow user-added CAs in debug builds only (for Charles/Proxyman proxies) -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+
+</network-security-config>

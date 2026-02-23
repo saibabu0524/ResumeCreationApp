@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Static App Shortcuts
+    ====================
+    These shortcuts appear when the user long-presses the app icon on the launcher.
+
+    To add a new shortcut:
+    1. Add a <shortcut> element below.
+    2. Ensure the target Activity handles the intent action.
+    3. Test on a physical device (not all emulators support shortcuts).
+
+    Maximum recommended: 4 shortcuts (2 static + 2 dynamic).
+-->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="settings"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:shortcutShortLabel="@string/shortcut_settings_short"
+        android:shortcutLongLabel="@string/shortcut_settings_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="${applicationId}"
+            android:targetClass="com.softsuave.resumecreationapp.MainActivity" />
+    </shortcut>
+
+</shortcuts>

@@ -1,0 +1,11 @@
+groups:
+  internal:
+    track: "internal"
+    emails:
+      - dev@company.com
+    auto_promote_to: null
+  alpha:
+    track: "alpha"
+    emails:
+      - beta@company.com
+    auto_promote_to: null

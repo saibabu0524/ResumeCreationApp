@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- Firebase Cloud Messaging Service -->
+        <service
+            android:name="com.softsuave.resumecreationapp.core.notifications.FcmService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- App Startup: Notification Channel Initializer -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="com.softsuave.resumecreationapp.core.notifications.initializer.NotificationChannelInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+
+</manifest>

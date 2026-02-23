@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ─── Login ──────────────────────────────────────────────────────── -->
+    <string name="auth_login_title">Welcome Back</string>
+    <string name="auth_login_subtitle">Sign in to continue</string>
+    <string name="auth_login_button">Sign In</string>
+    <string name="auth_register_prompt">Don\'t have an account? Register</string>
+
+    <!-- ─── Registration ───────────────────────────────────────────────── -->
+    <string name="auth_register_title">Create Account</string>
+    <string name="auth_register_subtitle">Sign up to get started</string>
+    <string name="auth_register_button">Create Account</string>
+    <string name="auth_login_prompt">Already have an account? Sign In</string>
+
+    <!-- ─── Shared Fields ──────────────────────────────────────────────── -->
+    <string name="auth_email_label">Email</string>
+    <string name="auth_email_placeholder">Enter your email</string>
+    <string name="auth_password_label">Password</string>
+    <string name="auth_password_placeholder">Enter your password</string>
+    <string name="auth_confirm_password_label">Confirm Password</string>
+    <string name="auth_display_name_label">Display Name</string>
+    <string name="auth_show_password">Show password</string>
+    <string name="auth_hide_password">Hide password</string>
+
+    <!-- ─── Onboarding ─────────────────────────────────────────────────── -->
+    <string name="auth_onboarding_page1_title">Discover</string>
+    <string name="auth_onboarding_page1_desc">Explore features designed to simplify your workflow and boost productivity.</string>
+    <string name="auth_onboarding_page2_title">Secure</string>
+    <string name="auth_onboarding_page2_desc">Your data is protected with enterprise-grade encryption and biometric authentication.</string>
+    <string name="auth_onboarding_page3_title">Stay Updated</string>
+    <string name="auth_onboarding_page3_desc">Get real-time notifications so you never miss what matters most.</string>
+    <string name="auth_onboarding_get_started">Get Started</string>
+    <string name="auth_onboarding_skip">Skip</string>
+
+    <!-- ─── R.string refs from core:ui used by auth ────────────────────── -->
+    <string name="core_ui_next">Next</string>
+</resources>

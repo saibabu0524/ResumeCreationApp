@@ -1,0 +1,52 @@
+#!/bin/sh
+# ─── Commit Message Validation Hook ───────────────────────────────────────
+#
+# Enforces Conventional Commits format:
+#   type(scope): description
+#
+# Allowed types: feat, fix, refactor, test, docs, build, ci, chore, perf
+#
+# Installation:
+#   cp scripts/commit-msg .git/hooks/commit-msg
+#   chmod +x .git/hooks/commit-msg
+
+COMMIT_MSG_FILE="$1"
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Regex for Conventional Commits
+PATTERN="^(feat|fix|refactor|test|docs|build|ci|chore|perf)(\(.+\))?!?: .{1,72}$"
+
+# Check first line only (subject line)
+FIRST_LINE=$(echo "$COMMIT_MSG" | head -n 1)
+
+if ! echo "$FIRST_LINE" | grep -Eq "$PATTERN"; then
+    echo ""
+    echo "❌ Invalid commit message format!"
+    echo ""
+    echo "Expected format: type(scope): description"
+    echo ""
+    echo "Allowed types: feat, fix, refactor, test, docs, build, ci, chore, perf"
+    echo ""
+    echo "Examples:"
+    echo "  feat(auth): add biometric login support"
+    echo "  fix(network): handle 503 service unavailable"
+    echo "  test(profile): add unit tests for ProfileViewModel"
+    echo "  chore(deps): update compose-bom to 2024.12.01"
+    echo ""
+    echo "Your message was:"
+    echo "  $FIRST_LINE"
+    echo ""
+    exit 1
+fi
+
+# Check subject line length
+SUBJECT_LENGTH=${#FIRST_LINE}
+if [ "$SUBJECT_LENGTH" -gt 72 ]; then
+    echo ""
+    echo "❌ Commit message subject is too long ($SUBJECT_LENGTH chars, max 72)."
+    echo "  $FIRST_LINE"
+    echo ""
+    exit 1
+fi
+
+exit 0
