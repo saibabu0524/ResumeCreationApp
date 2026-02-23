@@ -15,6 +15,9 @@ import com.softsuave.resumecreationapp.feature.profile.navigation.profileNavGrap
 import com.softsuave.resumecreationapp.feature.settings.navigation.SettingsScreenRoute
 import com.softsuave.resumecreationapp.feature.settings.navigation.settingsNavGraph
 
+import com.softsuave.resumecreationapp.feature.resume.navigation.ResumeGraph
+import com.softsuave.resumecreationapp.feature.resume.navigation.resumeGraph
+
 /**
  * Root navigation host assembling all feature navigation graphs.
  *
@@ -33,9 +36,12 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AuthGraphRoute,
+        startDestination = ResumeGraph,
         modifier = modifier,
     ) {
+        // ─── Resume ──────────────────────────────────────────────────
+        resumeGraph(navController = navController)
+
         // ─── Auth ────────────────────────────────────────────────────
         authNavGraph(
             onNavigateToHome = {

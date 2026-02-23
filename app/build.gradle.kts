@@ -40,6 +40,7 @@ dependencies {
     implementation(projects.feature.home)
     implementation(projects.feature.settings)
     implementation(projects.feature.profile)
+    implementation(projects.feature.resume)
 
     // Navigation (type-safe routes)
     implementation(libs.navigation.compose)
