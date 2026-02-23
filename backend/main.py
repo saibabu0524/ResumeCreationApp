@@ -39,7 +39,9 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     try:
         with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
             for page in pdf.pages:
-                text += page.extract_text() + "\n"
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text + "\n"
     except Exception as e:
         logger.warning(f"pdfplumber failed: {e}. Falling back to PyMuPDF.")
 
@@ -53,28 +55,26 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
             raise HTTPException(status_code=400, detail="Could not extract text from PDF.")
 
     if not text.strip():
-         raise HTTPException(status_code=400, detail="PDF appears to be empty or unreadable.")
+        raise HTTPException(status_code=400, detail="PDF appears to be empty or unreadable.")
 
     return text
 
 def extract_latex(response_text: str) -> str:
-    """Extract LaTeX content from <latex> tags, or return raw text if omitted (fallback)."""
+    """Extract LaTeX content from <latex> tags, or fallback to markdown blocks."""
     match = re.search(r"<latex>(.*?)</latex>", response_text, re.DOTALL | re.IGNORECASE)
     if match:
         return match.group(1).strip()
-    # Fallback to markdown blocks if they messed up the tags
     match_md = re.search(r"```latex(.*?)```", response_text, re.DOTALL | re.IGNORECASE)
     if match_md:
-       return match_md.group(1).strip()
+        return match_md.group(1).strip()
     return response_text.strip()
 
 async def call_llm(provider: str, prompt: str) -> str:
-    """Absract LLM call to Gemini or Ollama."""
+    """Abstract LLM call to Gemini or Ollama."""
     if provider == "gemini":
         if not gemini_client:
             raise HTTPException(status_code=503, detail="Gemini API Key not configured.")
         try:
-            # Using flash-2.0 or 1.5-flash
             response = gemini_client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=prompt,
@@ -106,12 +106,16 @@ async def call_llm(provider: str, prompt: str) -> str:
     else:
         raise HTTPException(status_code=400, detail="Invalid provider. Choose 'gemini' or 'ollama'.")
 
-def compile_latex_to_pdf(latex_code: str, work_dir: str) -> bool:
-    """Compile LaTeX to PDF using pdflatex. Returns True if successful."""
+def compile_latex_to_pdf(latex_code: str, work_dir: str) -> tuple[bool, str]:
+    """
+    Compile LaTeX to PDF using pdflatex.
+    Returns (success: bool, pdflatex_log: str).
+    """
     tex_file_path = os.path.join(work_dir, "resume.tex")
-    with open(tex_file_path, "w") as f:
+    with open(tex_file_path, "w", encoding="utf-8") as f:
         f.write(latex_code)
 
+    log_output = ""
     try:
         # Run pdflatex twice for references/formatting
         for _ in range(2):
@@ -119,38 +123,63 @@ def compile_latex_to_pdf(latex_code: str, work_dir: str) -> bool:
                 ["pdflatex", "-interaction=nonstopmode", "resume.tex"],
                 cwd=work_dir,
                 stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                stderr=subprocess.STDOUT,  # merge stderr into stdout for full log
                 text=True,
                 timeout=30
             )
+            log_output = result.stdout  # keep the last run's log
 
         pdf_path = os.path.join(work_dir, "resume.pdf")
-        if result.returncode == 0 and os.path.exists(pdf_path):
-            return True
+        # Use PDF existence as primary success signal — pdflatex can return rc=1
+        # for non-fatal warnings (e.g. undefined icon names) while still producing a valid PDF.
+        if os.path.exists(pdf_path) and os.path.getsize(pdf_path) > 1024:
+            if result.returncode != 0:
+                logger.warning(f"pdflatex rc={result.returncode} but PDF produced — treating as success.")
+            return True, log_output
         else:
-            logger.error(f"pdflatex compilation failed. Return code: {result.returncode}")
-            logger.debug(f"pdflatex stdout:\n{result.stdout}")
-            return False
+            logger.error(f"pdflatex failed (rc={result.returncode}), no PDF produced:\n{log_output[-3000:]}")
+            return False, log_output
+
     except subprocess.TimeoutExpired:
         logger.error("pdflatex compilation timed out.")
-        return False
+        return False, "pdflatex timed out"
     except FileNotFoundError:
-        logger.error("pdflatex command not found. Ensure TeX Live is installed.")
+        logger.error("pdflatex not found. Ensure TeX Live is installed.")
         raise HTTPException(status_code=500, detail="pdflatex not installed on server.")
 
-async def process_resume_stage(provider: str, prompt: str, work_dir: str, retries: int = 2) -> Optional[str]:
-    """Run LLM and attempt pdflatex compilation with retry loop."""
+async def process_resume_stage(
+    provider: str,
+    base_prompt: str,
+    work_dir: str,
+    retries: int = 2
+) -> Optional[str]:
+    """
+    Run LLM → compile loop with retry.
+    On failure, feeds the pdflatex error log back to the LLM for self-correction.
+    """
+    prompt = base_prompt
     for attempt in range(retries):
         logger.info(f"LLM compilation attempt {attempt + 1}/{retries}")
-        raw_llm_response = await call_llm(provider, prompt)
-        latex_code = extract_latex(raw_llm_response)
+        raw_response = await call_llm(provider, prompt)
+        latex_code = extract_latex(raw_response)
 
-        if compile_latex_to_pdf(latex_code, work_dir):
+        success, log = compile_latex_to_pdf(latex_code, work_dir)
+        if success:
             return latex_code
-        else:
-             # Compile error - if we have another attempt, we could theoretically feed the log back.
-             # For simplicity in this implementation, we just retry the generation with a stronger warning.
-             prompt += "\n\nVERY IMPORTANT: Your previous response caused a LaTeX compilation error. Make sure you are escaping all special characters (e.g. \\%, \\&, \\$, \\#) properly and providing VALID formatting."
+
+        # Feed the actual error log back so the model can self-correct
+        # Extract relevant error lines (lines starting with '!')
+        error_lines = "\n".join(
+            line for line in log.splitlines()
+            if line.startswith("!") or "Error" in line or "Undefined" in line
+        )
+        prompt = (
+            base_prompt
+            + f"\n\nIMPORTANT: Your previous LaTeX caused compilation errors. "
+            f"Fix ALL issues before responding.\n\nCompiler errors:\n{error_lines or log[-1500:]}\n\n"
+            f"Broken LaTeX (for reference):\n```latex\n{latex_code[:3000]}\n```"
+        )
+
     return None
 
 def cleanup_temp_dir(dir_path: str):
@@ -173,7 +202,7 @@ async def tailor_resume(
     job_description: str = Form(...),
     provider: str = Form("gemini")
 ):
-    if not resume.filename.endswith(".pdf"):
+    if not resume.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Upload must be a PDF file.")
 
     request_id = str(uuid.uuid4())
@@ -181,44 +210,54 @@ async def tailor_resume(
     background_tasks.add_task(cleanup_temp_dir, work_dir)
 
     try:
-        # 1. Read PDF
+        # 1. Read & extract PDF
         logger.info(f"[{request_id}] 1. Extracting PDF...")
         pdf_bytes = await resume.read()
         raw_text = extract_text_from_pdf(pdf_bytes)
 
-        # 2. Stage A: Structure
-        logger.info(f"[{request_id}] 2. Stage A (Structuring)...")
-        stage_a_prompt = STAGE_A_PROMPT.format(
-            latex_template=BASE_LATEX_TEMPLATE,
-            resume_text=raw_text
+        # 2. Stage A: Structure the resume into the LaTeX template
+        logger.info(f"[{request_id}] 2. Stage A — Structuring...")
+        # Use replace() instead of .format() to avoid KeyError on LaTeX curly braces like {5pt}
+        stage_a_prompt = (
+            STAGE_A_PROMPT
+            .replace("{latex_template}", BASE_LATEX_TEMPLATE)
+            .replace("{resume_text}", raw_text)
         )
         structured_latex = await process_resume_stage(provider, stage_a_prompt, work_dir)
         if not structured_latex:
-            raise HTTPException(status_code=500, detail="Failed to generate valid structured LaTeX from resume.")
+            raise HTTPException(
+                status_code=500,
+                detail="Failed to generate valid structured LaTeX from resume after retries."
+            )
 
-        # 3. Stage B: Tailor
-        logger.info(f"[{request_id}] 3. Stage B (Tailoring)...")
-        stage_b_prompt = STAGE_B_PROMPT.format(
-            job_description=job_description,
-            latex_resume=structured_latex
+        # 3. Stage B: Tailor the structured resume to the job description
+        logger.info(f"[{request_id}] 3. Stage B — Tailoring...")
+        stage_b_prompt = (
+            STAGE_B_PROMPT
+            .replace("{job_description}", job_description)
+            .replace("{latex_resume}", structured_latex)
         )
         tailored_latex = await process_resume_stage(provider, stage_b_prompt, work_dir)
         if not tailored_latex:
-             raise HTTPException(status_code=500, detail="Failed to compile tailored LaTeX resume.")
+            raise HTTPException(
+                status_code=500,
+                detail="Failed to compile tailored LaTeX resume after retries."
+            )
 
-        # 4. Return the compiled PDF
+        # 4. Stream back the compiled PDF
         pdf_path = os.path.join(work_dir, "resume.pdf")
         if not os.path.exists(pdf_path):
-             raise HTTPException(status_code=500, detail="PDF was not found after compilation.")
+            raise HTTPException(status_code=500, detail="PDF not found after compilation.")
 
-        logger.info(f"[{request_id}] Success. Returning PDF.")
+        logger.info(f"[{request_id}] Done. Returning PDF.")
         with open(pdf_path, "rb") as f:
             pdf_data = f.read()
 
+        safe_filename = re.sub(r"[^\w.\-]", "_", resume.filename)
         return StreamingResponse(
             io.BytesIO(pdf_data),
             media_type="application/pdf",
-            headers={"Content-Disposition": f'attachment; filename="tailored_{resume.filename}"'}
+            headers={"Content-Disposition": f'attachment; filename="tailored_{safe_filename}"'}
         )
 
     except HTTPException:

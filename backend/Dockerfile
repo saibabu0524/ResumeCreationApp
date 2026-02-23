@@ -1,9 +1,10 @@
 FROM python:3.11-slim
 
-# Install system dependencies including pdflatex
+# Install system dependencies including pdflatex + fontawesome5
 RUN apt-get update && apt-get install -y \
     texlive-latex-recommended \
     texlive-fonts-recommended \
+    texlive-fonts-extra \
     texlive-latex-extra \
     fonts-liberation \
     && rm -rf /var/lib/apt/lists/*

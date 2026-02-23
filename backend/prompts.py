@@ -1,139 +1,128 @@
-BASE_LATEX_TEMPLATE = r'''\documentclass[letterpaper,11pt]{article}
+BASE_LATEX_TEMPLATE = r'''\documentclass{article}
+\usepackage{fontawesome5}
 
-\usepackage{latexsym}
-\usepackage[empty]{fullpage}
-\usepackage{titlesec}
-\usepackage{marvosym}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
-\usepackage[english]{babel}
-\usepackage{tabularx}
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=2 cm,
+    bottom=2 cm,
+    left=2 cm,
+    right=2 cm,
+    footskip=1.0 cm,
+]{geometry}
+\usepackage{titlesec, tabularx, array, xcolor, enumitem, fontawesome5, amsmath, hyperref, eso-pic, calc, bookmark, lastpage, changepage, paracol, ifthen, needspace, iftex}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
 
-\pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
 
-% Adjust margins
-\addtolength{\oddsidemargin}{-0.5in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+\usepackage{charter}
 
-\urlstyle{same}
-
-\raggedbottom
 \raggedright
-\setlength{\tabcolsep}{0in}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
 
-% Sections formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing{\section}{-1pt}{0.3 cm}{0.2 cm}
 
-%-------------------------
-% Custom commands
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
+% Improved list environment
+\newenvironment{highlights}{
+    \begin{itemize}[topsep=0.10 cm, parsep=0.10 cm, partopsep=0pt, itemsep=0pt, leftmargin=15pt]
+}{
+    \end{itemize}
 }
-
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
-
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
-
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 %----------HEADING----------
-% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
-%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
-% \end{tabular*}
+\begin{center}
+{\fontsize{25 pt}{25 pt}\selectfont {{NAME}}}\vspace{5pt}
+\end{center}
 
 \begin{center}
-    \textbf{\Huge \scshape {{NAME}}} \\ \vspace{1pt}
-    \small {{CONTACT_INFO}} \\
+    {{CONTACT_INFO}}
 \end{center}
 
 %-----------SUMMARY-----------
-\section{Summary}
+\section*{Professional Summary}
+\noindent
 {{SUMMARY}}
-
-%-----------EDUCATION-----------
-\section{Education}
-  \resumeSubHeadingListStart
-    {{EDUCATION}}
-  \resumeSubHeadingListEnd
-
-%-----------EXPERIENCE-----------
-\section{Experience}
-  \resumeSubHeadingListStart
-    {{EXPERIENCE}}
-  \resumeSubHeadingListEnd
-
-%-----------PROJECTS-----------
-\section{Projects}
-    \resumeSubHeadingListStart
-      {{PROJECTS}}
-    \resumeSubHeadingListEnd
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     {{SKILLS}}
-    }}
- \end{itemize}
+\begin{itemize}[leftmargin=15pt, itemsep=2pt]
+    {{SKILLS}}
+\end{itemize}
 
-%-------------------------------------------
+%-----------EXPERIENCE-----------
+\section{Experience}
+{{EXPERIENCE}}
+
+%-----------PROJECTS-----------
+\section{Projects}
+{{PROJECTS}}
+
+%-----------ACHIEVEMENTS-----------
+\section{Achievements \& Certification}
+\begin{highlights}
+{{ACHIEVEMENTS}}
+\end{highlights}
+
+%-----------EDUCATION-----------
+\section{Education}
+{{EDUCATION}}
+
 \end{document}
 '''
 
-STAGE_A_PROMPT = """
-You are an expert resume formatter. Your task is to take the raw text extracted from a user's resume and format it exactly into the provided LaTeX template.
-Preserve EVERY piece of information without paraphrasing.
-Use standard resume sections: Summary, Experience, Skills, Education, Projects.
-If a section is missing from the raw text, leave its placeholder empty or remove the section from the LaTeX.
-Ensure you properly escape LaTeX special characters like &, %, $, #, _, {{, }}, ~, ^, \.
-Output ONLY valid LaTeX code wrapped exactly in <latex>...</latex> tags. Do not output anything else.
+# --- Formatting Guidance ---
+# Contact info should use \faMapMarker*, \faPhone, \faEnvelope, \faLinkedin, \faGithub icons
+# separated by \hspace{5pt}|\hspace{5pt}
+#
+# Experience entries follow this pattern:
+#   \textbf{Title, Company} \hfill (Start -- End)\\[2mm]
+#   Brief description paragraph.
+#   \begin{itemize}[leftmargin=15pt, itemsep=2pt]
+#       \item ...
+#   \end{itemize}
+#
+# Project entries follow this pattern:
+#   \textbf{Project Name} \hfill \textit{Date | Tech Stack}\\
+#   Brief description.
+#   \begin{highlights}
+#       \item \textbf{Key aspect:} Detail
+#   \end{highlights}
+#
+# Skill items:   \item \textbf{Category:} value1, value2, ...
+# Education:     \textbf{Degree} \hfill \textit{Years} \\ Institution
+# Achievement items go directly as \item text inside the highlights env
 
-Here is the base LaTeX template containing placeholders like {{NAME}}, {{CONTACT_INFO}}, {{SUMMARY}}, {{EDUCATION}}, {{EXPERIENCE}}, {{PROJECTS}}, {{SKILLS}}:
+
+STAGE_A_PROMPT = r"""
+You are an expert resume formatter. Your task is to take raw text extracted from a user's resume and format it into the provided LaTeX template.
+
+STRICT RULES:
+1. Preserve EVERY piece of information — do NOT paraphrase, summarize, or omit anything.
+2. Fill in these placeholders: {{NAME}}, {{CONTACT_INFO}}, {{SUMMARY}}, {{SKILLS}}, {{EXPERIENCE}}, {{PROJECTS}}, {{ACHIEVEMENTS}}, {{EDUCATION}}.
+3. If a section (e.g., Achievements, Projects) is absent from the raw text, remove that entire section block from the LaTeX.
+4. Escape ALL LaTeX special characters: & → \&, % → \%, $ → \$, # → \#, _ → \_, {{ → \{{, }} → \}}, ~ → \textasciitilde, ^ → \textasciicircum, \ → \textbackslash
+5. Contact info: use FontAwesome5 icons (\faMapMarker*, \faPhone~, \faEnvelope~, \faLinkedin~, \faGithub~) for each contact field, separated by \hspace{5pt}|\hspace{5pt}.
+6. Skills: each category on its own \item \textbf{Category:} values line.
+7. Experience: use \textbf{Title, Company} \hfill (dates)\\[2mm] + description paragraph + \begin{itemize}...\end{itemize}.
+8. Projects: use \textbf{Name} \hfill \textit{dates | tech}\\  + description + \begin{highlights}...\end{highlights}.
+9. Education: \textbf{Degree} \hfill \textit{Years} \\ Institution
+10. Output ONLY valid LaTeX wrapped in <latex>...</latex> tags. No preamble, no explanation, nothing else.
+
+LaTeX Template:
 ```latex
 {latex_template}
 ```
@@ -144,18 +133,20 @@ Raw Resume Text:
 ```
 """
 
-STAGE_B_PROMPT = """
-You are an expert technical recruiter and resume writer. 
+STAGE_B_PROMPT = r"""
+You are an expert technical recruiter and resume writer.
 Your task is to tailor a candidate's LaTeX resume to perfectly match a provided Job Description.
 
-Instructions:
-1. Reorder sections and skills to match the Job Description priorities.
-2. Mirror keywords and terminology from the Job Description in the bullet points.
-3. Rewrite the Summary paragraph to position the candidate perfectly for this specific role.
-4. DO NOT fabricate any experience, certifications, or skills that the candidate doesn't have.
-5. DO NOT remove any experience or projects, only reword and re-prioritize.
-6. Make sure all LaTeX syntax remains valid and error-free. Be very careful with special characters like &, %, $, #, _, {{, }}, ~, ^, \. Ensure they are escaped.
-7. Output ONLY valid LaTeX code wrapped exactly in <latex>...</latex> tags. Do not output anything else.
+INSTRUCTIONS:
+1. Rewrite the Professional Summary to directly target this specific role and company.
+2. Mirror keywords, terminology, and required skills from the Job Description in bullet points.
+3. Reorder Technical Skills to surface the most relevant technologies first.
+4. Elevate bullet points that align with the job's responsibilities; de-emphasize unrelated ones.
+5. Do NOT fabricate any experience, skills, certifications, or projects the candidate doesn't have.
+6. Do NOT remove any experience or projects — only reword and re-prioritize.
+7. Keep ALL LaTeX syntax valid. Escape special characters properly: & → \&, % → \%, $ → \$, # → \#, _ → \_, ~ → \textasciitilde, ^ → \textasciicircum
+8. Preserve the template structure exactly (all environments, commands, section order).
+9. Output ONLY valid LaTeX wrapped in <latex>...</latex> tags. No preamble, no explanation, nothing else.
 
 Job Description:
 ```
