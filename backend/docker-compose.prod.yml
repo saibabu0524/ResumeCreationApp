@@ -22,8 +22,11 @@ services:
     volumes:
       # Persist uploaded files across container restarts. No source code mapping in prod
       - uploads_data:/app/uploads
+      - sqlite_data:/app/data
     env_file:
       - .env
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///app/data/db.sqlite3
     depends_on:
       redis:
         condition: service_healthy
@@ -38,8 +41,11 @@ services:
       target: runtime
     volumes:
       - uploads_data:/app/uploads
+      - sqlite_data:/app/data
     env_file:
       - .env
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///app/data/db.sqlite3
     depends_on:
       redis:
         condition: service_healthy
@@ -66,3 +72,4 @@ services:
 volumes:
   redis_data:
   uploads_data:
+  sqlite_data:

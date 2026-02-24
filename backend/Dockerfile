@@ -42,8 +42,8 @@ COPY app/ ./app/
 COPY alembic/ ./alembic/
 COPY alembic.ini .
 
-# Ensure the uploads directory exists with correct permissions
-RUN mkdir -p /app/uploads && chown appuser:appgroup /app/uploads
+# Ensure the uploads and data directories exist with correct permissions
+RUN mkdir -p /app/uploads /app/data && chown -R appuser:appgroup /app/uploads /app/data
 
 USER appuser
 
