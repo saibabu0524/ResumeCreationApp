@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  # ── Nginx Reverse Proxy ────────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+    restart: always
+
+  # ── FastAPI API server ────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      target: runtime
+    # We do not expose port 8000 externally; Nginx routes traffic here
+    # ports:
+    #   - "8000:8000"
+    volumes:
+      # Persist uploaded files across container restarts. No source code mapping in prod
+      - uploads_data:/app/uploads
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: always
+    # Prod command (no --reload)
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips="*"
+
+  # ── ARQ background worker ──────────────────────────────────────────────────
+  worker:
+    build:
+      context: .
+      target: runtime
+    volumes:
+      - uploads_data:/app/uploads
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_started
+    restart: always
+    command: arq app.workers.arq_worker.WorkerSettings
+
+  # ── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    # Internal to the network only, no need to expose port externally
+    # ports:
+    #   - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+volumes:
+  redis_data:
+  uploads_data:
