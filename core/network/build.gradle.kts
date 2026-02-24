@@ -1,6 +1,7 @@
 plugins {
     id("resumecreationapp.android.library")
     id("resumecreationapp.android.hilt")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {

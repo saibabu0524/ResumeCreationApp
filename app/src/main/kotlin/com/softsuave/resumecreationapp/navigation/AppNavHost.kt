@@ -33,10 +33,11 @@ import com.softsuave.resumecreationapp.feature.resume.navigation.resumeGraph
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
+    startDestination: Any = AuthGraphRoute,
 ) {
     NavHost(
         navController = navController,
-        startDestination = ResumeGraph,
+        startDestination = startDestination,
         modifier = modifier,
     ) {
         // ─── Resume ──────────────────────────────────────────────────
@@ -45,7 +46,7 @@ fun AppNavHost(
         // ─── Auth ────────────────────────────────────────────────────
         authNavGraph(
             onNavigateToHome = {
-                navController.navigate(HomeScreenRoute) {
+                navController.navigate(ResumeGraph) {
                     // Clear auth back stack — user shouldn't go back to login
                     popUpTo(AuthGraphRoute) { inclusive = true }
                 }

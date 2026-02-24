@@ -13,6 +13,9 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.analytics)
     implementation(projects.core.featureFlags)
+    implementation(projects.core.network)
+    implementation(projects.core.datastore)
+    implementation(projects.core.data)
 
     testImplementation(projects.core.testing)
 }
