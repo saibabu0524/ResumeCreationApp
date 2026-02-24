@@ -41,9 +41,15 @@ object ExceptionMapper {
     }
 
     private fun mapHttpException(e: HttpException): AppException = when (e.code()) {
+        400 -> AppException.BadRequest(cause = e)
         401 -> AppException.Unauthorized(cause = e)
         403 -> AppException.Forbidden(cause = e)
         404 -> AppException.NotFound(cause = e)
+        409 -> AppException.Conflict(cause = e)
+        413 -> AppException.FileTooLarge(cause = e)
+        415 -> AppException.UnsupportedMediaType(cause = e)
+        422 -> AppException.ValidationError(cause = e)
+        429 -> AppException.RateLimited(cause = e)
         in 500..599 -> AppException.ServerError(code = e.code(), cause = e)
         else -> AppException.Unknown(
             message = "HTTP ${e.code()}: ${e.message()}",

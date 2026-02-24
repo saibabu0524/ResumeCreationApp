@@ -129,8 +129,23 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideAuthApi(
-        @Named("UnauthenticatedRetrofit") retrofit: Retrofit
-    ): com.softsuave.resumecreationapp.core.network.api.AuthApi = retrofit.create(com.softsuave.resumecreationapp.core.network.api.AuthApi::class.java)
+        @Named("UnauthenticatedRetrofit") retrofit: Retrofit,
+    ): com.softsuave.resumecreationapp.core.network.api.AuthApi =
+        retrofit.create(com.softsuave.resumecreationapp.core.network.api.AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideResumeApi(
+        @AuthenticatedClient retrofit: Retrofit,
+    ): com.softsuave.resumecreationapp.core.network.api.ResumeApi =
+        retrofit.create(com.softsuave.resumecreationapp.core.network.api.ResumeApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUploadsApi(
+        @AuthenticatedClient retrofit: Retrofit,
+    ): com.softsuave.resumecreationapp.core.network.api.UploadsApi =
+        retrofit.create(com.softsuave.resumecreationapp.core.network.api.UploadsApi::class.java)
 
     @Provides
     @Singleton

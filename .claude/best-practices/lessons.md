@@ -68,6 +68,49 @@ copying full code examples and explanations that already existed verbatim in:
 
 ---
 
+## [2025-07-11] — Backend ↔ Frontend API Contract Drift (13 mismatches)
+
+**What happened:** After the backend FastAPI template was fully built, a full audit of
+the Android Retrofit layer revealed 13 contract mismatches covering paths, verbs,
+payloads, error codes, and auth flow.
+
+**Root cause:** Backend and frontend were developed independently without a shared
+contract document, and no incremental sync was done as backend routes evolved.
+
+**Key mismatches fixed:**
+1. `AuthApi` login: `@FormUrlEncoded @POST("login")` with `username` field
+   → `@Body LoginRequestDto` (JSON) with `email` field, path `"auth/login"`
+2. All `AuthApi` paths were missing the `auth/` prefix (`"register"` → `"auth/register"`)
+3. `TokenResponseDto` was missing `refreshToken` — only `accessToken` was saved to storage
+4. `UserResponseDto.id` was typed `Int` instead of `String` (UUID)
+5. No `ApiResponseDto<T>` envelope — all service functions returned raw DTOs instead of
+   the `{data, message, success}` wrapper the backend sends on every response
+6. `UserApi` used `GET/PUT users/{userId}` — backend only exposes `GET/PATCH users/me`
+7. `Dispatchers.IO` was hardcoded in `AuthRepositoryImpl`, `ResumeRepository`
+   → inject `@IoDispatcher CoroutineDispatcher`
+8. `AuthRepositoryImpl` used Kotlin stdlib `Result` API (`.isSuccess`, `.getOrNull()`)
+   instead of the project's sealed `DomainResult` type
+9. No `logout()` or `refreshToken()` in `AuthRepository` interface or implementation
+10. `ExceptionMapper` was missing HTTP 400, 409, 413, 415, 422, 429 mappings
+11. `ResumeApi` path was `"tailor"` → should be `"resume/tailor"` (missing resource prefix)
+12. `UserDto` had non-nullable `displayName: String`, `createdAt: Long`, `updatedAt: Long`
+    — server can omit all three; crash on deserialization
+13. `NetworkModule` was not providing `ResumeApi` or `UploadsApi` into the DI graph
+
+**Fixes applied:**
+- Created `ApiResponseDto.kt`, `UploadsApi.kt`, `UserUpdateRequestDto.kt`
+- Added 5 new `AppException` subtypes: `BadRequest`, `Conflict`, `FileTooLarge`,
+  `UnsupportedMediaType`, `RateLimited`
+- Fully rewrote `AuthApi.kt`, `AuthRepositoryImpl.kt`, `UserApi.kt`
+- Extended `AuthRepository.kt` with `logout()` and `refreshToken()`
+- Made `UserDto` fields nullable with safe defaults in `UserMapper` (`?: ""`, `?: 0L`)
+- Added `provideResumeApi()` and `provideUploadsApi()` in `NetworkModule.kt`
+
+**Rule added:** After any backend route change, run a diff of all Retrofit service
+interfaces against the OpenAPI spec or route file before the PR is merged.
+
+---
+
 ## [YYYY-MM-DD] — Add new entries below as mistakes are discovered
 
 

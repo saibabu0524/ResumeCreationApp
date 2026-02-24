@@ -9,7 +9,7 @@ import retrofit2.http.Part
 
 interface ResumeApi {
     @Multipart
-    @POST("tailor")
+    @POST("resume/tailor")
     suspend fun tailorResume(
         @Part resume: MultipartBody.Part,
         @Part("job_description") jobDescription: RequestBody,

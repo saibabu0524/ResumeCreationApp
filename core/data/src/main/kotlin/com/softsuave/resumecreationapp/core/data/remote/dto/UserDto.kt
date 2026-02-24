@@ -20,8 +20,19 @@ data class UserDto(
     @SerialName("email")
     val email: String,
 
+    // ── Fields returned by the backend UserPublic schema ─────────────────────
+
+    @SerialName("is_active")
+    val isActive: Boolean = true,
+
+    @SerialName("is_superuser")
+    val isSuperuser: Boolean = false,
+
+    // ── App-enriched fields (not in the backend response; defaults applied) ──
+    // These are populated from the local Room cache after the initial network fetch.
+
     @SerialName("display_name")
-    val displayName: String,
+    val displayName: String? = null,
 
     @SerialName("avatar_url")
     val avatarUrl: String? = null,
@@ -30,8 +41,8 @@ data class UserDto(
     val isEmailVerified: Boolean = false,
 
     @SerialName("created_at")
-    val createdAt: Long,
+    val createdAt: Long? = null,
 
     @SerialName("updated_at")
-    val updatedAt: Long,
+    val updatedAt: Long? = null,
 )

@@ -5,8 +5,9 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import com.softsuave.resumecreationapp.core.domain.model.Result
 import com.softsuave.resumecreationapp.core.network.api.ResumeApi
+import com.softsuave.resumecreationapp.core.common.di.IoDispatcher
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -23,13 +24,14 @@ import com.softsuave.resumecreationapp.core.domain.model.AppException
 @Singleton
 class ResumeRepository @Inject constructor(
     private val resumeApi: ResumeApi,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     suspend fun tailorResume(
         pdfUri: Uri,
         jobDescription: String,
         provider: String
-    ): Result<ByteArray> = withContext(Dispatchers.IO) {
+    ): Result<ByteArray> = withContext(ioDispatcher) {
         try {
             // First, copy the content from URI to a temporary file
             val tempFile = copyUriToTempFile(pdfUri)

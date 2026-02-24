@@ -27,11 +27,11 @@ object UserMapper {
     fun UserDto.toDomain(): User = User(
         id = id,
         email = email,
-        displayName = displayName,
+        displayName = displayName ?: "",
         avatarUrl = avatarUrl,
         isEmailVerified = isEmailVerified,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
+        createdAt = createdAt ?: 0L,
+        updatedAt = updatedAt ?: 0L,
     )
 
     // ─── DTO → Entity ─────────────────────────────────────────────────────────
@@ -39,11 +39,11 @@ object UserMapper {
     fun UserDto.toEntity(): UserEntity = UserEntity(
         id = id,
         email = email,
-        displayName = displayName,
+        displayName = displayName ?: "",
         avatarUrl = avatarUrl,
         isEmailVerified = isEmailVerified,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
+        createdAt = createdAt ?: 0L,
+        updatedAt = updatedAt ?: 0L,
     )
 
     // ─── Entity → Domain ──────────────────────────────────────────────────────
