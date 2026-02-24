@@ -135,13 +135,6 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideResumeApi(
-        @AuthenticatedClient retrofit: Retrofit,
-    ): com.softsuave.resumecreationapp.core.network.api.ResumeApi =
-        retrofit.create(com.softsuave.resumecreationapp.core.network.api.ResumeApi::class.java)
-
-    @Provides
-    @Singleton
     fun provideUploadsApi(
         @AuthenticatedClient retrofit: Retrofit,
     ): com.softsuave.resumecreationapp.core.network.api.UploadsApi =
