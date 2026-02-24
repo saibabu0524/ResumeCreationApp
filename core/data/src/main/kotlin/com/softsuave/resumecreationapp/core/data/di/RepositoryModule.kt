@@ -28,6 +28,10 @@ abstract class RepositoryModule {
     @Singleton
     abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(impl: com.softsuave.resumecreationapp.core.data.repository.AuthRepositoryImpl): com.softsuave.resumecreationapp.core.domain.repository.AuthRepository
+
     companion object {
 
         @Provides

@@ -1,6 +1,12 @@
 package com.softsuave.resumecreationapp.feature.auth.login
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -23,16 +30,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.softsuave.resumecreationapp.core.ui.component.AppButton
@@ -91,121 +106,155 @@ fun LoginScreen(
 ) {
     val spacing = LocalSpacing.current
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    var isVisible by remember { mutableStateOf(false) }
 
-    Column(
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
+
+    // A striking diagonal gradient background
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = spacing.large, vertical = spacing.extraLarge),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        // ─── Title ───────────────────────────────────────────────────
-        Text(
-            text = stringResource(R.string.auth_login_title),
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center,
-        )
-
-        Spacer(modifier = Modifier.height(spacing.small))
-
-        Text(
-            text = stringResource(R.string.auth_login_subtitle),
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-        )
-
-        Spacer(modifier = Modifier.height(spacing.extraLarge))
-
-        // ─── Email ───────────────────────────────────────────────────
-        AppTextField(
-            value = uiState.email,
-            onValueChange = onEmailChanged,
-            label = stringResource(R.string.auth_email_label),
-            placeholder = stringResource(R.string.auth_email_placeholder),
-            errorMessage = uiState.emailError,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Email,
-                    contentDescription = null,
-                )
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next,
-            ),
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        Spacer(modifier = Modifier.height(spacing.medium))
-
-        // ─── Password ────────────────────────────────────────────────
-        AppTextField(
-            value = uiState.password,
-            onValueChange = onPasswordChanged,
-            label = stringResource(R.string.auth_password_label),
-            placeholder = stringResource(R.string.auth_password_placeholder),
-            errorMessage = uiState.passwordError,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    contentDescription = null,
-                )
-            },
-            trailingIcon = {
-                IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                    Icon(
-                        imageVector = if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                        contentDescription = stringResource(
-                            if (passwordVisible) R.string.auth_hide_password
-                            else R.string.auth_show_password,
-                        ),
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        MaterialTheme.colorScheme.background,
+                        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
                     )
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done,
-            ),
-            visualTransformation = if (passwordVisible) {
-                VisualTransformation.None
-            } else {
-                PasswordVisualTransformation()
-            },
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        // ─── General Error ───────────────────────────────────────────
-        if (uiState.generalError != null) {
-            Spacer(modifier = Modifier.height(spacing.small))
-            Text(
-                text = uiState.generalError,
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
+                )
             )
+            .padding(horizontal = spacing.large),
+        contentAlignment = Alignment.Center
+    ) {
+        AnimatedVisibility(
+            visible = isVisible,
+            enter = fadeIn(tween(800)) + slideInVertically(tween(800), initialOffsetY = { 100 })
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.85f))
+                    .padding(spacing.extraLarge)
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                // ─── Title ───────────────────────────────────────────────────
+                Text(
+                    text = stringResource(R.string.auth_login_title),
+                    style = MaterialTheme.typography.displaySmall.copy(
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = (-0.5).sp
+                    ),
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center,
+                )
+
+                Spacer(modifier = Modifier.height(spacing.small))
+
+                Text(
+                    text = stringResource(R.string.auth_login_subtitle),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                    textAlign = TextAlign.Center,
+                )
+
+                Spacer(modifier = Modifier.height(spacing.extraLarge))
+
+                // ─── Email ───────────────────────────────────────────────────
+                AppTextField(
+                    value = uiState.email,
+                    onValueChange = onEmailChanged,
+                    label = stringResource(R.string.auth_email_label),
+                    placeholder = stringResource(R.string.auth_email_placeholder),
+                    errorMessage = uiState.emailError,
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = null,
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next,
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+
+                Spacer(modifier = Modifier.height(spacing.medium))
+
+                // ─── Password ────────────────────────────────────────────────
+                AppTextField(
+                    value = uiState.password,
+                    onValueChange = onPasswordChanged,
+                    label = stringResource(R.string.auth_password_label),
+                    placeholder = stringResource(R.string.auth_password_placeholder),
+                    errorMessage = uiState.passwordError,
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Lock,
+                            contentDescription = null,
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(
+                                imageVector = if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                                contentDescription = stringResource(
+                                    if (passwordVisible) R.string.auth_hide_password
+                                    else R.string.auth_show_password,
+                                ),
+                            )
+                        }
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                    ),
+                    visualTransformation = if (passwordVisible) {
+                        VisualTransformation.None
+                    } else {
+                        PasswordVisualTransformation()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+
+                // ─── General Error ───────────────────────────────────────────
+                AnimatedVisibility(visible = uiState.generalError != null) {
+                    Column {
+                        Spacer(modifier = Modifier.height(spacing.small))
+                        Text(
+                            text = uiState.generalError ?: "",
+                            color = MaterialTheme.colorScheme.error,
+                            style = MaterialTheme.typography.bodySmall,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(spacing.extraLarge))
+
+                // ─── Login Button ────────────────────────────────────────────
+                AppButton(
+                    text = stringResource(R.string.auth_login_button),
+                    onClick = onLoginClicked,
+                    isLoading = uiState.isLoading,
+                    modifier = Modifier.fillMaxWidth().height(56.dp),
+                )
+
+                Spacer(modifier = Modifier.height(spacing.medium))
+
+                // ─── Register Button ─────────────────────────────────────────
+                AppButton(
+                    text = stringResource(R.string.auth_register_prompt),
+                    onClick = onRegisterClicked,
+                    variant = AppButtonVariant.Text,
+                )
+            }
         }
-
-        Spacer(modifier = Modifier.height(spacing.large))
-
-        // ─── Login Button ────────────────────────────────────────────
-        AppButton(
-            text = stringResource(R.string.auth_login_button),
-            onClick = onLoginClicked,
-            isLoading = uiState.isLoading,
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        Spacer(modifier = Modifier.height(spacing.medium))
-
-        // ─── Register Button ─────────────────────────────────────────
-        AppButton(
-            text = stringResource(R.string.auth_register_prompt),
-            onClick = onRegisterClicked,
-            variant = AppButtonVariant.Text,
-        )
     }
 }

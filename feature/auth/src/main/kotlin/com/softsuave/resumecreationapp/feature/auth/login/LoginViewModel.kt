@@ -24,6 +24,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val authRepository: com.softsuave.resumecreationapp.core.domain.repository.AuthRepository,
     private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
 
@@ -81,14 +82,16 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, generalError = null) }
 
-            // Note: Replace with actual LoginUseCase call when backend integration is ready
-            // For now, simulate successful login for template demonstration
-            kotlinx.coroutines.delay(SIMULATED_NETWORK_DELAY_MS)
+            val result = authRepository.login(state.email, state.password)
 
-            analyticsTracker.track(AnalyticsEvent.Login(method = "email_password"))
-
-            _uiState.update { it.copy(isLoading = false) }
-            _uiEvent.send(LoginUiEvent.NavigateToHome)
+            if (result.isSuccess) {
+                analyticsTracker.track(AnalyticsEvent.Login(method = "email_password"))
+                _uiState.update { it.copy(isLoading = false) }
+                _uiEvent.send(LoginUiEvent.NavigateToHome)
+            } else {
+                val errorMsg = result.exceptionOrNull()?.message ?: "Login failed. Check credentials."
+                _uiState.update { it.copy(isLoading = false, generalError = errorMsg) }
+            }
         }
     }
 

@@ -114,6 +114,26 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    @Named("UnauthenticatedRetrofit")
+    fun provideUnauthenticatedRetrofit(
+        okHttpClient: OkHttpClient,
+        json: Json,
+        @Named(NAMED_BASE_URL) baseUrl: String,
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .client(okHttpClient)
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .addCallAdapterFactory(ApiResultCallAdapterFactory())
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(
+        @Named("UnauthenticatedRetrofit") retrofit: Retrofit
+    ): com.softsuave.resumecreationapp.core.network.api.AuthApi = retrofit.create(com.softsuave.resumecreationapp.core.network.api.AuthApi::class.java)
+
+    @Provides
+    @Singleton
     fun provideNetworkMonitor(
         @ApplicationContext context: Context,
     ): NetworkMonitor {

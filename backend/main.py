@@ -7,8 +7,10 @@ import tempfile
 import logging
 from typing import Optional
 
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, BackgroundTasks
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, BackgroundTasks, Depends, status
 from fastapi.responses import StreamingResponse
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.orm import Session
 import pdfplumber
 import fitz  # PyMuPDF
 import httpx
@@ -17,6 +19,14 @@ from google.genai import types
 
 from prompts import BASE_LATEX_TEMPLATE, STAGE_A_PROMPT, STAGE_B_PROMPT
 
+import models
+import schemas
+import auth
+from database import engine, get_db
+
+# Create matching tables in DB
+models.Base.metadata.create_all(bind=engine)
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -24,7 +34,16 @@ app = FastAPI(title="Resume Tailor API")
 
 # --- Configuration ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+
+# Ollama cloud / remote configuration
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
+OLLAMA_API_KEY = os.environ.get("OLLAMA_API_KEY")
+
+# Open-AI compatible Cloud configuration (like Kimi / Moonshot)
+CLOUD_API_KEY = os.environ.get("CLOUD_API_KEY")
+CLOUD_BASE_URL = os.environ.get("CLOUD_BASE_URL", "https://api.moonshot.cn/v1")
+CLOUD_MODEL = os.environ.get("CLOUD_MODEL", "moonshot-v1-8k")
 
 if GEMINI_API_KEY:
     gemini_client = genai.Client(api_key=GEMINI_API_KEY)
@@ -86,12 +105,16 @@ async def call_llm(provider: str, prompt: str) -> str:
             raise HTTPException(status_code=503, detail=f"Gemini API error: {str(e)}")
 
     elif provider == "ollama":
+        headers = {}
+        if OLLAMA_API_KEY:
+            headers["Authorization"] = f"Bearer {OLLAMA_API_KEY}"
         async with httpx.AsyncClient() as client:
             try:
                 response = await client.post(
                     f"{OLLAMA_BASE_URL}/api/generate",
+                    headers=headers,
                     json={
-                        "model": "llama3",
+                        "model": OLLAMA_MODEL,
                         "prompt": prompt,
                         "stream": False,
                         "options": {"temperature": 0.2}
@@ -103,8 +126,34 @@ async def call_llm(provider: str, prompt: str) -> str:
             except Exception as e:
                 logger.error(f"Ollama API error: {e}")
                 raise HTTPException(status_code=503, detail=f"Ollama API error: {str(e)}")
+
+    elif provider == "cloud":
+        if not CLOUD_API_KEY:
+            raise HTTPException(status_code=503, detail="CLOUD_API_KEY not configured. Set this to use cloud models like Kimi.")
+        headers = {
+            "Authorization": f"Bearer {CLOUD_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        async with httpx.AsyncClient() as client:
+            try:
+                response = await client.post(
+                    f"{CLOUD_BASE_URL}/chat/completions",
+                    headers=headers,
+                    json={
+                        "model": CLOUD_MODEL,
+                        "messages": [{"role": "user", "content": prompt}],
+                        "temperature": 0.2
+                    },
+                    timeout=120.0
+                )
+                response.raise_for_status()
+                return response.json()["choices"][0]["message"]["content"]
+            except Exception as e:
+                logger.error(f"Cloud API error: {e}")
+                raise HTTPException(status_code=503, detail=f"Cloud API error: {str(e)}")
+
     else:
-        raise HTTPException(status_code=400, detail="Invalid provider. Choose 'gemini' or 'ollama'.")
+        raise HTTPException(status_code=400, detail="Invalid provider. Choose 'gemini', 'ollama', or 'cloud'.")
 
 def compile_latex_to_pdf(latex_code: str, work_dir: str) -> tuple[bool, str]:
     """
@@ -195,12 +244,39 @@ def cleanup_temp_dir(dir_path: str):
 def health_check():
     return {"status": "ok"}
 
+@app.post("/register", response_model=schemas.UserResponse)
+def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = auth.get_user_by_email(db, email=user.email)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    hashed_pwd = auth.get_password_hash(user.password)
+    new_user = models.User(email=user.email, hashed_password=hashed_pwd)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+
+@app.post("/login", response_model=schemas.Token)
+def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = auth.get_user_by_email(db, email=form_data.username) # OAuth2 uses `username`
+    if not user or not auth.verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    access_token = auth.create_access_token(data={"sub": user.email})
+    return {"access_token": access_token, "token_type": "bearer"}
+
 @app.post("/tailor")
 async def tailor_resume(
     background_tasks: BackgroundTasks,
     resume: UploadFile = File(...),
     job_description: str = Form(...),
-    provider: str = Form("gemini")
+    provider: str = Form("gemini"),
+    current_user: models.User = Depends(auth.get_current_user)
 ):
     if not resume.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Upload must be a PDF file.")
