@@ -31,6 +31,14 @@ async def init_db() -> None:
     # Ensure the uploads directory exists.
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 
+    # Automatically create the database directory if using SQLite file database
+    if settings.DATABASE_URL.startswith("sqlite"):
+        # Given "sqlite+aiosqlite:///app/data/db.sqlite3", strip prefix down to "/app/data/db.sqlite3"
+        db_path = settings.DATABASE_URL.split("///")[-1]
+        db_dir = os.path.dirname(db_path)
+        if db_dir and db_dir not in (".", "./"):
+            os.makedirs(db_dir, exist_ok=True)
+
     # Create any missing tables.  In production, rely on Alembic instead
     # and comment out the create_all call to be safe.
     async with engine.begin() as conn:
