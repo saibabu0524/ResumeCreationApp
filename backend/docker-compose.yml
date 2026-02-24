@@ -16,6 +16,8 @@ services:
       - uploads_data:/app/uploads
     env_file:
       - .env
+    environment:
+      - REDIS_URL=redis://redis:6379
     depends_on:
       redis:
         condition: service_healthy
@@ -32,6 +34,8 @@ services:
       - uploads_data:/app/uploads
     env_file:
       - .env
+    environment:
+      - REDIS_URL=redis://redis:6379
     depends_on:
       redis:
         condition: service_healthy
@@ -48,7 +52,7 @@ services:
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5
