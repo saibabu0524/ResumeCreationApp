@@ -53,11 +53,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                             localProps.load(localPropsFile.inputStream())
                         }
                         var devBaseUrl = (localProps.getProperty("base_url") ?: project.findProperty("DEV_BASE_URL") as? String)
-                            ?: "https://e18c-2402-e280-213a-15c-bc91-c533-3048-8f04.ngrok-free.app/"
-                        
+                            ?: "https://5f92-14-98-153-162.ngrok-free.app/"
+
                         if (!devBaseUrl.endsWith("/")) devBaseUrl += "/"
                         if (!devBaseUrl.endsWith("api/v1/")) devBaseUrl += "api/v1/"
-                        
+
                         buildConfigField("String", "BASE_URL", "\"$devBaseUrl\"")
                     }
 

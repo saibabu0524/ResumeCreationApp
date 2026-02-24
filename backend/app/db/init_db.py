@@ -21,6 +21,7 @@ from app.db.session import engine
 # This must stay in sync with every ``table=True`` SQLModel class.
 import app.models.user  # noqa: F401
 import app.models.token  # noqa: F401
+import app.models.resume  # noqa: F401
 
 
 async def init_db() -> None:

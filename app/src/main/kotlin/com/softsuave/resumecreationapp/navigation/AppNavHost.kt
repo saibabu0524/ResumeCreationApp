@@ -6,17 +6,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.softsuave.resumecreationapp.feature.auth.navigation.AuthGraphRoute
+import com.softsuave.resumecreationapp.feature.auth.navigation.OnboardingScreenRoute
 import com.softsuave.resumecreationapp.feature.auth.navigation.RegistrationScreenRoute
 import com.softsuave.resumecreationapp.feature.auth.navigation.authNavGraph
-import com.softsuave.resumecreationapp.feature.home.navigation.HomeScreenRoute
+import com.softsuave.resumecreationapp.feature.ats.navigation.AtsGraph
+import com.softsuave.resumecreationapp.feature.ats.navigation.atsNavGraph
 import com.softsuave.resumecreationapp.feature.home.navigation.homeNavGraph
 import com.softsuave.resumecreationapp.feature.profile.navigation.ProfileScreenRoute
 import com.softsuave.resumecreationapp.feature.profile.navigation.profileNavGraph
-import com.softsuave.resumecreationapp.feature.settings.navigation.SettingsScreenRoute
-import com.softsuave.resumecreationapp.feature.settings.navigation.settingsNavGraph
-
 import com.softsuave.resumecreationapp.feature.resume.navigation.ResumeGraph
 import com.softsuave.resumecreationapp.feature.resume.navigation.resumeGraph
+import com.softsuave.resumecreationapp.feature.settings.navigation.SettingsScreenRoute
+import com.softsuave.resumecreationapp.feature.settings.navigation.settingsNavGraph
 
 /**
  * Root navigation host assembling all feature navigation graphs.
@@ -25,6 +26,8 @@ import com.softsuave.resumecreationapp.feature.resume.navigation.resumeGraph
  * together. Individual features never know about each other's routes or
  * navigation graphs — all cross-feature navigation goes through lambdas
  * resolved here.
+ *
+ * Auth flow:  Login → (Registration →) Onboarding → ResumeGraph
  *
  * @param modifier Modifier applied to the [NavHost].
  * @param navController The [NavHostController] managing navigation state.
@@ -41,16 +44,29 @@ fun AppNavHost(
         modifier = modifier,
     ) {
         // ─── Resume ──────────────────────────────────────────────────
-        resumeGraph(navController = navController)
+        resumeGraph(
+            navController = navController,
+            onNavigateToAts = {
+                navController.navigate(AtsGraph)
+            },
+        )
+
+        // ─── ATS Scanner ─────────────────────────────────────────────
+        atsNavGraph(
+            onNavigateBack = {
+                navController.popBackStack()
+            },
+        )
 
         // ─── Auth ────────────────────────────────────────────────────
         authNavGraph(
+            // Login success → go directly to ResumeGraph (skip onboarding for returning users)
             onNavigateToHome = {
                 navController.navigate(ResumeGraph) {
-                    // Clear auth back stack — user shouldn't go back to login
                     popUpTo(AuthGraphRoute) { inclusive = true }
                 }
             },
+            // Registration → show onboarding first
             onNavigateToRegistration = {
                 navController.navigate(RegistrationScreenRoute)
             },

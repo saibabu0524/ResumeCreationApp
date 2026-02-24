@@ -23,7 +23,10 @@ fun NavController.navigateToResumeGraph(navOptions: NavOptions? = null) {
     navigate(ResumeGraph, navOptions)
 }
 
-fun NavGraphBuilder.resumeGraph(navController: NavController) {
+fun NavGraphBuilder.resumeGraph(
+    navController: NavController,
+    onNavigateToAts: () -> Unit = {},
+) {
     navigation<ResumeGraph>(startDestination = HomeRoute) {
         composable<HomeRoute> {
             HomeScreen(
@@ -35,10 +38,11 @@ fun NavGraphBuilder.resumeGraph(navController: NavController) {
                     // We created a hack for now to store it in a companion object Holder.
                     PdfHolder.bytes = bytes
                     navController.navigate(ResultRoute)
-                }
+                },
+                onNavigateToAts = onNavigateToAts,
             )
         }
-        
+
         composable<ResultRoute> {
             // Use the PDF bytes from the holder instead of the bundle argument to avoid crashes
             val bytes = PdfHolder.bytes ?: ByteArray(0)

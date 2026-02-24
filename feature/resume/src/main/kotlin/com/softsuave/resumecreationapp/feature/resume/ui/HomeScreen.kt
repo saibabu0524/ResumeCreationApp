@@ -56,6 +56,7 @@ private val SuccessGreen = Color(0xFF4A7C59)
 fun HomeScreen(
     viewModel: ResumeViewModel = hiltViewModel(),
     onNavigateToResult: (ByteArray) -> Unit,
+    onNavigateToAts: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var selectedPdfUri by remember<MutableState<Uri?>> { mutableStateOf(null) }
@@ -331,6 +332,63 @@ fun HomeScreen(
                         letterSpacing = 3.sp,
                         fontWeight = FontWeight.Bold
                     )
+                }
+
+                Spacer(Modifier.height(20.dp))
+
+                // ── ATS Scanner shortcut ──────────────────────────────────────
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(2.dp))
+                        .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
+                        .background(Surface)
+                        .clickable(onClick = onNavigateToAts)
+                        .padding(16.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(2.dp))
+                                .background(SurfaceHigh)
+                                .border(0.5.dp, AmberDim, RoundedCornerShape(2.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                Icons.Default.Analytics,
+                                contentDescription = null,
+                                tint = Amber,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                "ATS SCANNER",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 10.sp,
+                                letterSpacing = 2.sp,
+                                color = Amber
+                            )
+                            Spacer(Modifier.height(2.dp))
+                            Text(
+                                "Check your resume score before tailoring",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                color = TextMuted.copy(0.7f)
+                            )
+                        }
+                        Icon(
+                            Icons.Default.ChevronRight,
+                            contentDescription = null,
+                            tint = AmberDim,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
                 }
 
                 Spacer(Modifier.height(40.dp))
