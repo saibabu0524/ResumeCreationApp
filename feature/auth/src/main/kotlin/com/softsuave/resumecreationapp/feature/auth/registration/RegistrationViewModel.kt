@@ -17,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
+    private val authRepository: com.softsuave.resumecreationapp.core.domain.repository.AuthRepository,
     private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
 
@@ -78,12 +79,16 @@ class RegistrationViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, generalError = null) }
 
-            // Note: Replace with actual RegisterUseCase call when backend integration is ready
-            kotlinx.coroutines.delay(SIMULATED_NETWORK_DELAY_MS)
+            val result = authRepository.register(state.email, state.password)
 
-            analyticsTracker.track(AnalyticsEvent.SignUp(method = "email_password"))
-            _uiState.update { it.copy(isLoading = false) }
-            _uiEvent.send(RegistrationUiEvent.NavigateToOnboarding)
+            if (result.isSuccess) {
+                analyticsTracker.track(AnalyticsEvent.SignUp(method = "email_password"))
+                _uiState.update { it.copy(isLoading = false) }
+                _uiEvent.send(RegistrationUiEvent.NavigateToOnboarding)
+            } else {
+                val errorMsg = result.exceptionOrNull()?.message ?: "Registration failed."
+                _uiState.update { it.copy(isLoading = false, generalError = errorMsg) }
+            }
         }
     }
 

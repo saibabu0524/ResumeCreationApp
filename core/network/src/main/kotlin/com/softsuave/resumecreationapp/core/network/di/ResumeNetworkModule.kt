@@ -28,10 +28,12 @@ object ResumeNetworkModule {
     @ResumeClient
     fun provideResumeOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: com.softsuave.resumecreationapp.core.network.interceptor.AuthInterceptor,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(120, TimeUnit.SECONDS)
         .readTimeout(120, TimeUnit.SECONDS)
         .writeTimeout(120, TimeUnit.SECONDS)
+        .addInterceptor(authInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
 
