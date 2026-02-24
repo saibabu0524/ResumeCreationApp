@@ -1,0 +1,37 @@
+# Virtual environments
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docker compose files (not needed inside the image)
+docker-compose*.yml
+
+# Local data / uploads (will be mounted as volumes)
+data/
+uploads/
+*.sqlite3
+
+# Environment files (secrets — passed via env_file at runtime)
+.env
+.env.*
+
+# Testing / CI
+tests/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Docs
+*.md
+LICENSE

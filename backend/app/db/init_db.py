@@ -26,20 +26,32 @@ import app.models.resume  # noqa: F401
 
 async def init_db() -> None:
     """Create tables and required directories on first startup."""
+    import logging
+    from pathlib import Path
+
+    logger = logging.getLogger(__name__)
     settings = get_settings()
 
     # Ensure the uploads directory exists.
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+    logger.info("Uploads directory ensured: %s", settings.UPLOAD_DIR)
 
     # Automatically create the database directory if using SQLite file database
     if settings.DATABASE_URL.startswith("sqlite"):
-        # Given "sqlite+aiosqlite:///app/data/db.sqlite3", strip prefix down to "/app/data/db.sqlite3"
-        db_path = settings.DATABASE_URL.split("///")[-1]
-        db_dir = os.path.dirname(db_path)
-        if db_dir and db_dir not in (".", "./"):
+        # Strip the scheme — handles both "sqlite:///path" (relative) and "sqlite:////path" (absolute)
+        raw_path = settings.DATABASE_URL.split("///", 1)[-1]
+        db_path = Path(raw_path).resolve()
+        db_dir = db_path.parent
+
+        logger.info("DATABASE_URL: %s", settings.DATABASE_URL)
+        logger.info("Resolved DB path: %s  (dir: %s)", db_path, db_dir)
+
+        if db_dir != Path(".").resolve():
             os.makedirs(db_dir, exist_ok=True)
+            logger.info("Database directory ensured: %s", db_dir)
 
     # Create any missing tables.  In production, rely on Alembic instead
     # and comment out the create_all call to be safe.
     async with engine.begin() as conn:
         await conn.run_sync(SQLModel.metadata.create_all)
+    logger.info("Database tables created/verified.")

@@ -26,7 +26,7 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=sqlite+aiosqlite:///app/data/db.sqlite3
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/db.sqlite3
     depends_on:
       redis:
         condition: service_healthy
@@ -45,7 +45,7 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=sqlite+aiosqlite:///app/data/db.sqlite3
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/db.sqlite3
     depends_on:
       redis:
         condition: service_healthy
