@@ -47,6 +47,22 @@ val SemanticErrorBright = Color(0xFFE06050)
 val SemanticSuccess     = Color(0xFF4A7C59)
 val SemanticSuccessDim  = Color(0xFF0F1F14)
 val SemanticWarning     = Color(0xFFC08030)
+val SemanticMiss        = Color(0xFF9A3A2A)
+
+// ─── Convenience aliases (backward compat for feature screens) ───────────────
+// These let feature code reference the design tokens using shorter names that
+// match the original private-val conventions, avoiding a mass-rename.
+val Amber       = Amber80
+val AmberGlow   = Amber95
+val AmberDim    = Amber40
+val Surface     = Surface0
+val SurfaceHigh = Surface1
+val Border      = BorderSubtle
+val ErrorRed    = SemanticError
+val ErrorDim    = SemanticErrorDim
+val SuccessGreen = SemanticSuccess
+val RedMiss     = SemanticMiss
+val GreenOk     = SemanticSuccess
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Color Schemes

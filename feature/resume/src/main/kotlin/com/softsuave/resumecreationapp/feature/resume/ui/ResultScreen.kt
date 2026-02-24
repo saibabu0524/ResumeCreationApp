@@ -3,7 +3,7 @@ package com.softsuave.resumecreationapp.feature.resume.ui
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.Canvas as AndroidCanvas
 import android.graphics.Color as AndroidColor
 import android.graphics.pdf.PdfRenderer
 import android.os.Build
@@ -49,24 +49,11 @@ import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.softsuave.resumecreationapp.core.ui.theme.*
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.cos
 import kotlin.math.sin
-
-// ── Design Tokens ────────────────────────────────────────────────────────────
-private val Canvas       = Color(0xFF0E0D0B)
-private val Surface      = Color(0xFF1A1814)
-private val SurfaceHigh  = Color(0xFF242019)
-private val Amber        = Color(0xFFD4A853)
-private val AmberGlow    = Color(0xFFEFC97A)
-private val AmberDim     = Color(0xFF8A6930)
-private val TextPrimary  = Color(0xFFF0EAD6)
-private val TextMuted    = Color(0xFF9A8E78)
-private val Border       = Color(0xFF2E2A24)
-private val BorderMid    = Color(0xFF4A4238)
-private val SuccessGreen = Color(0xFF4A7C59)
-private val ErrorRed     = Color(0xFFB04A3A)
 
 @Composable
 fun ResultScreen(
@@ -96,7 +83,7 @@ fun ResultScreen(
                 for (i in 0 until renderer.pageCount) {
                     val page = renderer.openPage(i)
                     val bmp = Bitmap.createBitmap(page.width * 2, page.height * 2, Bitmap.Config.ARGB_8888)
-                    Canvas(bmp).drawColor(AndroidColor.WHITE)
+                    AndroidCanvas(bmp).drawColor(AndroidColor.WHITE)
                     page.render(bmp, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
                     bitmaps.add(bmp)
                     page.close()

@@ -1,10 +1,15 @@
 package com.softsuave.resumecreationapp.feature.ats
 
+import android.content.Context
 import android.net.Uri
+import android.provider.OpenableColumns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.softsuave.resumecreationapp.core.domain.model.AtsResult
 import com.softsuave.resumecreationapp.core.domain.model.Result
+import com.softsuave.resumecreationapp.core.domain.usecase.ats.AnalyseAtsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +25,8 @@ sealed class AtsUiState {
 
 @HiltViewModel
 class AtsViewModel @Inject constructor(
-    private val repository: AtsRepository,
+    private val analyseAtsUseCase: AnalyseAtsUseCase,
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AtsUiState>(AtsUiState.Idle)
@@ -34,7 +40,21 @@ class AtsViewModel @Inject constructor(
         _uiState.value = AtsUiState.Loading("Scanning with $provider…")
 
         viewModelScope.launch {
-            when (val result = repository.analyseAts(pdfUri, jobDescription, provider)) {
+            // Resolve Uri → ByteArray + fileName in the ViewModel layer
+            val (pdfBytes, fileName) = readPdfFromUri(pdfUri)
+                ?: run {
+                    _uiState.value = AtsUiState.Error("Could not read the PDF file.")
+                    return@launch
+                }
+
+            val params = AnalyseAtsUseCase.Params(
+                pdfBytes = pdfBytes,
+                fileName = fileName,
+                jobDescription = jobDescription,
+                provider = provider,
+            )
+
+            when (val result = analyseAtsUseCase(params)) {
                 is Result.Success -> _uiState.value = AtsUiState.Success(result.data)
                 is Result.Error   -> _uiState.value = AtsUiState.Error(result.exception.message ?: "Unknown error")
                 is Result.Loading -> Unit
@@ -44,5 +64,26 @@ class AtsViewModel @Inject constructor(
 
     fun reset() {
         _uiState.value = AtsUiState.Idle
+    }
+
+    /**
+     * Reads a content URI into raw bytes + display name.
+     * Returns null if the URI cannot be resolved.
+     */
+    private fun readPdfFromUri(uri: Uri): Pair<ByteArray, String>? {
+        var fileName = "resume.pdf"
+        context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val idx = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (idx != -1) fileName = cursor.getString(idx)
+            }
+        }
+        return try {
+            val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+                ?: return null
+            bytes to fileName
+        } catch (_: Exception) {
+            null
+        }
     }
 }

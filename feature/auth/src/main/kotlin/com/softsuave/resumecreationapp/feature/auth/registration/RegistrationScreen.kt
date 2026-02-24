@@ -40,21 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.softsuave.resumecreationapp.core.ui.theme.*
 import com.softsuave.resumecreationapp.feature.auth.R
-
-// ── Design Tokens ────────────────────────────────────────────────────────────
-private val Canvas      = Color(0xFF0E0D0B)
-private val Surface     = Color(0xFF1A1814)
-private val SurfaceHigh = Color(0xFF242019)
-private val Amber       = Color(0xFFD4A853)
-private val AmberGlow   = Color(0xFFEFC97A)
-private val AmberDim    = Color(0xFF8A6930)
-private val TextPrimary = Color(0xFFF0EAD6)
-private val TextMuted   = Color(0xFF9A8E78)
-private val Border      = Color(0xFF2E2A24)
-private val BorderMid   = Color(0xFF4A4238)
-private val ErrorRed    = Color(0xFFB04A3A)
-private val ErrorDim    = Color(0xFF2D1410)
 
 @Composable
 fun RegistrationRoute(

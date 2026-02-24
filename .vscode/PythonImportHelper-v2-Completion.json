@@ -425,6 +425,30 @@
         "documentation": {}
     },
     {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -640,6 +664,14 @@
     },
     {
         "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -1115,6 +1147,22 @@
         "documentation": {}
     },
     {
+        "label": "UTC",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -1309,7 +1357,31 @@
         "documentation": {}
     },
     {
+        "label": "select",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
         "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
         "isExtraImport": true,
@@ -1508,6 +1580,70 @@
         "description": "app.core.config",
         "isExtraImport": true,
         "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
         "documentation": {}
     },
     {
@@ -1711,6 +1847,14 @@
         "documentation": {}
     },
     {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -1727,6 +1871,22 @@
         "documentation": {}
     },
     {
+        "label": "CurrentUser",
+        "importPath": "app.api.deps",
+        "description": "app.api.deps",
+        "isExtraImport": true,
+        "detail": "app.api.deps",
+        "documentation": {}
+    },
+    {
+        "label": "DbSession",
+        "importPath": "app.api.deps",
+        "description": "app.api.deps",
+        "isExtraImport": true,
+        "detail": "app.api.deps",
+        "documentation": {}
+    },
+    {
         "label": "DbSession",
         "importPath": "app.api.deps",
         "description": "app.api.deps",
@@ -1736,6 +1896,14 @@
     },
     {
         "label": "CurrentUser",
+        "importPath": "app.api.deps",
+        "description": "app.api.deps",
+        "isExtraImport": true,
+        "detail": "app.api.deps",
+        "documentation": {}
+    },
+    {
+        "label": "DbSession",
         "importPath": "app.api.deps",
         "description": "app.api.deps",
         "isExtraImport": true,
@@ -1804,6 +1972,94 @@
         "description": "app.core.limiter",
         "isExtraImport": true,
         "detail": "app.core.limiter",
+        "documentation": {}
+    },
+    {
+        "label": "limiter",
+        "importPath": "app.core.limiter",
+        "description": "app.core.limiter",
+        "isExtraImport": true,
+        "detail": "app.core.limiter",
+        "documentation": {}
+    },
+    {
+        "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "MessageResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "MessageResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "MessageResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "AtsResult",
+        "importPath": "app.schemas.ats",
+        "description": "app.schemas.ats",
+        "isExtraImport": true,
+        "detail": "app.schemas.ats",
+        "documentation": {}
+    },
+    {
+        "label": "analyse_ats",
+        "importPath": "app.services.ats",
+        "description": "app.services.ats",
+        "isExtraImport": true,
+        "detail": "app.services.ats",
         "documentation": {}
     },
     {
@@ -2031,54 +2287,6 @@
         "documentation": {}
     },
     {
-        "label": "ApiResponse",
-        "importPath": "app.schemas.common",
-        "description": "app.schemas.common",
-        "isExtraImport": true,
-        "detail": "app.schemas.common",
-        "documentation": {}
-    },
-    {
-        "label": "MessageResponse",
-        "importPath": "app.schemas.common",
-        "description": "app.schemas.common",
-        "isExtraImport": true,
-        "detail": "app.schemas.common",
-        "documentation": {}
-    },
-    {
-        "label": "ApiResponse",
-        "importPath": "app.schemas.common",
-        "description": "app.schemas.common",
-        "isExtraImport": true,
-        "detail": "app.schemas.common",
-        "documentation": {}
-    },
-    {
-        "label": "MessageResponse",
-        "importPath": "app.schemas.common",
-        "description": "app.schemas.common",
-        "isExtraImport": true,
-        "detail": "app.schemas.common",
-        "documentation": {}
-    },
-    {
-        "label": "ApiResponse",
-        "importPath": "app.schemas.common",
-        "description": "app.schemas.common",
-        "isExtraImport": true,
-        "detail": "app.schemas.common",
-        "documentation": {}
-    },
-    {
-        "label": "MessageResponse",
-        "importPath": "app.schemas.common",
-        "description": "app.schemas.common",
-        "isExtraImport": true,
-        "detail": "app.schemas.common",
-        "documentation": {}
-    },
-    {
         "label": "io",
         "kind": 6,
         "isExtraImport": true,
@@ -2106,6 +2314,230 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "StreamingResponse",
         "importPath": "fastapi.responses",
         "description": "fastapi.responses",
@@ -2123,6 +2555,22 @@
     },
     {
         "label": "tailor_resume_pipeline",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "call_llm",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "extract_text_from_pdf",
         "importPath": "app.services.resume",
         "description": "app.services.resume",
         "isExtraImport": true,
@@ -2178,219 +2626,28 @@
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
+        "label": "app.models.resume",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "pathlib",
+        "importPath": "app.models.resume",
+        "description": "app.models.resume",
+        "detail": "app.models.resume",
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
+        "label": "TailoredResume",
+        "importPath": "app.models.resume",
+        "description": "app.models.resume",
         "isExtraImport": true,
-        "detail": "pathlib",
+        "detail": "app.models.resume",
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
+        "label": "ats",
+        "importPath": "app.api.v1.routes",
+        "description": "app.api.v1.routes",
         "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
+        "detail": "app.api.v1.routes",
         "documentation": {}
     },
     {
@@ -2554,6 +2811,22 @@
         "documentation": {}
     },
     {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "EmailStr",
         "importPath": "pydantic",
         "description": "pydantic",
@@ -2636,11 +2909,12 @@
         "documentation": {}
     },
     {
-        "label": "CryptContext",
-        "importPath": "passlib.context",
-        "description": "passlib.context",
+        "label": "bcrypt",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "passlib.context",
+        "importPath": "bcrypt",
+        "description": "bcrypt",
+        "detail": "bcrypt",
         "documentation": {}
     },
     {
@@ -2657,6 +2931,15 @@
         "description": "collections.abc",
         "isExtraImport": true,
         "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -3765,15 +4048,6 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "threading",
         "kind": 6,
         "isExtraImport": true,
@@ -4283,6 +4557,15 @@
     {
         "label": "router",
         "kind": 5,
+        "importPath": "backend.app.api.v1.routes.ats",
+        "description": "backend.app.api.v1.routes.ats",
+        "peekOfCode": "router = APIRouter(prefix=\"/ats\", tags=[\"ats\"])\n@router.post(\n    \"/analyse\",\n    summary=\"Analyse resume ATS compatibility against a job description\",\n    response_model=ApiResponse[AtsResult],\n    status_code=status.HTTP_200_OK,\n)\n@limiter.limit(\"20/minute\")\nasync def analyse_resume_ats(\n    request: Request,",
+        "detail": "backend.app.api.v1.routes.ats",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
         "importPath": "backend.app.api.v1.routes.auth",
         "description": "backend.app.api.v1.routes.auth",
         "peekOfCode": "router = APIRouter(prefix=\"/auth\", tags=[\"auth\"])\n@router.post(\n    \"/register\",\n    response_model=ApiResponse[UserPublic],\n    status_code=status.HTTP_201_CREATED,\n)\n@limiter.limit(\"20/minute\")\nasync def register(\n    request: Request,\n    payload: RegisterRequest,",
@@ -4321,7 +4604,7 @@
         "kind": 5,
         "importPath": "backend.app.api.v1.router",
         "description": "backend.app.api.v1.router",
-        "peekOfCode": "v1_router = APIRouter()\nv1_router.include_router(auth.router)\nv1_router.include_router(users.router)\nv1_router.include_router(uploads.router)\nv1_router.include_router(resume.router)",
+        "peekOfCode": "v1_router = APIRouter()\nv1_router.include_router(auth.router)\nv1_router.include_router(users.router)\nv1_router.include_router(uploads.router)\nv1_router.include_router(resume.router)\nv1_router.include_router(ats.router)",
         "detail": "backend.app.api.v1.router",
         "documentation": {}
     },
@@ -4420,7 +4703,7 @@
         "kind": 2,
         "importPath": "backend.app.core.security",
         "description": "backend.app.core.security",
-        "peekOfCode": "def hash_password(plain: str) -> str:\n    \"\"\"Return a bcrypt hash of *plain*.\"\"\"\n    return _pwd_context.hash(plain)\ndef verify_password(plain: str, hashed: str) -> bool:\n    \"\"\"Return ``True`` if *plain* matches *hashed*.\"\"\"\n    return _pwd_context.verify(plain, hashed)\n# ── JWT helpers ───────────────────────────────────────────────────────────────\ndef create_access_token(subject: str | Any, expires_delta: timedelta | None = None) -> str:\n    \"\"\"Create a signed JWT access token.\n    Parameters",
+        "peekOfCode": "def hash_password(plain: str) -> str:\n    \"\"\"Return a bcrypt hash of *plain*.\"\"\"\n    salt = bcrypt.gensalt()\n    return bcrypt.hashpw(plain.encode('utf-8'), salt).decode('utf-8')\ndef verify_password(plain: str, hashed: str) -> bool:\n    \"\"\"Return ``True`` if *plain* matches *hashed*.\"\"\"\n    try:\n        return bcrypt.checkpw(plain.encode('utf-8'), hashed.encode('utf-8'))\n    except Exception:\n        return False",
         "detail": "backend.app.core.security",
         "documentation": {}
     },
@@ -4429,7 +4712,7 @@
         "kind": 2,
         "importPath": "backend.app.core.security",
         "description": "backend.app.core.security",
-        "peekOfCode": "def verify_password(plain: str, hashed: str) -> bool:\n    \"\"\"Return ``True`` if *plain* matches *hashed*.\"\"\"\n    return _pwd_context.verify(plain, hashed)\n# ── JWT helpers ───────────────────────────────────────────────────────────────\ndef create_access_token(subject: str | Any, expires_delta: timedelta | None = None) -> str:\n    \"\"\"Create a signed JWT access token.\n    Parameters\n    ----------\n    subject:\n        Typically a user ID string.  Stored in the ``sub`` claim.",
+        "peekOfCode": "def verify_password(plain: str, hashed: str) -> bool:\n    \"\"\"Return ``True`` if *plain* matches *hashed*.\"\"\"\n    try:\n        return bcrypt.checkpw(plain.encode('utf-8'), hashed.encode('utf-8'))\n    except Exception:\n        return False\n# ── JWT helpers ───────────────────────────────────────────────────────────────\ndef create_access_token(subject: str | Any, expires_delta: timedelta | None = None) -> str:\n    \"\"\"Create a signed JWT access token.\n    Parameters",
         "detail": "backend.app.core.security",
         "documentation": {}
     },
@@ -4470,15 +4753,6 @@
         "documentation": {}
     },
     {
-        "label": "_pwd_context",
-        "kind": 5,
-        "importPath": "backend.app.core.security",
-        "description": "backend.app.core.security",
-        "peekOfCode": "_pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\n# ── Password helpers ──────────────────────────────────────────────────────────\ndef hash_password(plain: str) -> str:\n    \"\"\"Return a bcrypt hash of *plain*.\"\"\"\n    return _pwd_context.hash(plain)\ndef verify_password(plain: str, hashed: str) -> bool:\n    \"\"\"Return ``True`` if *plain* matches *hashed*.\"\"\"\n    return _pwd_context.verify(plain, hashed)\n# ── JWT helpers ───────────────────────────────────────────────────────────────\ndef create_access_token(subject: str | Any, expires_delta: timedelta | None = None) -> str:",
-        "detail": "backend.app.core.security",
-        "documentation": {}
-    },
-    {
         "label": "_settings",
         "kind": 5,
         "importPath": "backend.app.db.session",
@@ -4506,6 +4780,24 @@
         "documentation": {}
     },
     {
+        "label": "TailoredResumeBase",
+        "kind": 6,
+        "importPath": "backend.app.models.resume",
+        "description": "backend.app.models.resume",
+        "peekOfCode": "class TailoredResumeBase(SQLModel):\n    user_id: uuid.UUID = Field(index=True)\n    job_description: str = Field(max_length=10000)\n    provider: str\n    original_filename: str\n    stored_filename: str\n    uploaded_stored_filename: str | None = None\nclass TailoredResume(TailoredResumeBase, table=True):\n    __tablename__ = \"tailored_resumes\"\n    id: uuid.UUID = Field(",
+        "detail": "backend.app.models.resume",
+        "documentation": {}
+    },
+    {
+        "label": "TailoredResume",
+        "kind": 6,
+        "importPath": "backend.app.models.resume",
+        "description": "backend.app.models.resume",
+        "peekOfCode": "class TailoredResume(TailoredResumeBase, table=True):\n    __tablename__ = \"tailored_resumes\"\n    id: uuid.UUID = Field(\n        default_factory=uuid.uuid4,\n        primary_key=True,\n        index=True,\n        nullable=False,\n    )\n    created_at: datetime = Field(default_factory=_utcnow, nullable=False)",
+        "detail": "backend.app.models.resume",
+        "documentation": {}
+    },
+    {
         "label": "RefreshToken",
         "kind": 6,
         "importPath": "backend.app.models.token",
@@ -4530,6 +4822,24 @@
         "description": "backend.app.models.user",
         "peekOfCode": "class User(UserBase, table=True):\n    \"\"\"Database table model for a registered user.\"\"\"\n    __tablename__ = \"users\"\n    id: uuid.UUID = Field(\n        default_factory=uuid.uuid4,\n        primary_key=True,\n        index=True,\n        nullable=False,\n    )\n    hashed_password: str",
         "detail": "backend.app.models.user",
+        "documentation": {}
+    },
+    {
+        "label": "SectionScores",
+        "kind": 6,
+        "importPath": "backend.app.schemas.ats",
+        "description": "backend.app.schemas.ats",
+        "peekOfCode": "class SectionScores(BaseModel):\n    skills_match: int = Field(ge=0, le=100)\n    experience_relevance: int = Field(ge=0, le=100)\n    education_match: int = Field(ge=0, le=100)\n    formatting: int = Field(ge=0, le=100)\nclass AtsResult(BaseModel):\n    overall_score: int = Field(ge=0, le=100, description=\"ATS compatibility score 0-100\")\n    score_label: str = Field(description=\"Excellent | Good | Fair | Poor\")\n    keywords_present: list[str] = Field(default_factory=list)\n    keywords_missing: list[str] = Field(default_factory=list)",
+        "detail": "backend.app.schemas.ats",
+        "documentation": {}
+    },
+    {
+        "label": "AtsResult",
+        "kind": 6,
+        "importPath": "backend.app.schemas.ats",
+        "description": "backend.app.schemas.ats",
+        "peekOfCode": "class AtsResult(BaseModel):\n    overall_score: int = Field(ge=0, le=100, description=\"ATS compatibility score 0-100\")\n    score_label: str = Field(description=\"Excellent | Good | Fair | Poor\")\n    keywords_present: list[str] = Field(default_factory=list)\n    keywords_missing: list[str] = Field(default_factory=list)\n    section_scores: SectionScores\n    suggestions: list[str] = Field(default_factory=list)\n    strengths: list[str] = Field(default_factory=list)\n    summary: str = \"\"",
+        "detail": "backend.app.schemas.ats",
         "documentation": {}
     },
     {
@@ -4629,6 +4939,24 @@
         "description": "backend.app.schemas.common",
         "peekOfCode": "DataT = TypeVar(\"DataT\")\nclass ApiResponse(BaseModel, Generic[DataT]):\n    \"\"\"Standard response envelope used by all endpoints.\n    Example::\n        {\n            \"data\": { ... },\n            \"message\": \"User registered successfully.\",\n            \"success\": true\n        }\n    \"\"\"",
         "detail": "backend.app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "backend.app.services.ats",
+        "description": "backend.app.services.ats",
+        "peekOfCode": "logger = logging.getLogger(__name__)\n# ── ATS Prompt ────────────────────────────────────────────────────────────────\nATS_ANALYSIS_PROMPT = \"\"\"\\\nYou are an expert ATS (Applicant Tracking System) analyst. Analyse the resume against the job description and return ONLY a valid JSON object with the following exact structure (no markdown, no explanation):\n{{\n  \"overall_score\": <integer 0-100>,\n  \"score_label\": \"<Excellent|Good|Fair|Poor>\",\n  \"keywords_present\": [<list of strings>],\n  \"keywords_missing\": [<list of strings>],\n  \"section_scores\": {{",
+        "detail": "backend.app.services.ats",
+        "documentation": {}
+    },
+    {
+        "label": "ATS_ANALYSIS_PROMPT",
+        "kind": 5,
+        "importPath": "backend.app.services.ats",
+        "description": "backend.app.services.ats",
+        "peekOfCode": "ATS_ANALYSIS_PROMPT = \"\"\"\\\nYou are an expert ATS (Applicant Tracking System) analyst. Analyse the resume against the job description and return ONLY a valid JSON object with the following exact structure (no markdown, no explanation):\n{{\n  \"overall_score\": <integer 0-100>,\n  \"score_label\": \"<Excellent|Good|Fair|Poor>\",\n  \"keywords_present\": [<list of strings>],\n  \"keywords_missing\": [<list of strings>],\n  \"section_scores\": {{\n    \"skills_match\": <integer 0-100>,\n    \"experience_relevance\": <integer 0-100>,",
+        "detail": "backend.app.services.ats",
         "documentation": {}
     },
     {
