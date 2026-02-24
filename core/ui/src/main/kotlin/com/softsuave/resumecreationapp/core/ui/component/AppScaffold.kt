@@ -1,39 +1,27 @@
 package com.softsuave.resumecreationapp.core.ui.component
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
+
+// ── Local tokens ─────────────────────────────────────────────────────────────
+private val Canvas   = Color(0xFF0E0D0B)
+private val Surface0 = Color(0xFF1A1814)
+private val Amber    = Color(0xFFD4A853)
 
 /**
- * Standard application scaffold that delegates to loading, error, or content states.
+ * Standard application scaffold — dark editorial.
  *
- * Provides:
- * - [SnackbarHost] for showing snackbar messages
- * - Optional [topBar] and [bottomBar]
- * - Automatic loading / error / empty / content state switching
- * - Correct [WindowInsets] handling via [Scaffold]
+ * Delegates to [LoadingIndicator], [ErrorState], or [content] based on state.
+ * The Scaffold background is always [Canvas] to maintain the dark foundation.
  *
- * @param modifier Modifier for the scaffold.
- * @param isLoading Whether to show the loading indicator.
- * @param errorMessage When non-null, shows [ErrorState] with a retry button.
- * @param isEmpty Whether the content is empty, showing [emptyContent] if provided.
- * @param onRetry Callback for [ErrorState] retry button.
- * @param topBar Optional top app bar composable.
- * @param bottomBar Optional bottom bar composable.
- * @param snackbarHostState Snackbar host state for showing messages.
- * @param scrollBehavior Optional scroll behavior for nested scroll connection.
- * @param emptyContent Content to show when [isEmpty] is true.
- * @param content Main content with [PaddingValues] from [Scaffold].
+ * The snackbar is styled with [Surface0] container and [Amber] action text.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,27 +39,40 @@ fun AppScaffold(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
-        modifier = modifier.then(
-            if (scrollBehavior != null) {
-                Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
-            } else {
-                Modifier
-            },
-        ),
-        topBar = topBar,
+        modifier = modifier
+            .background(Canvas)
+            .then(
+                if (scrollBehavior != null) Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+                else Modifier,
+            ),
+        topBar    = topBar,
         bottomBar = bottomBar,
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        containerColor = Canvas,
+        contentColor   = Color(0xFFF0EAD6),
+        snackbarHost  = {
+            SnackbarHost(hostState = snackbarHostState) { data ->
+                Snackbar(
+                    snackbarData    = data,
+                    modifier        = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    shape           = MaterialTheme.shapes.small,
+                    containerColor  = Surface0,
+                    contentColor    = Color(0xFFF0EAD6),
+                    actionColor     = Amber,
+                )
+            }
+        },
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .background(Canvas),
         ) {
             when {
-                isLoading -> LoadingIndicator()
-                errorMessage != null -> ErrorState(message = errorMessage, onRetry = onRetry)
-                isEmpty && emptyContent != null -> emptyContent()
-                else -> content(innerPadding)
+                isLoading                           -> LoadingIndicator()
+                errorMessage != null                -> ErrorState(message = errorMessage, onRetry = onRetry)
+                isEmpty && emptyContent != null     -> emptyContent()
+                else                                -> content(innerPadding)
             }
         }
     }

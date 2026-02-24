@@ -1,48 +1,42 @@
 package com.softsuave.resumecreationapp.core.ui.component
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-/**
- * Button variant enumeration for [AppButton].
- */
-enum class AppButtonVariant {
-    Primary,
-    Secondary,
-    Text,
-}
+// ── Local tokens (mirrors AppColors) ────────────────────────────────────────
+private val Canvas   = Color(0xFF0E0D0B)
+private val Amber    = Color(0xFFD4A853)
+private val AmberDim = Color(0xFF8A6930)
+private val Surface1 = Color(0xFF242019)
+private val BorderMid = Color(0xFF4A4238)
+private val TextMuted = Color(0xFF9A8E78)
+
+enum class AppButtonVariant { Primary, Secondary, Text }
 
 /**
  * Standard application button with built-in loading state and accessibility.
  *
- * Enforces:
- * - Minimum 48dp touch target height (WCAG compliance)
- * - Proper semantic role for screen readers
- * - Loading spinner replaces text when [isLoading] is true
+ * Variants:
+ *  - **Primary**   — Solid amber fill, canvas text. The main CTA.
+ *  - **Secondary** — Transparent with amber border. Secondary actions.
+ *  - **Text**      — No background or border. Tertiary / link actions.
  *
- * @param text Button label text.
- * @param onClick Callback when the button is clicked.
- * @param modifier Modifier for the button.
- * @param variant Visual variant — [AppButtonVariant.Primary], [AppButtonVariant.Secondary], or [AppButtonVariant.Text].
- * @param enabled Whether the button is enabled. Disabled when [isLoading] is true.
- * @param isLoading Whether to show a loading indicator.
- * @param leadingIcon Optional composable drawn before the text.
+ * All variants enforce a 48 dp minimum touch target (WCAG 2.1 AA).
  */
 @Composable
 fun AppButton(
@@ -56,59 +50,118 @@ fun AppButton(
 ) {
     val effectiveEnabled = enabled && !isLoading
 
-    val buttonContent: @Composable () -> Unit = {
+    // Subtle glow pulse on Primary when loading
+    val glowAlpha by rememberInfiniteTransition(label = "btnGlow").animateFloat(
+        initialValue = 0.15f,
+        targetValue  = if (isLoading) 0.45f else 0.22f,
+        animationSpec = if (isLoading)
+            infiniteRepeatable(tween(700, easing = FastOutSlowInEasing), RepeatMode.Reverse)
+        else
+            infiniteRepeatable(tween(3000), RepeatMode.Reverse),
+        label = "ga"
+    )
+
+    val baseModifier = modifier
+        .heightIn(min = 48.dp)
+        .semantics { role = Role.Button }
+
+    val labelContent: @Composable RowScope.() -> Unit = {
         if (isLoading) {
             CircularProgressIndicator(
-                modifier = Modifier.size(20.dp),
+                modifier  = Modifier.size(16.dp),
                 strokeWidth = 2.dp,
                 color = when (variant) {
-                    AppButtonVariant.Primary -> MaterialTheme.colorScheme.onPrimary
-                    AppButtonVariant.Secondary -> MaterialTheme.colorScheme.primary
-                    AppButtonVariant.Text -> MaterialTheme.colorScheme.primary
+                    AppButtonVariant.Primary   -> Canvas
+                    AppButtonVariant.Secondary -> Amber
+                    AppButtonVariant.Text      -> Amber
                 },
+            )
+            Spacer(Modifier.width(10.dp))
+            Text(
+                "PLEASE WAIT",
+                fontFamily    = FontFamily.Monospace,
+                fontSize      = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight    = FontWeight.Medium,
             )
         } else {
             if (leadingIcon != null) {
                 leadingIcon()
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(Modifier.width(8.dp))
             }
-            Text(text = text)
+            Text(
+                text.uppercase(),
+                fontFamily    = FontFamily.Monospace,
+                fontSize      = 12.sp,
+                letterSpacing = 2.5.sp,
+                fontWeight    = FontWeight.Bold,
+            )
         }
     }
-
-    val semanticsModifier = modifier
-        .heightIn(min = 48.dp)
-        .semantics { role = Role.Button }
 
     when (variant) {
         AppButtonVariant.Primary -> {
             Button(
-                onClick = onClick,
-                modifier = semanticsModifier,
-                enabled = effectiveEnabled,
-                contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
-                content = { buttonContent() },
+                onClick  = onClick,
+                modifier = baseModifier.drawBehind {
+                    drawRect(
+                        Brush.horizontalGradient(
+                            listOf(Amber.copy(alpha = glowAlpha * 0.6f), Color.Transparent)
+                        )
+                    )
+                },
+                enabled          = effectiveEnabled,
+                shape            = MaterialTheme.shapes.extraSmall,
+                contentPadding   = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
+                elevation        = ButtonDefaults.buttonElevation(0.dp),
+                colors           = ButtonDefaults.buttonColors(
+                    containerColor         = Amber,
+                    disabledContainerColor = AmberDim.copy(alpha = 0.5f),
+                    contentColor           = Canvas,
+                    disabledContentColor   = Canvas.copy(alpha = 0.5f),
+                ),
+                content = labelContent,
             )
         }
 
         AppButtonVariant.Secondary -> {
             OutlinedButton(
-                onClick = onClick,
-                modifier = semanticsModifier,
-                enabled = effectiveEnabled,
-                contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
-                content = { buttonContent() },
+                onClick        = onClick,
+                modifier       = baseModifier.border(
+                    width  = if (effectiveEnabled) 1.dp else 0.5.dp,
+                    color  = if (effectiveEnabled) Amber.copy(alpha = 0.6f) else BorderMid,
+                    shape  = MaterialTheme.shapes.extraSmall,
+                ),
+                enabled        = effectiveEnabled,
+                shape          = MaterialTheme.shapes.extraSmall,
+                contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
+                border         = null,          // border drawn manually above
+                colors         = ButtonDefaults.outlinedButtonColors(
+                    containerColor         = Color.Transparent,
+                    contentColor           = if (effectiveEnabled) Amber else TextMuted,
+                    disabledContainerColor = Color.Transparent,
+                    disabledContentColor   = TextMuted.copy(alpha = 0.5f),
+                ),
+                content = labelContent,
             )
         }
 
         AppButtonVariant.Text -> {
             TextButton(
-                onClick = onClick,
-                modifier = semanticsModifier,
-                enabled = effectiveEnabled,
+                onClick        = onClick,
+                modifier       = baseModifier,
+                enabled        = effectiveEnabled,
+                shape          = MaterialTheme.shapes.extraSmall,
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-                content = { buttonContent() },
+                colors         = TextButtonDefaults.textButtonColors(
+                    contentColor         = Amber,
+                    disabledContentColor = TextMuted.copy(alpha = 0.5f),
+                ),
+                content = labelContent,
             )
         }
     }
 }
+
+// Alias so existing call-sites that import TextButtonDefaults still compile
+private val TextButtonDefaults get() = ButtonDefaults

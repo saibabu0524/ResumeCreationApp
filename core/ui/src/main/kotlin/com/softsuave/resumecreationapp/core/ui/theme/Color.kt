@@ -4,110 +4,128 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-// ─── Primary ─────────────────────────────────────────────────────────────────
-val Purple10 = Color(0xFF1D0040)
-val Purple20 = Color(0xFF330066)
-val Purple30 = Color(0xFF4A0099)
-val Purple40 = Color(0xFF6200EE)
-val Purple80 = Color(0xFFCFBCFF)
-val Purple90 = Color(0xFFE9DDFF)
+// ─────────────────────────────────────────────────────────────────────────────
+//  RESUME TAILOR — Dark Editorial Color Palette
+//  Aesthetic: Near-black warm canvas · Amber gold accent · Warm off-white text
+// ─────────────────────────────────────────────────────────────────────────────
 
-// ─── Secondary ───────────────────────────────────────────────────────────────
-val Teal10 = Color(0xFF003B3F)
-val Teal20 = Color(0xFF005457)
-val Teal30 = Color(0xFF006D72)
-val Teal40 = Color(0xFF03DAC6)
-val Teal80 = Color(0xFF80F0E5)
-val Teal90 = Color(0xFFB3F5EF)
+// ─── Canvas / Background ─────────────────────────────────────────────────────
+val Canvas        = Color(0xFF0E0D0B)   // deepest background
+val CanvasWarm    = Color(0xFF131109)   // slightly warm variant
 
-// ─── Tertiary ────────────────────────────────────────────────────────────────
-val Rose10 = Color(0xFF3E0021)
-val Rose20 = Color(0xFF5D0035)
-val Rose30 = Color(0xFF7D004C)
-val Rose40 = Color(0xFFBB0066)
-val Rose80 = Color(0xFFFFB1C8)
-val Rose90 = Color(0xFFFFD9E2)
+// ─── Surfaces ────────────────────────────────────────────────────────────────
+val Surface0      = Color(0xFF1A1814)   // base card surface
+val Surface1      = Color(0xFF242019)   // elevated surface
+val Surface2      = Color(0xFF2E2A21)   // highest elevation
 
-// ─── Error ───────────────────────────────────────────────────────────────────
-val Red10 = Color(0xFF410002)
-val Red20 = Color(0xFF690005)
-val Red30 = Color(0xFF93000A)
-val Red40 = Color(0xFFBA1A1A)
-val Red80 = Color(0xFFFFB4AB)
-val Red90 = Color(0xFFFFDAD6)
+// ─── Borders ─────────────────────────────────────────────────────────────────
+val BorderSubtle  = Color(0xFF2E2A24)
+val BorderMid     = Color(0xFF4A4238)
+val BorderStrong  = Color(0xFF7A6E5E)
 
-// ─── Neutral ─────────────────────────────────────────────────────────────────
-val Neutral10 = Color(0xFF1C1B1F)
-val Neutral20 = Color(0xFF313033)
-val Neutral90 = Color(0xFFE6E1E5)
-val Neutral95 = Color(0xFFF4EFF4)
-val Neutral99 = Color(0xFFFFFBFE)
+// ─── Amber — Primary Accent ──────────────────────────────────────────────────
+val Amber10       = Color(0xFF2A1E08)
+val Amber20       = Color(0xFF4A3412)
+val Amber30       = Color(0xFF6A4D1C)
+val Amber40       = Color(0xFF8A6930)   // dim / disabled
+val Amber70       = Color(0xFFCFA050)
+val Amber80       = Color(0xFFD4A853)   // primary accent
+val Amber90       = Color(0xFFDFBB75)
+val Amber95       = Color(0xFFEFC97A)   // bright / hover glow
+val Amber99       = Color(0xFFF7E5C0)   // near-white tint
 
-// ─── Neutral Variant ─────────────────────────────────────────────────────────
-val NeutralVariant30 = Color(0xFF49454F)
-val NeutralVariant50 = Color(0xFF79747E)
-val NeutralVariant60 = Color(0xFF938F99)
-val NeutralVariant80 = Color(0xFFCAC4D0)
-val NeutralVariant90 = Color(0xFFE7E0EC)
+// ─── Text ─────────────────────────────────────────────────────────────────────
+val TextPrimary   = Color(0xFFF0EAD6)   // warm off-white
+val TextSecondary = Color(0xFFBFB49A)
+val TextMuted     = Color(0xFF9A8E78)
+val TextFaint     = Color(0xFF5A5040)
 
-// ─── Color Schemes ───────────────────────────────────────────────────────────
+// ─── Semantic ─────────────────────────────────────────────────────────────────
+val SemanticError       = Color(0xFFB04A3A)
+val SemanticErrorDim    = Color(0xFF2D1410)
+val SemanticErrorBright = Color(0xFFE06050)
+val SemanticSuccess     = Color(0xFF4A7C59)
+val SemanticSuccessDim  = Color(0xFF0F1F14)
+val SemanticWarning     = Color(0xFFC08030)
 
-val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    onPrimary = Color.White,
-    primaryContainer = Purple90,
-    onPrimaryContainer = Purple10,
-    secondary = Teal40,
-    onSecondary = Color.White,
-    secondaryContainer = Teal90,
-    onSecondaryContainer = Teal10,
-    tertiary = Rose40,
-    onTertiary = Color.White,
-    tertiaryContainer = Rose90,
-    onTertiaryContainer = Rose10,
-    error = Red40,
-    onError = Color.White,
-    errorContainer = Red90,
-    onErrorContainer = Red10,
-    background = Neutral99,
-    onBackground = Neutral10,
-    surface = Neutral99,
-    onSurface = Neutral10,
-    surfaceVariant = NeutralVariant90,
-    onSurfaceVariant = NeutralVariant30,
-    outline = NeutralVariant50,
-    outlineVariant = NeutralVariant80,
-    inverseSurface = Neutral20,
-    inverseOnSurface = Neutral95,
-    inversePrimary = Purple80,
-)
+// ─────────────────────────────────────────────────────────────────────────────
+//  Color Schemes
+//  The app uses DarkColorScheme exclusively (enforced in AppTheme).
+//  LightColorScheme is kept for tooling / preview compatibility.
+// ─────────────────────────────────────────────────────────────────────────────
 
 val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    onPrimary = Purple20,
-    primaryContainer = Purple30,
-    onPrimaryContainer = Purple90,
-    secondary = Teal80,
-    onSecondary = Teal20,
-    secondaryContainer = Teal30,
-    onSecondaryContainer = Teal90,
-    tertiary = Rose80,
-    onTertiary = Rose20,
-    tertiaryContainer = Rose30,
-    onTertiaryContainer = Rose90,
-    error = Red80,
-    onError = Red20,
-    errorContainer = Red30,
-    onErrorContainer = Red90,
-    background = Neutral10,
-    onBackground = Neutral90,
-    surface = Neutral10,
-    onSurface = Neutral90,
-    surfaceVariant = NeutralVariant30,
-    onSurfaceVariant = NeutralVariant80,
-    outline = NeutralVariant60,
-    outlineVariant = NeutralVariant30,
-    inverseSurface = Neutral90,
-    inverseOnSurface = Neutral20,
-    inversePrimary = Purple40,
+    // Primary — Amber
+    primary                = Amber80,
+    onPrimary              = Canvas,
+    primaryContainer       = Amber20,
+    onPrimaryContainer     = Amber95,
+
+    // Secondary — muted amber-brown
+    secondary              = Amber70,
+    onSecondary            = Canvas,
+    secondaryContainer     = Amber10,
+    onSecondaryContainer   = Amber90,
+
+    // Tertiary — warm neutral
+    tertiary               = TextSecondary,
+    onTertiary             = Canvas,
+    tertiaryContainer      = Surface2,
+    onTertiaryContainer    = TextPrimary,
+
+    // Error
+    error                  = SemanticError,
+    onError                = TextPrimary,
+    errorContainer         = SemanticErrorDim,
+    onErrorContainer       = SemanticErrorBright,
+
+    // Background / Canvas
+    background             = Canvas,
+    onBackground           = TextPrimary,
+
+    // Surface hierarchy
+    surface                = Surface0,
+    onSurface              = TextPrimary,
+    surfaceVariant         = Surface1,
+    onSurfaceVariant       = TextMuted,
+
+    // Borders / outlines
+    outline                = BorderMid,
+    outlineVariant         = BorderSubtle,
+
+    // Inverse (used by SnackBar, tooltips, etc.)
+    inverseSurface         = TextPrimary,
+    inverseOnSurface       = Canvas,
+    inversePrimary         = Amber40,
+
+    // Scrim
+    scrim                  = Color(0xCC0E0D0B),
+)
+
+// Light scheme retained for IDE previews — not used at runtime.
+val LightColorScheme = lightColorScheme(
+    primary                = Amber80,
+    onPrimary              = Canvas,
+    primaryContainer       = Amber99,
+    onPrimaryContainer     = Amber20,
+    secondary              = Amber70,
+    onSecondary            = Canvas,
+    secondaryContainer     = Amber99,
+    onSecondaryContainer   = Amber30,
+    tertiary               = TextMuted,
+    onTertiary             = Color.White,
+    tertiaryContainer      = Color(0xFFF5F0E8),
+    onTertiaryContainer    = Amber30,
+    error                  = SemanticError,
+    onError                = Color.White,
+    errorContainer         = Color(0xFFFFDAD6),
+    onErrorContainer       = SemanticError,
+    background             = Color(0xFFFAF8F4),
+    onBackground           = Color(0xFF1A1814),
+    surface                = Color(0xFFFFFBF5),
+    onSurface              = Color(0xFF1A1814),
+    surfaceVariant         = Color(0xFFF0EAD6),
+    onSurfaceVariant       = Color(0xFF5A5040),
+    outline                = Color(0xFFBFB49A),
+    outlineVariant         = Color(0xFFE0D8C8),
 )
