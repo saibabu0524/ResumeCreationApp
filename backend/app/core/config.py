@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite+aiosqlite:///./db.sqlite3"
 
     # ── CORS ─────────────────────────────────────────────────────────────────
-    ALLOWED_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:8080"]
+    ALLOWED_ORIGINS: str | list[str] = ["http://localhost:3000", "http://localhost:8080"]
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
