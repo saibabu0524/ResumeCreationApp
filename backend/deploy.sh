@@ -6,8 +6,9 @@ set -e
 echo "🚀 Starting deployment process..."
 
 # 1. Pull latest code from the current branch
-echo "📦 Pulling latest changes from git..."
-git pull origin main
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo "📦 Pulling latest changes from git branch: $BRANCH..."
+git pull origin "$BRANCH"
 
 # 2. Build and restart Docker containers
 echo "🏭 Building and restarting Docker containers..."
