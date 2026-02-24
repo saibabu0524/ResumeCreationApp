@@ -24,9 +24,8 @@ FROM python:3.12-slim AS runtime
 # Install TeX Live (pdflatex) for compiling resumes
 RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-latex-base \
-    texlive-fonts-recommended \
-    texlive-fonts-extra \
     texlive-latex-extra \
+    texlive-fonts-recommended \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user for security
