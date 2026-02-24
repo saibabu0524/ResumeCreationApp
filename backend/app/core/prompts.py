@@ -1,3 +1,15 @@
+"""LaTeX resume template and LLM prompts.
+
+``BASE_LATEX_TEMPLATE`` is the skeleton document fed to Stage A.
+``STAGE_A_PROMPT`` structures raw PDF text into the template.
+``STAGE_B_PROMPT`` tailors the structured resume to a specific job description.
+
+Both prompts use ``str.replace()`` substitution (not ``.format()``) to avoid
+``KeyError`` conflicts with LaTeX curly braces like ``{5pt}``.
+"""
+
+from __future__ import annotations
+
 BASE_LATEX_TEMPLATE = r'''\documentclass{article}
 \usepackage{fontawesome5}
 
