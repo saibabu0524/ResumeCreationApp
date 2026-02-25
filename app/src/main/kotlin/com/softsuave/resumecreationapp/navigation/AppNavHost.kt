@@ -5,12 +5,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.softsuave.resumecreationapp.core.ui.component.ThemeMode
 import com.softsuave.resumecreationapp.feature.auth.navigation.AuthGraphRoute
-import com.softsuave.resumecreationapp.feature.auth.navigation.OnboardingScreenRoute
 import com.softsuave.resumecreationapp.feature.auth.navigation.RegistrationScreenRoute
 import com.softsuave.resumecreationapp.feature.auth.navigation.authNavGraph
 import com.softsuave.resumecreationapp.feature.ats.navigation.AtsGraph
 import com.softsuave.resumecreationapp.feature.ats.navigation.atsNavGraph
+import com.softsuave.resumecreationapp.feature.history.navigation.HistoryScreenRoute
+import com.softsuave.resumecreationapp.feature.history.navigation.historyNavGraph
 import com.softsuave.resumecreationapp.feature.home.navigation.homeNavGraph
 import com.softsuave.resumecreationapp.feature.profile.navigation.ProfileScreenRoute
 import com.softsuave.resumecreationapp.feature.profile.navigation.profileNavGraph
@@ -22,21 +24,19 @@ import com.softsuave.resumecreationapp.feature.settings.navigation.settingsNavGr
 /**
  * Root navigation host assembling all feature navigation graphs.
  *
- * This is the ONLY place where feature modules' navigation graphs are wired
- * together. Individual features never know about each other's routes or
- * navigation graphs — all cross-feature navigation goes through lambdas
- * resolved here.
+ * Cross-feature navigation is resolved here through lambdas —
+ * individual feature modules are decoupled from each other.
  *
- * Auth flow:  Login → (Registration →) Onboarding → ResumeGraph
- *
- * @param modifier Modifier applied to the [NavHost].
- * @param navController The [NavHostController] managing navigation state.
+ * @param currentThemeMode The active theme mode passed down to screens that show the switcher.
+ * @param onThemeChanged   Callback to change the theme from within a screen.
  */
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: Any = AuthGraphRoute,
+    currentThemeMode: ThemeMode = ThemeMode.System,
+    onThemeChanged: (ThemeMode) -> Unit = {},
 ) {
     NavHost(
         navController = navController,
@@ -49,6 +49,11 @@ fun AppNavHost(
             onNavigateToAts = {
                 navController.navigate(AtsGraph)
             },
+            onNavigateToHistory = {
+                navController.navigate(HistoryScreenRoute)
+            },
+            currentThemeMode = currentThemeMode,
+            onThemeChanged = onThemeChanged,
         )
 
         // ─── ATS Scanner ─────────────────────────────────────────────
@@ -60,13 +65,11 @@ fun AppNavHost(
 
         // ─── Auth ────────────────────────────────────────────────────
         authNavGraph(
-            // Login success → go directly to ResumeGraph (skip onboarding for returning users)
             onNavigateToHome = {
                 navController.navigate(ResumeGraph) {
                     popUpTo(AuthGraphRoute) { inclusive = true }
                 }
             },
-            // Registration → show onboarding first
             onNavigateToRegistration = {
                 navController.navigate(RegistrationScreenRoute)
             },
@@ -94,6 +97,13 @@ fun AppNavHost(
 
         // ─── Profile ─────────────────────────────────────────────────
         profileNavGraph(
+            onNavigateBack = {
+                navController.popBackStack()
+            },
+        )
+
+        // ─── History ─────────────────────────────────────────────────
+        historyNavGraph(
             onNavigateBack = {
                 navController.popBackStack()
             },

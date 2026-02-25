@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.softsuave.resumecreationapp.core.analytics.AnalyticsEvent
 import com.softsuave.resumecreationapp.core.analytics.AnalyticsTracker
 import com.softsuave.resumecreationapp.core.datastore.UserPreferencesRepository
+import com.softsuave.resumecreationapp.core.ui.component.ThemeMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,17 +45,21 @@ class SettingsViewModel @Inject constructor(
     }
 
     /**
-     * Reference implementation for [combine] operator —
-     * merges multiple preference flows into a single state.
+     * Merges theme-mode string and notifications preference into a single [SettingsUiState].
      */
     private fun observePreferences() {
         viewModelScope.launch {
             combine(
-                preferencesRepository.isDarkMode,
+                preferencesRepository.themeModeString,
                 preferencesRepository.isPushNotificationsEnabled,
-            ) { isDarkMode, isNotificationsEnabled ->
+            ) { themeModeStr, isNotificationsEnabled ->
+                val themeMode = when (themeModeStr) {
+                    "dark"   -> ThemeMode.Dark
+                    "light"  -> ThemeMode.Light
+                    else     -> ThemeMode.System
+                }
                 SettingsUiState(
-                    themeMode = if (isDarkMode) ThemeMode.Dark else ThemeMode.Light,
+                    themeMode = themeMode,
                     notificationsEnabled = isNotificationsEnabled,
                     isLoading = false,
                 )
@@ -67,7 +72,12 @@ class SettingsViewModel @Inject constructor(
     private fun onThemeModeChanged(mode: ThemeMode) {
         _uiState.update { it.copy(themeMode = mode) }
         viewModelScope.launch {
-            preferencesRepository.setDarkMode(mode == ThemeMode.Dark)
+            val modeStr = when (mode) {
+                ThemeMode.Dark   -> "dark"
+                ThemeMode.Light  -> "light"
+                ThemeMode.System -> "system"
+            }
+            preferencesRepository.setThemeMode(modeStr)
         }
     }
 

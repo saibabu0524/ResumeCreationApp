@@ -1,13 +1,6 @@
 package com.softsuave.resumecreationapp.feature.settings
 
-/**
- * Theme mode selection.
- */
-enum class ThemeMode {
-    Light,
-    Dark,
-    System,
-}
+import com.softsuave.resumecreationapp.core.ui.component.ThemeMode
 
 data class SettingsUiState(
     val themeMode: ThemeMode = ThemeMode.System,

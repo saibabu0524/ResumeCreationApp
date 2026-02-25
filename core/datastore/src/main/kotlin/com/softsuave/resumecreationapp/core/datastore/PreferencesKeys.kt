@@ -7,7 +7,10 @@ package com.softsuave.resumecreationapp.core.datastore
  * This makes refactoring safe and prevents key collisions.
  */
 object PreferencesKeys {
-    // Theme
+    // Theme mode: "light" | "dark" | "system"
+    const val KEY_THEME_MODE = "theme_mode"
+
+    // Legacy dark-mode boolean — kept for backward compat, new code uses KEY_THEME_MODE
     const val KEY_IS_DARK_MODE = "is_dark_mode"
 
     // Onboarding
@@ -19,3 +22,4 @@ object PreferencesKeys {
     // Currently signed-in user id (non-sensitive — auth tokens live in EncryptedSharedPreferences)
     const val KEY_CURRENT_USER_ID = "current_user_id"
 }
+

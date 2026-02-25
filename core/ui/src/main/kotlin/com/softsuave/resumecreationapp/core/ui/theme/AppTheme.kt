@@ -12,14 +12,15 @@ import androidx.core.view.WindowCompat
 /**
  * Root application theme for Resume Tailor.
  *
- * Design direction: Dark Editorial — near-black warm canvas with amber gold
- * accents and a monospace/serif typographic pairing.
+ * Design direction: Dual editorial modes —
+ *  - Dark: Near-black warm canvas with amber gold accents.
+ *  - Light: Warm parchment with rich amber and deep brown text.
  *
  * Dynamic color is intentionally disabled to preserve the curated palette.
- * Supports both dark (default) and light themes based on system preference.
  *
- * @param darkTheme Whether to use the dark color scheme.
- *                  Defaults to the system dark-mode setting.
+ * @param darkTheme Whether to force dark mode.
+ *                  Defaults to the system dark-mode preference.
+ * @param dynamicColor Disabled — always uses the curated amber palette.
  * @param content The composable content to render inside the theme.
  */
 @Composable
@@ -39,7 +40,7 @@ fun AppTheme(
             // Edge-to-edge: let Compose draw behind bars
             WindowCompat.setDecorFitsSystemWindows(window, false)
 
-            // Status bar icons — light icons on dark, dark icons on light
+            // Status bar icons — light icons on dark bg, dark icons on light bg
             WindowCompat.getInsetsController(window, view).apply {
                 isAppearanceLightStatusBars = !darkTheme
                 isAppearanceLightNavigationBars = !darkTheme
@@ -64,4 +65,3 @@ fun AppTheme(
         )
     }
 }
-

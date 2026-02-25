@@ -18,22 +18,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// ── Local tokens (mirrors AppColors) ────────────────────────────────────────
-private val Canvas   = Color(0xFF0E0D0B)
-private val Amber    = Color(0xFFD4A853)
-private val AmberDim = Color(0xFF8A6930)
-private val Surface1 = Color(0xFF242019)
-private val BorderMid = Color(0xFF4A4238)
-private val TextMuted = Color(0xFF9A8E78)
-
 enum class AppButtonVariant { Primary, Secondary, Text }
 
 /**
- * Standard application button with built-in loading state and accessibility.
+ * Standard application button — theme-aware (light + dark).
  *
  * Variants:
- *  - **Primary**   — Solid amber fill, canvas text. The main CTA.
- *  - **Secondary** — Transparent with amber border. Secondary actions.
+ *  - **Primary**   — Solid primary fill. The main CTA.
+ *  - **Secondary** — Transparent with primary border. Secondary actions.
  *  - **Text**      — No background or border. Tertiary / link actions.
  *
  * All variants enforce a 48 dp minimum touch target (WCAG 2.1 AA).
@@ -48,6 +40,11 @@ fun AppButton(
     isLoading: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
+    val primary  = MaterialTheme.colorScheme.primary
+    val onPrimary = MaterialTheme.colorScheme.onPrimary
+    val outline  = MaterialTheme.colorScheme.outline
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+
     val effectiveEnabled = enabled && !isLoading
 
     // Subtle glow pulse on Primary when loading
@@ -71,9 +68,9 @@ fun AppButton(
                 modifier  = Modifier.size(16.dp),
                 strokeWidth = 2.dp,
                 color = when (variant) {
-                    AppButtonVariant.Primary   -> Canvas
-                    AppButtonVariant.Secondary -> Amber
-                    AppButtonVariant.Text      -> Amber
+                    AppButtonVariant.Primary   -> onPrimary
+                    AppButtonVariant.Secondary -> primary
+                    AppButtonVariant.Text      -> primary
                 },
             )
             Spacer(Modifier.width(10.dp))
@@ -106,7 +103,7 @@ fun AppButton(
                 modifier = baseModifier.drawBehind {
                     drawRect(
                         Brush.horizontalGradient(
-                            listOf(Amber.copy(alpha = glowAlpha * 0.6f), Color.Transparent)
+                            listOf(primary.copy(alpha = glowAlpha * 0.4f), Color.Transparent)
                         )
                     )
                 },
@@ -115,10 +112,10 @@ fun AppButton(
                 contentPadding   = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
                 elevation        = ButtonDefaults.buttonElevation(0.dp),
                 colors           = ButtonDefaults.buttonColors(
-                    containerColor         = Amber,
-                    disabledContainerColor = AmberDim.copy(alpha = 0.5f),
-                    contentColor           = Canvas,
-                    disabledContentColor   = Canvas.copy(alpha = 0.5f),
+                    containerColor         = primary,
+                    disabledContainerColor = primary.copy(alpha = 0.4f),
+                    contentColor           = onPrimary,
+                    disabledContentColor   = onPrimary.copy(alpha = 0.5f),
                 ),
                 content = labelContent,
             )
@@ -129,7 +126,7 @@ fun AppButton(
                 onClick        = onClick,
                 modifier       = baseModifier.border(
                     width  = if (effectiveEnabled) 1.dp else 0.5.dp,
-                    color  = if (effectiveEnabled) Amber.copy(alpha = 0.6f) else BorderMid,
+                    color  = if (effectiveEnabled) primary.copy(alpha = 0.6f) else outline,
                     shape  = MaterialTheme.shapes.extraSmall,
                 ),
                 enabled        = effectiveEnabled,
@@ -138,9 +135,9 @@ fun AppButton(
                 border         = null,          // border drawn manually above
                 colors         = ButtonDefaults.outlinedButtonColors(
                     containerColor         = Color.Transparent,
-                    contentColor           = if (effectiveEnabled) Amber else TextMuted,
+                    contentColor           = if (effectiveEnabled) primary else onSurfaceVariant,
                     disabledContainerColor = Color.Transparent,
-                    disabledContentColor   = TextMuted.copy(alpha = 0.5f),
+                    disabledContentColor   = onSurfaceVariant.copy(alpha = 0.5f),
                 ),
                 content = labelContent,
             )
@@ -153,15 +150,12 @@ fun AppButton(
                 enabled        = effectiveEnabled,
                 shape          = MaterialTheme.shapes.extraSmall,
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-                colors         = TextButtonDefaults.textButtonColors(
-                    contentColor         = Amber,
-                    disabledContentColor = TextMuted.copy(alpha = 0.5f),
+                colors         = ButtonDefaults.textButtonColors(
+                    contentColor         = primary,
+                    disabledContentColor = onSurfaceVariant.copy(alpha = 0.5f),
                 ),
                 content = labelContent,
             )
         }
     }
 }
-
-// Alias so existing call-sites that import TextButtonDefaults still compile
-private val TextButtonDefaults get() = ButtonDefaults

@@ -6,22 +6,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas   = Color(0xFF0E0D0B)
-private val Surface0 = Color(0xFF1A1814)
-private val Amber    = Color(0xFFD4A853)
-
 /**
- * Standard application scaffold — dark editorial.
+ * Standard application scaffold — theme-aware.
  *
  * Delegates to [LoadingIndicator], [ErrorState], or [content] based on state.
- * The Scaffold background is always [Canvas] to maintain the dark foundation.
- *
- * The snackbar is styled with [Surface0] container and [Amber] action text.
+ * Background and snackbar colors follow [MaterialTheme.colorScheme].
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,26 +30,31 @@ fun AppScaffold(
     emptyContent: @Composable (() -> Unit)? = null,
     content: @Composable (PaddingValues) -> Unit,
 ) {
+    val bg      = MaterialTheme.colorScheme.background
+    val onBg    = MaterialTheme.colorScheme.onBackground
+    val surface = MaterialTheme.colorScheme.surfaceVariant
+    val primary = MaterialTheme.colorScheme.primary
+
     Scaffold(
         modifier = modifier
-            .background(Canvas)
+            .background(bg)
             .then(
                 if (scrollBehavior != null) Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
                 else Modifier,
             ),
-        topBar    = topBar,
-        bottomBar = bottomBar,
-        containerColor = Canvas,
-        contentColor   = Color(0xFFF0EAD6),
-        snackbarHost  = {
+        topBar         = topBar,
+        bottomBar      = bottomBar,
+        containerColor = bg,
+        contentColor   = onBg,
+        snackbarHost   = {
             SnackbarHost(hostState = snackbarHostState) { data ->
                 Snackbar(
                     snackbarData    = data,
                     modifier        = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                     shape           = MaterialTheme.shapes.small,
-                    containerColor  = Surface0,
-                    contentColor    = Color(0xFFF0EAD6),
-                    actionColor     = Amber,
+                    containerColor  = surface,
+                    contentColor    = onBg,
+                    actionColor     = primary,
                 )
             }
         },
@@ -66,13 +63,13 @@ fun AppScaffold(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Canvas),
+                .background(bg),
         ) {
             when {
-                isLoading                           -> LoadingIndicator()
-                errorMessage != null                -> ErrorState(message = errorMessage, onRetry = onRetry)
-                isEmpty && emptyContent != null     -> emptyContent()
-                else                                -> content(innerPadding)
+                isLoading                       -> LoadingIndicator()
+                errorMessage != null            -> ErrorState(message = errorMessage, onRetry = onRetry)
+                isEmpty && emptyContent != null -> emptyContent()
+                else                            -> content(innerPadding)
             }
         }
     }

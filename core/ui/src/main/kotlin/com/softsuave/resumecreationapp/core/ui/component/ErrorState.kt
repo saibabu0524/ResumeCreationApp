@@ -9,14 +9,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -31,19 +30,8 @@ import androidx.compose.ui.unit.sp
 import com.softsuave.resumecreationapp.core.ui.R
 import com.softsuave.resumecreationapp.core.ui.theme.LocalSpacing
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas    = Color(0xFF0E0D0B)
-private val Surface0  = Color(0xFF1A1814)
-private val Amber     = Color(0xFFD4A853)
-private val AmberDim  = Color(0xFF8A6930)
-private val TextPri   = Color(0xFFF0EAD6)
-private val TextMuted = Color(0xFF9A8E78)
-private val ErrorRed  = Color(0xFFB04A3A)
-private val ErrorDim  = Color(0xFF2D1410)
-private val ErrorBright = Color(0xFFE06050)
-
 /**
- * Dark editorial error state with animated icon ring and retry button.
+ * Theme-aware error state with animated icon ring and retry button.
  */
 @Composable
 fun ErrorState(
@@ -52,6 +40,11 @@ fun ErrorState(
     modifier: Modifier = Modifier,
 ) {
     val spacing = LocalSpacing.current
+    val error        = MaterialTheme.colorScheme.error
+    val errorContainer = MaterialTheme.colorScheme.errorContainer
+    val onErrorContainer = MaterialTheme.colorScheme.onErrorContainer
+    val onSurface    = MaterialTheme.colorScheme.onSurface
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
 
     val rotation by rememberInfiniteTransition(label = "errRot").animateFloat(
         initialValue = 0f, targetValue = 360f,
@@ -79,18 +72,18 @@ fun ErrorState(
                 .drawBehind {
                     rotate(rotation) {
                         drawArc(
-                            color      = ErrorRed.copy(alpha = 0.35f),
+                            color      = error.copy(alpha = 0.35f),
                             startAngle = 0f, sweepAngle = 200f,
                             useCenter  = false,
                             style      = Stroke(width = 1.dp.toPx(), cap = StrokeCap.Round),
                         )
                     }
                     drawCircle(
-                        color  = ErrorDim,
+                        color  = errorContainer,
                         radius = size.minDimension * 0.35f * pulse,
                     )
                     drawCircle(
-                        color  = ErrorRed.copy(alpha = 0.2f),
+                        color  = error.copy(alpha = 0.2f),
                         radius = size.minDimension * 0.35f * pulse,
                         style  = Stroke(0.5.dp.toPx()),
                     )
@@ -101,7 +94,7 @@ fun ErrorState(
                 imageVector        = Icons.Outlined.ErrorOutline,
                 contentDescription = null,
                 modifier           = Modifier.size(36.dp),
-                tint               = ErrorRed.copy(alpha = 0.8f),
+                tint               = error.copy(alpha = 0.8f),
             )
         }
 
@@ -113,7 +106,7 @@ fun ErrorState(
             fontFamily    = FontFamily.Monospace,
             fontSize      = 9.sp,
             letterSpacing = 3.sp,
-            color         = ErrorRed.copy(0.5f),
+            color         = error.copy(0.5f),
         )
 
         Spacer(Modifier.height(8.dp))
@@ -125,18 +118,18 @@ fun ErrorState(
             fontSize   = 22.sp,
             fontWeight = FontWeight.Bold,
             fontStyle  = FontStyle.Italic,
-            color      = TextPri,
+            color      = onSurface,
         )
 
         Spacer(Modifier.height(12.dp))
 
-        // Message in bordered monospace box
+        // Message in bordered box using error container colors
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.85f)
                 .clip(RoundedCornerShape(2.dp))
-                .background(ErrorDim)
-                .border(0.5.dp, ErrorRed.copy(0.3f), RoundedCornerShape(2.dp))
+                .background(errorContainer)
+                .border(0.5.dp, error.copy(0.3f), RoundedCornerShape(2.dp))
                 .padding(14.dp),
         ) {
             Text(
@@ -144,7 +137,7 @@ fun ErrorState(
                 fontFamily    = FontFamily.Monospace,
                 fontSize      = 11.sp,
                 lineHeight    = 18.sp,
-                color         = ErrorBright.copy(0.8f),
+                color         = onErrorContainer,
                 textAlign     = TextAlign.Center,
                 letterSpacing = 0.3.sp,
             )

@@ -35,6 +35,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.softsuave.resumecreationapp.feature.resume.ResumeUiState
 import com.softsuave.resumecreationapp.feature.resume.ResumeViewModel
 import com.softsuave.resumecreationapp.core.ui.theme.*
+import com.softsuave.resumecreationapp.core.ui.component.ThemeMode
+import com.softsuave.resumecreationapp.core.ui.component.ThemeSwitcherIcon
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -47,6 +49,9 @@ fun HomeScreen(
     viewModel: ResumeViewModel = hiltViewModel(),
     onNavigateToResult: (ByteArray) -> Unit,
     onNavigateToAts: () -> Unit = {},
+    onNavigateToHistory: () -> Unit = {},
+    currentThemeMode: ThemeMode = ThemeMode.System,
+    onThemeChanged: (ThemeMode) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -61,6 +66,9 @@ fun HomeScreen(
         uiState = uiState,
         onTailorResume = { uri, jd, provider -> viewModel.tailorResume(uri, jd, provider) },
         onNavigateToAts = onNavigateToAts,
+        onNavigateToHistory = onNavigateToHistory,
+        currentThemeMode = currentThemeMode,
+        onThemeChanged = onThemeChanged,
     )
 }
 
@@ -73,6 +81,9 @@ fun HomeScreenContent(
     uiState: ResumeUiState = ResumeUiState.Idle,
     onTailorResume: (Uri, String, String) -> Unit = { _, _, _ -> },
     onNavigateToAts: () -> Unit = {},
+    onNavigateToHistory: () -> Unit = {},
+    currentThemeMode: ThemeMode = ThemeMode.System,
+    onThemeChanged: (ThemeMode) -> Unit = {},
 ) {
     var selectedPdfUri by remember<MutableState<Uri?>> { mutableStateOf(null) }
     var selectedPdfName by remember { mutableStateOf("") }
@@ -88,7 +99,7 @@ fun HomeScreenContent(
 
     val isLoading = uiState is ResumeUiState.Loading
 
-    Box(modifier = Modifier.fillMaxSize().background(Canvas)) {
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         // Ambient glow
         val glowAnim by rememberInfiniteTransition(label = "glow").animateFloat(
             initialValue = 0f, targetValue = 1f,
@@ -101,7 +112,7 @@ fun HomeScreenContent(
                 .size(350.dp)
                 .background(
                     Brush.radialGradient(
-                        colors = listOf(Amber.copy(alpha = 0.04f + glowAnim * 0.03f), Color.Transparent)
+                        colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.04f + glowAnim * 0.03f), Color.Transparent)
                     )
                 )
         )
@@ -136,20 +147,33 @@ fun HomeScreenContent(
                         fontSize = 26.sp
                     )
                 }
-                // Logo mark
-                Box(
-                    modifier = Modifier
-                        .size(44.dp)
-                        .drawBehind {
-                            drawCircle(color = Amber.copy(alpha = 0.2f), style = Stroke(1f))
-                            drawCircle(
-                                brush = Brush.radialGradient(listOf(Color(0xFF2A2218), Color(0xFF151210))),
-                                radius = size.minDimension / 2 - 3
-                            )
-                        },
-                    contentAlignment = Alignment.Center
+                // Top-right action buttons
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    Text("RT", fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Amber, letterSpacing = 1.sp)
+                    // ── Theme Switcher ────────────────────────────────────
+                    ThemeSwitcherIcon(
+                        currentMode = currentThemeMode,
+                        onModeChanged = onThemeChanged,
+                    )
+                    // ── History button ────────────────────────────────────
+                    Box(
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clip(RoundedCornerShape(2.dp))
+                            .background(SurfaceHigh.copy(alpha = 0.6f))
+                            .border(0.5.dp, Border, RoundedCornerShape(2.dp))
+                            .clickable(onClick = onNavigateToHistory),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            Icons.Default.History,
+                            contentDescription = "View history",
+                            tint = Amber.copy(alpha = 0.7f),
+                            modifier = Modifier.size(18.dp),
+                        )
+                    }
                 }
             }
 

@@ -18,14 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas    = Color(0xFF0E0D0B)
-private val Surface0  = Color(0xFF1A1814)
-private val Amber     = Color(0xFFD4A853)
-private val AmberDim  = Color(0xFF8A6930)
-private val TextMuted = Color(0xFF9A8E78)
-private val BorderSub = Color(0xFF2E2A24)
-
 /**
  * Configuration for a single navigation item in [AppBottomBar].
  */
@@ -38,10 +30,10 @@ data class AppNavigationItem(
 )
 
 /**
- * Dark editorial bottom navigation bar.
+ * Theme-aware bottom navigation bar.
  *
- * - Hairline top border for structural definition
- * - Amber indicator line above selected icon (not pill/container)
+ * - Hairline top border from [MaterialTheme.colorScheme.outline]
+ * - Primary colour indicator line above selected icon
  * - Monospace uppercase labels
  * - Animated color transitions
  */
@@ -52,15 +44,20 @@ fun AppBottomBar(
     onItemSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val surface  = MaterialTheme.colorScheme.surface
+    val primary  = MaterialTheme.colorScheme.primary
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val outline  = MaterialTheme.colorScheme.outline
+
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Surface0)
+            .background(surface)
             .navigationBarsPadding()
             .drawBehind {
                 // Hairline top border
                 drawLine(
-                    color       = BorderSub,
+                    color       = outline.copy(alpha = 0.5f),
                     start       = Offset(0f, 0f),
                     end         = Offset(size.width, 0f),
                     strokeWidth = 0.5.dp.toPx(),
@@ -79,12 +76,12 @@ fun AppBottomBar(
                 val selected = index == selectedIndex
 
                 val iconTint by animateColorAsState(
-                    targetValue   = if (selected) Amber else TextMuted,
+                    targetValue   = if (selected) primary else onSurfaceVariant,
                     animationSpec = tween(250),
                     label         = "iconTint$index",
                 )
                 val labelColor by animateColorAsState(
-                    targetValue   = if (selected) Amber else TextMuted.copy(alpha = 0.6f),
+                    targetValue   = if (selected) primary else onSurfaceVariant.copy(alpha = 0.6f),
                     animationSpec = tween(250),
                     label         = "labelColor$index",
                 )
@@ -94,12 +91,12 @@ fun AppBottomBar(
                     onClick   = { onItemSelected(index) },
                     icon      = {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            // Amber indicator line above icon when selected
+                            // Primary indicator line above icon when selected
                             Box(
                                 modifier = Modifier
                                     .width(24.dp)
                                     .height(2.dp)
-                                    .background(if (selected) Amber else Color.Transparent)
+                                    .background(if (selected) primary else Color.Transparent)
                             )
                             Spacer(Modifier.height(4.dp))
                             Icon(
@@ -122,11 +119,11 @@ fun AppBottomBar(
                     },
                     alwaysShowLabel = true,
                     colors    = NavigationBarItemDefaults.colors(
-                        selectedIconColor   = Amber,
-                        selectedTextColor   = Amber,
+                        selectedIconColor   = primary,
+                        selectedTextColor   = primary,
                         indicatorColor      = Color.Transparent, // custom indicator drawn above
-                        unselectedIconColor = TextMuted,
-                        unselectedTextColor = TextMuted,
+                        unselectedIconColor = onSurfaceVariant,
+                        unselectedTextColor = onSurfaceVariant,
                     ),
                 )
             }

@@ -24,17 +24,57 @@ class UserPreferencesRepository @Inject constructor(
 
     // ─── Keys (private — encapsulated here) ──────────────────────────────────
 
+    private val themeModeKey = stringPreferencesKey(PreferencesKeys.KEY_THEME_MODE)
     private val isDarkModeKey = booleanPreferencesKey(PreferencesKeys.KEY_IS_DARK_MODE)
     private val onboardingCompletedKey = booleanPreferencesKey(PreferencesKeys.KEY_ONBOARDING_COMPLETED)
     private val pushNotificationsKey = booleanPreferencesKey(PreferencesKeys.KEY_PUSH_NOTIFICATIONS_ENABLED)
     private val currentUserIdKey = stringPreferencesKey(PreferencesKeys.KEY_CURRENT_USER_ID)
 
-    // ─── Dark Mode ────────────────────────────────────────────────────────────
+    // ─── Theme Mode ──────────────────────────────────────────────────────────
+    // Stored as a plain string: "light" | "dark" | "system"
 
-    val isDarkMode: Flow<Boolean> = dataStore.data.map { it[isDarkModeKey] ?: false }
+    /** Emits one of "light", "dark", or "system". Defaults to "system" if unset. */
+    val themeModeString: Flow<String> = dataStore.data.map {
+        it[themeModeKey] ?: "system"
+    }
 
+    /**
+     * Derived boolean convenience flow used by MainActivity.
+     * - "dark"   → true
+     * - "light"  → false
+     * - "system" → false (MainActivity uses isSystemInDarkTheme() as the fallback)
+     */
+    val isDarkMode: Flow<Boolean> = dataStore.data.map {
+        when (it[themeModeKey]) {
+            "dark"  -> true
+            "light" -> false
+            else    -> it[isDarkModeKey] ?: false   // legacy fallback
+        }
+    }
+
+    /**
+     * Whether the theme is set to follow the system.
+     * MainActivity uses this to decide whether to call isSystemInDarkTheme().
+     */
+    val isSystemTheme: Flow<Boolean> = dataStore.data.map {
+        it[themeModeKey] == "system" || it[themeModeKey] == null
+    }
+
+    /**
+     * Saves the theme mode preference.
+     * @param mode one of "light", "dark", or "system"
+     */
+    suspend fun setThemeMode(mode: String) {
+        dataStore.edit { prefs ->
+            prefs[themeModeKey] = mode
+            // Keep legacy boolean in sync
+            prefs[isDarkModeKey] = (mode == "dark")
+        }
+    }
+
+    /** Legacy convenience wrapper — prefer [setThemeMode]. */
     suspend fun setDarkMode(enabled: Boolean) {
-        dataStore.edit { it[isDarkModeKey] = enabled }
+        setThemeMode(if (enabled) "dark" else "light")
     }
 
     // ─── Onboarding ───────────────────────────────────────────────────────────

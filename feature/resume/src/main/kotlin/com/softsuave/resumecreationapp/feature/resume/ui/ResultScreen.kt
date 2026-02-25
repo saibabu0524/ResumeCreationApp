@@ -99,14 +99,14 @@ fun ResultScreen(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(Canvas)) {
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
 
             // ── Custom Top Bar ────────────────────────────────────────────────
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Canvas)
+                    .background(MaterialTheme.colorScheme.background)
                     .padding(horizontal = 8.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -115,7 +115,7 @@ fun ResultScreen(
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
                         null,
-                        tint = TextMuted,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )
                 }
@@ -125,7 +125,7 @@ fun ResultScreen(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 10.sp,
                         letterSpacing = 3.sp,
-                        color = Amber.copy(0.7f)
+                        color = MaterialTheme.colorScheme.primary.copy(0.7f)
                     )
                     if (pdfBitmaps.isNotEmpty()) {
                         Text(

@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.softsuave.resumecreationapp.core.ui.component.ThemeMode
 import com.softsuave.resumecreationapp.feature.resume.ui.HomeScreen
 import com.softsuave.resumecreationapp.feature.resume.ui.ResultScreen
 import kotlinx.serialization.Serializable
@@ -26,25 +27,27 @@ fun NavController.navigateToResumeGraph(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.resumeGraph(
     navController: NavController,
     onNavigateToAts: () -> Unit = {},
+    onNavigateToHistory: () -> Unit = {},
+    currentThemeMode: ThemeMode = ThemeMode.System,
+    onThemeChanged: (ThemeMode) -> Unit = {},
 ) {
     navigation<ResumeGraph>(startDestination = HomeRoute) {
         composable<HomeRoute> {
             HomeScreen(
                 onNavigateToResult = { bytes ->
-                    // Since passing large byte arrays in Navigation arguments might exceed the Intent size limit,
-                    // we could save it temporarily and pass a URI, or Use a shared ViewModel.
-                    // For simplicity, we assume ByteArray is manageable if it's a small PDF, but it's risky (TransactionTooLargeException).
-                    // Navigation Compose route args are bundled. If it's too large, or if the type isn't natively supported, it crashes.
-                    // We created a hack for now to store it in a companion object Holder.
+                    // In-memory holder avoids TransactionTooLargeException when passing
+                    // large byte arrays through the navigation back-stack bundle.
                     PdfHolder.bytes = bytes
                     navController.navigate(ResultRoute)
                 },
                 onNavigateToAts = onNavigateToAts,
+                onNavigateToHistory = onNavigateToHistory,
+                currentThemeMode = currentThemeMode,
+                onThemeChanged = onThemeChanged,
             )
         }
 
         composable<ResultRoute> {
-            // Use the PDF bytes from the holder instead of the bundle argument to avoid crashes
             val bytes = PdfHolder.bytes ?: ByteArray(0)
             ResultScreen(
                 pdfBytes = bytes,
@@ -57,7 +60,7 @@ fun NavGraphBuilder.resumeGraph(
     }
 }
 
-// Simple in-memory holder for the PDF bytes strictly for navigation purposes
+/** Simple in-memory holder for the PDF bytes — avoids bundle size limits in navigation. */
 object PdfHolder {
     var bytes: ByteArray? = null
 }

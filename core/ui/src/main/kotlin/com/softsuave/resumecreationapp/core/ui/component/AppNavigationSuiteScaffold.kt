@@ -4,6 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
@@ -12,19 +13,12 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas    = Color(0xFF0E0D0B)
-private val Surface0  = Color(0xFF1A1814)
-private val Amber     = Color(0xFFD4A853)
-private val TextMuted = Color(0xFF9A8E78)
 
 /**
  * Configuration for a single navigation destination in [AppNavigationSuiteScaffold].
@@ -39,10 +33,10 @@ data class AppNavDestination(
 )
 
 /**
- * Adaptive navigation scaffold — dark editorial.
+ * Adaptive navigation scaffold — theme-aware.
  *
  * Automatically uses bottom bar / rail / drawer based on window size class.
- * Icon tints and labels animate between [Amber] (selected) and [TextMuted].
+ * Icon tints and labels animate between primary (selected) and onSurfaceVariant.
  */
 @Composable
 fun AppNavigationSuiteScaffold(
@@ -52,17 +46,23 @@ fun AppNavigationSuiteScaffold(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
+    val bg           = MaterialTheme.colorScheme.background
+    val onBg         = MaterialTheme.colorScheme.onBackground
+    val surface      = MaterialTheme.colorScheme.surface
+    val primary      = MaterialTheme.colorScheme.primary
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+
     // Pre-compute colors per destination in composable scope
     val itemColorsList = destinations.map { destination ->
         val selected = currentRoute == destination.route
 
         val iconTint by animateColorAsState(
-            targetValue   = if (selected) Amber else TextMuted,
+            targetValue   = if (selected) primary else onSurfaceVariant,
             animationSpec = tween(250),
             label         = "navIcon${destination.route}",
         )
         val labelColor by animateColorAsState(
-            targetValue   = if (selected) Amber else TextMuted.copy(alpha = 0.6f),
+            targetValue   = if (selected) primary else onSurfaceVariant.copy(alpha = 0.6f),
             animationSpec = tween(250),
             label         = "navLabel${destination.route}",
         )
@@ -72,18 +72,18 @@ fun AppNavigationSuiteScaffold(
 
     // Build item colors once in composable scope — these functions are @Composable
     val navBarItemColors = NavigationBarItemDefaults.colors(
-        selectedIconColor   = Amber,
-        selectedTextColor   = Amber,
+        selectedIconColor   = primary,
+        selectedTextColor   = primary,
         indicatorColor      = Color.Transparent,
-        unselectedIconColor = TextMuted,
-        unselectedTextColor = TextMuted,
+        unselectedIconColor = onSurfaceVariant,
+        unselectedTextColor = onSurfaceVariant,
     )
     val navRailItemColors = NavigationRailItemDefaults.colors(
-        selectedIconColor   = Amber,
-        selectedTextColor   = Amber,
-        indicatorColor      = Surface0,
-        unselectedIconColor = TextMuted,
-        unselectedTextColor = TextMuted,
+        selectedIconColor   = primary,
+        selectedTextColor   = primary,
+        indicatorColor      = surface,
+        unselectedIconColor = onSurfaceVariant,
+        unselectedTextColor = onSurfaceVariant,
     )
     val suiteItemColors = NavigationSuiteDefaults.itemColors(
         navigationBarItemColors  = navBarItemColors,
@@ -91,7 +91,7 @@ fun AppNavigationSuiteScaffold(
     )
 
     NavigationSuiteScaffold(
-        modifier = modifier.background(Canvas),
+        modifier = modifier.background(bg),
         navigationSuiteItems = {
             destinations.forEachIndexed { index, destination ->
                 val (selected, iconTint, labelColor) = itemColorsList[index]
@@ -121,15 +121,15 @@ fun AppNavigationSuiteScaffold(
             }
         },
         navigationSuiteColors = NavigationSuiteDefaults.colors(
-            navigationBarContainerColor    = Surface0,
-            navigationBarContentColor      = TextMuted,
-            navigationRailContainerColor   = Surface0,
-            navigationRailContentColor     = TextMuted,
-            navigationDrawerContainerColor = Surface0,
-            navigationDrawerContentColor   = TextMuted,
+            navigationBarContainerColor    = surface,
+            navigationBarContentColor      = onSurfaceVariant,
+            navigationRailContainerColor   = surface,
+            navigationRailContentColor     = onSurfaceVariant,
+            navigationDrawerContainerColor = surface,
+            navigationDrawerContentColor   = onSurfaceVariant,
         ),
-        containerColor = Canvas,
-        contentColor   = Color(0xFFF0EAD6),
+        containerColor = bg,
+        contentColor   = onBg,
     ) {
         content()
     }
