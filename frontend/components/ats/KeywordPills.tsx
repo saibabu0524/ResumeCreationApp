@@ -13,8 +13,10 @@ function Pill({
     return (
         <span
             className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ${variant === "matched"
-                    ? "bg-emerald-500/10 text-emerald-400 ring-emerald-500/20"
-                    : "bg-red-500/10 text-red-400 ring-red-500/20"
+                    // SemanticSuccess #4A7C59
+                    ? "bg-[#4A7C59]/10 text-[#4A7C59] dark:text-[#6AAF80] ring-[#4A7C59]/25"
+                    // SemanticError #B04A3A
+                    : "bg-[#B04A3A]/10 text-[#B04A3A] dark:text-[#E06050] ring-[#B04A3A]/25"
                 }`}
         >
             {variant === "matched" ? "✓ " : "✗ "}
@@ -25,11 +27,12 @@ function Pill({
 
 export function KeywordPills({ matched, missing }: KeywordPillsProps) {
     return (
-        <div className="space-y-5">
+        <div className="space-y-4">
             {matched.length > 0 && (
                 <div>
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                        Matched Keywords ({matched.length})
+                    <p className="mb-2.5 text-sm font-semibold text-[#4A7C59] dark:text-[#6AAF80]">
+                        Matched Keywords
+                        <span className="ml-1.5 text-xs font-normal text-muted-foreground">({matched.length})</span>
                     </p>
                     <div className="flex flex-wrap gap-2">
                         {matched.map((kw) => (
@@ -40,8 +43,9 @@ export function KeywordPills({ matched, missing }: KeywordPillsProps) {
             )}
             {missing.length > 0 && (
                 <div>
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-red-400">
-                        Missing Keywords ({missing.length})
+                    <p className="mb-2.5 text-sm font-semibold text-[#B04A3A] dark:text-[#E06050]">
+                        Missing Keywords
+                        <span className="ml-1.5 text-xs font-normal text-muted-foreground">({missing.length})</span>
                     </p>
                     <div className="flex flex-wrap gap-2">
                         {missing.map((kw) => (

@@ -5,12 +5,15 @@ import { useEffect, useRef } from "react";
 interface ATSScoreRingProps {
     score: number; // 0-100
     size?: number;
+    /** Show the coloured label badge below the ring. Defaults to false. */
+    showBadge?: boolean;
 }
 
 function getColor(score: number): string {
-    if (score >= 70) return "#10b981"; // emerald-500
-    if (score >= 40) return "#f59e0b"; // amber-500
-    return "#ef4444"; // red-500
+    // Mirrors Android SemanticSuccess / SemanticWarning / SemanticError tokens
+    if (score >= 70) return "#4A7C59"; // SemanticSuccess
+    if (score >= 40) return "#C08030"; // SemanticWarning
+    return "#B04A3A"; // SemanticError
 }
 
 function getLabel(score: number): string {
@@ -19,7 +22,7 @@ function getLabel(score: number): string {
     return "Poor";
 }
 
-export function ATSScoreRing({ score, size = 160 }: ATSScoreRingProps) {
+export function ATSScoreRing({ score, size = 160, showBadge = false }: ATSScoreRingProps) {
     const circleRef = useRef<SVGCircleElement>(null);
     const radius = (size - 16) / 2; // stroke-width = 8 each side
     const circumference = 2 * Math.PI * radius;
@@ -92,16 +95,18 @@ export function ATSScoreRing({ score, size = 160 }: ATSScoreRingProps) {
                     / 100
                 </text>
             </svg>
-            <span
-                className="rounded-full px-3 py-1 text-xs font-semibold ring-1"
-                style={{
-                    color,
-                    backgroundColor: `${color}15`,
-                    boxShadow: `0 0 0 1px ${color}30`,
-                }}
-            >
-                {label} Match
-            </span>
+            {showBadge && (
+                <span
+                    className="rounded-full px-3 py-1 text-xs font-semibold ring-1"
+                    style={{
+                        color,
+                        backgroundColor: `${color}15`,
+                        boxShadow: `0 0 0 1px ${color}30`,
+                    }}
+                >
+                    {label} Match
+                </span>
+            )}
         </div>
     );
 }

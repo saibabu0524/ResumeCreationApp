@@ -11,24 +11,29 @@ export default function AuthLayout({
 }) {
     return (
         <div className="relative min-h-screen overflow-hidden bg-background">
-            {/* Animated background gradient */}
+            {/*
+             * Ambient background — CSS radial-gradient (no filter: blur).
+             * A single pseudo-element costs zero additional compositing layers
+             * vs the previous three blurred divs that each created a GPU layer.
+             */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-10"
-            >
-                <div className="absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full bg-blue-500/10 blur-3xl" />
-                <div className="absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full bg-violet-500/10 blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/5 blur-3xl" />
-            </div>
+                style={{
+                    background:
+                        "radial-gradient(ellipse 80% 60% at 20% 10%, #D4A85314 0%, transparent 60%), " +
+                        "radial-gradient(ellipse 70% 50% at 80% 90%, #CFA05010 0%, transparent 60%)",
+                }}
+            />
 
             {/* Content */}
             <div className="flex min-h-screen items-center justify-center px-4 py-16">
                 <div className="w-full max-w-md">
                     {/* Logo */}
                     <div className="mb-8 text-center">
-                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/20 ring-1 ring-blue-500/30">
+                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15 ring-1 ring-primary/30">
                             <svg
-                                className="h-6 w-6 text-blue-400"
+                                className="h-6 w-6 text-primary"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"

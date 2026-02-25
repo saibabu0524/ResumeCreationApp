@@ -7,12 +7,13 @@ interface ResumeCardProps {
 }
 
 function ScoreChip({ score }: { score: number }) {
+    // Uses Android semantic colour tokens directly
     const color =
         score >= 70
-            ? "text-emerald-400 bg-emerald-500/10 ring-emerald-500/20"
+            ? "text-[#4A7C59] dark:text-[#6AAF80] bg-[#4A7C59]/10 ring-[#4A7C59]/20"   // SemanticSuccess
             : score >= 40
-                ? "text-amber-400 bg-amber-500/10 ring-amber-500/20"
-                : "text-red-400 bg-red-500/10 ring-red-500/20";
+                ? "text-[#C08030] bg-[#C08030]/10 ring-[#C08030]/20"                     // SemanticWarning
+                : "text-[#B04A3A] dark:text-[#E06050] bg-[#B04A3A]/10 ring-[#B04A3A]/20"; // SemanticError
 
     return (
         <span

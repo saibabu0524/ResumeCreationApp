@@ -44,81 +44,119 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ── Light Mode ──────────────────────────────────────────────────────────── */
+/*
+ * ── Resume Tailor — Amber Editorial Palette ───────────────────────────────
+ * Mirrors the Android AppTheme dual-mode colour scheme:
+ *   Dark  → near-black warm canvas (#0E0D0B) + amber gold (#D4A853) accent
+ *   Light → warm parchment (#FAF7F0) + rich amber (#9B6E18) accent
+ */
+
+/* ── Light Mode (parchment) ──────────────────────────────────────────────── */
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  /* Blue-500 primary */
-  --primary: oklch(0.623 0.214 258.53);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.49 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  /* Red-500 destructive */
-  --destructive: oklch(0.628 0.258 29);
-  --border: oklch(0.88 0 0);
-  --input: oklch(0.88 0 0);
-  --ring: oklch(0.623 0.214 258.53);
-  /* Chart / status colours */
-  --chart-1: oklch(0.623 0.214 258.53); /* blue  */
-  --chart-2: oklch(0.7 0.173 162.5);   /* emerald */
-  --chart-3: oklch(0.75 0.172 80);     /* amber */
-  --chart-4: oklch(0.628 0.258 29);    /* red */
-  --chart-5: oklch(0.65 0.19 305);     /* violet */
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.623 0.214 258.53);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.88 0 0);
-  --sidebar-ring: oklch(0.623 0.214 258.53);
+
+  /* Backgrounds */
+  --background:          #FAF7F0;   /* LightPaper   — warm parchment */
+  --foreground:          #1F1A12;   /* LightTextPrimary — deep warm brown */
+
+  /* Card / popover surfaces */
+  --card:                #EFE9DC;   /* LightSurface0 */
+  --card-foreground:     #1F1A12;
+  --popover:             #EFE9DC;
+  --popover-foreground:  #1F1A12;
+
+  /* Primary — darker amber (enough contrast on parchment) */
+  --primary:             #9B6E18;   /* LightAmberDark */
+  --primary-foreground:  #FFFFFF;
+
+  /* Secondary / muted */
+  --secondary:           #E8E0D0;   /* LightSurface1 */
+  --secondary-foreground:#4A3D28;
+  --muted:               #E8E0D0;
+  --muted-foreground:    #7A6E58;   /* LightTextMuted */
+
+  /* Accent */
+  --accent:              #DFD5C2;   /* LightSurface2 */
+  --accent-foreground:   #1F1A12;
+
+  /* Semantic */
+  --destructive:         #B04A3A;   /* SemanticError */
+
+  /* Borders / inputs */
+  --border:              #D8CDB8;   /* LightBorderSubtle */
+  --input:               #D8CDB8;
+  --ring:                #9B6E18;
+
+  /* Chart / status */
+  --chart-1: #9B6E18;   /* amber — primary */
+  --chart-2: #4A7C59;   /* SemanticSuccess — emerald */
+  --chart-3: #C08030;   /* SemanticWarning */
+  --chart-4: #B04A3A;   /* SemanticError */
+  --chart-5: #7A6E58;   /* neutral muted */
+
+  /* Sidebar */
+  --sidebar:                    #FAF7F0;
+  --sidebar-foreground:         #1F1A12;
+  --sidebar-primary:            #9B6E18;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent:             #E8E0D0;
+  --sidebar-accent-foreground:  #4A3D28;
+  --sidebar-border:             #D8CDB8;
+  --sidebar-ring:               #9B6E18;
 }
 
-/* ── Dark Mode (default) ─────────────────────────────────────────────────── */
+/* ── Dark Mode — warm canvas (default) ──────────────────────────────────── */
 .dark {
-  /* zinc-950 background, zinc-900 surface, zinc-800 border */
-  --background: oklch(0.09 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  /* Blue-500 primary */
-  --primary: oklch(0.623 0.214 258.53);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.21 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.21 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.21 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  /* Red-500 */
-  --destructive: oklch(0.628 0.258 29);
-  --border: oklch(0.27 0 0);
-  --input: oklch(0.27 0 0);
-  --ring: oklch(0.623 0.214 258.53);
-  --chart-1: oklch(0.623 0.214 258.53);
-  --chart-2: oklch(0.7 0.173 162.5);
-  --chart-3: oklch(0.75 0.172 80);
-  --chart-4: oklch(0.628 0.258 29);
-  --chart-5: oklch(0.65 0.19 305);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.623 0.214 258.53);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.21 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.27 0 0);
-  --sidebar-ring: oklch(0.623 0.214 258.53);
+  /* Backgrounds */
+  --background:          #0E0D0B;   /* Canvas */
+  --foreground:          #F0EAD6;   /* TextPrimary — warm off-white */
+
+  /* Card / popover surfaces */
+  --card:                #1A1814;   /* Surface0 */
+  --card-foreground:     #F0EAD6;
+  --popover:             #1A1814;
+  --popover-foreground:  #F0EAD6;
+
+  /* Primary — amber gold */
+  --primary:             #D4A853;   /* Amber80 */
+  --primary-foreground:  #0E0D0B;
+
+  /* Secondary / elevated surface */
+  --secondary:           #242019;   /* Surface1 */
+  --secondary-foreground:#F0EAD6;
+
+  /* Muted */
+  --muted:               #242019;
+  --muted-foreground:    #9A8E78;   /* TextMuted */
+
+  /* Accent */
+  --accent:              #2E2A21;   /* Surface2 */
+  --accent-foreground:   #F0EAD6;
+
+  /* Semantic */
+  --destructive:         #B04A3A;
+
+  /* Borders / inputs */
+  --border:              #2E2A24;   /* BorderSubtle */
+  --input:               #2E2A24;
+  --ring:                #D4A853;
+
+  /* Chart / status */
+  --chart-1: #D4A853;   /* Amber80 */
+  --chart-2: #4A7C59;   /* SemanticSuccess */
+  --chart-3: #C08030;   /* SemanticWarning */
+  --chart-4: #B04A3A;   /* SemanticError */
+  --chart-5: #9A8E78;   /* TextMuted */
+
+  /* Sidebar — slightly deeper than canvas */
+  --sidebar:                    #131109;   /* CanvasWarm */
+  --sidebar-foreground:         #F0EAD6;
+  --sidebar-primary:            #D4A853;
+  --sidebar-primary-foreground: #0E0D0B;
+  --sidebar-accent:             #242019;
+  --sidebar-accent-foreground:  #F0EAD6;
+  --sidebar-border:             #2E2A24;
+  --sidebar-ring:               #D4A853;
 }
 
 @layer base {
@@ -131,24 +169,46 @@
 }
 
 @layer utilities {
-  /* Glassmorphism surface — used on cards/modals */
+  /*
+   * Glass surface — performance optimised.
+   * On mobile (no fine pointer) backdrop-filter is skipped to preserve
+   * compositing budget. On desktop hover devices it's enabled for depth.
+   */
   .glass {
-    background: oklch(from var(--card) l c h / 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid oklch(from var(--border) l c h / 0.5);
+    background-color: color-mix(in srgb, var(--card) 88%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  }
+
+  @media (hover: hover) {
+    .glass {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
   }
 
   .glass-strong {
-    background: oklch(from var(--card) l c h / 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid oklch(from var(--border) l c h / 0.6);
+    background-color: color-mix(in srgb, var(--card) 94%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   }
 
-  /* Gradient text helper */
+  @media (hover: hover) {
+    .glass-strong {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+  }
+
+  /* Gradient text — amber editorial (mirrors Android AppTheme) */
   .gradient-text {
-    background: linear-gradient(135deg, oklch(0.623 0.214 258.53), oklch(0.7 0.19 305));
+    background: linear-gradient(135deg, #D4A853 0%, #EFC97A 60%, #CFA050 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Light mode gradient text uses the richer amber range */
+  :root .gradient-text {
+    background: linear-gradient(135deg, #9B6E18 0%, #C08030 60%, #8A6930 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -157,5 +217,14 @@
   /* Pulse skeleton animation */
   .skeleton {
     @apply animate-pulse rounded-md bg-muted;
+  }
+
+  /* Ambient decorative blob — CSS gradient, no blur layer */
+  .ambient-blob {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+    /* Use a radial gradient instead of a blurred div — zero GPU cost */
+    background: radial-gradient(ellipse at center, var(--blob-color, #D4A85318) 0%, transparent 70%);
   }
 }

@@ -2,12 +2,30 @@
 
 import { useCallback, useState } from "react";
 import { useDropzone, type FileRejection } from "react-dropzone";
-import { Upload, FileText, X, Loader2, Sparkles } from "lucide-react";
+import {
+    Upload,
+    FileText,
+    X,
+    Loader2,
+    Sparkles,
+    CheckCircle2,
+    AlertCircle,
+    Lightbulb,
+    TrendingUp,
+} from "lucide-react";
 import { useATSAnalysis } from "@/lib/hooks/useATSAnalysis";
 import { ATSScoreRing } from "./ATSScoreRing";
 import { KeywordPills } from "./KeywordPills";
 
 const MAX_SIZE = 5 * 1024 * 1024;
+
+function getScoreLabel(score: number): { label: string; color: string } {
+    // Mirrors Android SemanticSuccess / SemanticWarning / SemanticError
+    if (score >= 80) return { label: "Excellent Match", color: "text-[#4A7C59] dark:text-[#6AAF80]" };
+    if (score >= 60) return { label: "Good Match",      color: "text-[#C08030]" };
+    if (score >= 40) return { label: "Fair Match",      color: "text-[#C08030]" };
+    return             { label: "Poor Match",       color: "text-[#B04A3A] dark:text-[#E06050]" };
+}
 
 export function ATSUploader() {
     const [file, setFile] = useState<File | null>(null);
@@ -45,7 +63,7 @@ export function ATSUploader() {
 
     return (
         <div className="grid gap-6 lg:grid-cols-2 items-start">
-            {/* LEFT — Upload panel */}
+            {/* ── LEFT — Upload panel ───────────────────────────────────────── */}
             <div className="space-y-4">
                 {/* Dropzone */}
                 <div
@@ -111,7 +129,7 @@ export function ATSUploader() {
                     type="button"
                     onClick={handleAnalyse}
                     disabled={isPending}
-                    className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-primary-foreground
+                    className="w-full rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground
             transition-all duration-150 hover:opacity-90 active:scale-[0.98]
             disabled:cursor-not-allowed disabled:opacity-60 flex items-center justify-center gap-2"
                 >
@@ -123,77 +141,123 @@ export function ATSUploader() {
                 </button>
             </div>
 
-            {/* RIGHT — Results panel */}
-            <div className="glass rounded-xl p-6">
+            {/* ── RIGHT — Results panel ─────────────────────────────────────── */}
+            <div className="glass rounded-xl overflow-hidden">
+                {/* Loading skeleton */}
                 {isPending && (
-                    <div className="flex flex-col items-center justify-center py-16 gap-4">
-                        <div className="skeleton h-40 w-40 rounded-full" />
-                        <div className="skeleton h-4 w-32 rounded" />
-                        <div className="skeleton h-4 w-48 rounded" />
-                    </div>
-                )}
-
-                {!isPending && !data && !isError && (
-                    <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
-                        <Sparkles className="mb-3 h-12 w-12 opacity-30" />
-                        <p className="text-sm">Upload a resume and job description to see your ATS score</p>
-                    </div>
-                )}
-
-                {isError && (
-                    <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive">
-                        {error?.message ?? "Analysis failed. Please try again."}
-                    </div>
-                )}
-
-                {data && !isPending && (
-                    <div className="space-y-6">
-                        <div className="flex justify-center">
-                            <ATSScoreRing score={data.overall_score} size={180} />
+                    <div className="flex flex-col items-center justify-center py-16 px-6 gap-5">
+                        <div className="skeleton h-44 w-44 rounded-full" />
+                        <div className="space-y-2 w-full max-w-[220px]">
+                            <div className="skeleton h-4 w-full rounded" />
+                            <div className="skeleton h-4 w-3/4 rounded mx-auto" />
                         </div>
-
-                        {/* Summary */}
-                        {data.summary && (
-                            <div className="rounded-lg bg-muted/40 px-4 py-3">
-                                <p className="text-xs text-foreground leading-relaxed">{data.summary}</p>
-                            </div>
-                        )}
-
-                        {/* Strengths */}
-                        {data.strengths && data.strengths.length > 0 && (
-                            <div className="rounded-lg bg-emerald-500/5 border border-emerald-500/20 px-4 py-3">
-                                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                                    Strengths
-                                </p>
-                                <ul className="space-y-1">
-                                    {data.strengths.slice(0, 3).map((s, i) => (
-                                        <li key={i} className="text-xs text-foreground">✓ {s}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-
-                        {/* Suggestions */}
-                        {data.suggestions && data.suggestions.length > 0 && (
-                            <div className="rounded-lg bg-muted/40 px-4 py-3">
-                                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                                    Suggestions
-                                </p>
-                                <ul className="space-y-1">
-                                    {data.suggestions.slice(0, 4).map((s, i) => (
-                                        <li key={i} className="text-xs text-foreground">• {s}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-
-                        <KeywordPills
-                            matched={data.keywords_present ?? []}
-                            missing={data.keywords_missing ?? []}
-                        />
+                        <div className="skeleton h-3 w-36 rounded" />
                     </div>
                 )}
+
+                {/* Empty state */}
+                {!isPending && !data && !isError && (
+                    <div className="flex flex-col items-center justify-center py-16 px-6 text-center text-muted-foreground">
+                        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/60">
+                            <Sparkles className="h-8 w-8 opacity-40" />
+                        </div>
+                        <p className="text-base font-medium text-foreground/70">No results yet</p>
+                        <p className="mt-1 text-sm">Upload a resume and paste a job description to check your ATS compatibility score.</p>
+                    </div>
+                )}
+
+                {/* Error state */}
+                {isError && (
+                    <div className="m-4 flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                        <AlertCircle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+                        <div>
+                            <p className="text-sm font-medium text-destructive">Analysis failed</p>
+                            <p className="mt-0.5 text-sm text-destructive/80">{error?.message ?? "Please try again."}</p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Results */}
+                {data && !isPending && (() => {
+                    const { label, color } = getScoreLabel(data.overall_score);
+                    return (
+                        <div className="divide-y divide-border/50">
+                            {/* Score section */}
+                            <div className="flex flex-col items-center gap-2 px-6 py-8">
+                                <ATSScoreRing score={data.overall_score} size={180} />
+                                <span className={`text-base font-semibold ${color}`}>{label}</span>
+                                <p className="text-sm text-muted-foreground text-center">
+                                    Your resume scored <strong className={color}>{data.overall_score}%</strong> against this job description
+                                </p>
+                            </div>
+
+                            {/* Summary */}
+                            {data.summary && (
+                                <div className="px-5 py-4">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <TrendingUp className="h-4 w-4 text-primary shrink-0" />
+                                        <p className="text-sm font-semibold text-foreground">Summary</p>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{data.summary}</p>
+                                </div>
+                            )}
+
+                            {/* Strengths */}
+                            {data.strengths && data.strengths.length > 0 && (
+                                <div className="px-5 py-4">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <CheckCircle2 className="h-4 w-4 text-[#4A7C59] dark:text-[#6AAF80] shrink-0" />
+                                        <p className="text-sm font-semibold text-foreground">
+                                            Strengths
+                                            <span className="ml-1.5 text-xs font-normal text-muted-foreground">({data.strengths.length})</span>
+                                        </p>
+                                    </div>
+                                    <ul className="space-y-2">
+                                        {data.strengths.map((s, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                                                <span className="mt-0.5 text-[#4A7C59] dark:text-[#6AAF80] shrink-0">✓</span>
+                                                <span>{s}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Suggestions */}
+                            {data.suggestions && data.suggestions.length > 0 && (
+                                <div className="px-5 py-4">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <Lightbulb className="h-4 w-4 text-[#C08030] shrink-0" />
+                                        <p className="text-sm font-semibold text-foreground">
+                                            Suggestions
+                                            <span className="ml-1.5 text-xs font-normal text-muted-foreground">({data.suggestions.length})</span>
+                                        </p>
+                                    </div>
+                                    <ul className="space-y-2">
+                                        {data.suggestions.map((s, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground/80">
+                                                <span className="mt-0.5 text-[#C08030] shrink-0">•</span>
+                                                <span>{s}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Keywords */}
+                            {((data.keywords_present?.length ?? 0) > 0 || (data.keywords_missing?.length ?? 0) > 0) && (
+                                <div className="px-5 py-4">
+                                    <KeywordPills
+                                        matched={data.keywords_present ?? []}
+                                        missing={data.keywords_missing ?? []}
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    );
+                })()}
             </div>
         </div>
     );
 }
+

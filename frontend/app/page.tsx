@@ -7,16 +7,16 @@ const FEATURES = [
     title: "AI Resume Tailoring",
     description:
       "Upload your resume and a job description. Our AI rewrites every bullet point to match what the employer is looking for.",
-    color: "text-blue-400",
-    bg: "bg-blue-500/10",
-    ring: "ring-blue-500/20",
+    color: "text-primary",
+    bg: "bg-primary/10",
+    ring: "ring-primary/20",
   },
   {
     icon: Target,
     title: "ATS Score Analysis",
     description:
       "Instantly score your resume against any job description. See matched and missing keywords so you know exactly what to fix.",
-    color: "text-emerald-400",
+    color: "text-emerald-600 dark:text-emerald-400",
     bg: "bg-emerald-500/10",
     ring: "ring-emerald-500/20",
   },
@@ -25,9 +25,9 @@ const FEATURES = [
     title: "Privacy First",
     description:
       "Your resume is processed in-session and never stored without your permission. Your data stays yours.",
-    color: "text-violet-400",
-    bg: "bg-violet-500/10",
-    ring: "ring-violet-500/20",
+    color: "text-primary/70",
+    bg: "bg-primary/8",
+    ring: "ring-primary/15",
   },
 ];
 
@@ -40,19 +40,27 @@ const STATS = [
 export default function HomePage() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
-      {/* Ambient blobs */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-60 -left-60 h-[800px] w-[800px] rounded-full bg-blue-500/8 blur-3xl" />
-        <div className="absolute -bottom-60 -right-60 h-[700px] w-[700px] rounded-full bg-violet-500/8 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/4 blur-3xl" />
-      </div>
+      {/*
+       * Ambient background — single CSS radial-gradient.
+       * Replaces three blurred divs that each created a GPU compositing
+       * layer (major LCP/CLS penalty). This approach costs zero extra layers.
+       */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 50% at 15% 5%, #D4A85310 0%, transparent 55%), " +
+            "radial-gradient(ellipse 70% 45% at 85% 95%, #CFA05008 0%, transparent 55%)",
+        }}
+      />
 
       {/* Navigation */}
       <header className="sticky top-0 z-20 border-b border-border/40 glass">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
-              <FileText className="h-4 w-4 text-blue-400" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/30">
+              <FileText className="h-4 w-4 text-primary" />
             </div>
             <span className="text-lg font-bold gradient-text">ResumeTailor</span>
           </div>
@@ -79,7 +87,7 @@ export default function HomePage() {
       <main className="mx-auto max-w-6xl px-6">
         {/* Hero */}
         <section className="py-24 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1.5 text-xs font-medium text-blue-400 mb-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-xs font-medium text-primary mb-8">
             <Sparkles className="h-3 w-3" />
             AI-powered in seconds
           </div>

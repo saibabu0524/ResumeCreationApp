@@ -1,14 +1,5 @@
 [
     {
-        "label": "runpy",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "runpy",
-        "description": "runpy",
-        "detail": "runpy",
-        "documentation": {}
-    },
-    {
         "label": "annotations",
         "importPath": "__future__",
         "description": "__future__",
@@ -438,599 +429,6 @@
         "description": "__future__",
         "isExtraImport": true,
         "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "site",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "site",
-        "description": "site",
-        "detail": "site",
-        "documentation": {}
-    },
-    {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
-        "documentation": {}
-    },
-    {
-        "label": "logging",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "logging",
-        "description": "logging",
-        "detail": "logging",
-        "documentation": {}
-    },
-    {
-        "label": "os.path",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os.path",
-        "description": "os.path",
-        "detail": "os.path",
-        "documentation": {}
-    },
-    {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Container",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TextIO",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "cast",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Container",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Annotated",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Literal",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TYPE_CHECKING",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TYPE_CHECKING",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Generic",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TypeVar",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "AsyncGenerator",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "argparse",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "argparse",
-        "description": "argparse",
-        "detail": "argparse",
-        "documentation": {}
-    },
-    {
-        "label": "ArgumentParser",
-        "importPath": "argparse",
-        "description": "argparse",
-        "isExtraImport": true,
-        "detail": "argparse",
-        "documentation": {}
-    },
-    {
-        "label": "pdfminer",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pdfminer",
-        "description": "pdfminer",
-        "detail": "pdfminer",
-        "documentation": {}
-    },
-    {
-        "label": "PDFDocument",
-        "importPath": "pdfminer.pdfdocument",
-        "description": "pdfminer.pdfdocument",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdfdocument",
-        "documentation": {}
-    },
-    {
-        "label": "PDFNoOutlines",
-        "importPath": "pdfminer.pdfdocument",
-        "description": "pdfminer.pdfdocument",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdfdocument",
-        "documentation": {}
-    },
-    {
-        "label": "PDFXRefFallback",
-        "importPath": "pdfminer.pdfdocument",
-        "description": "pdfminer.pdfdocument",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdfdocument",
-        "documentation": {}
-    },
-    {
-        "label": "PDFPage",
-        "importPath": "pdfminer.pdfpage",
-        "description": "pdfminer.pdfpage",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdfpage",
-        "documentation": {}
-    },
-    {
-        "label": "PDFParser",
-        "importPath": "pdfminer.pdfparser",
-        "description": "pdfminer.pdfparser",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdfparser",
-        "documentation": {}
-    },
-    {
-        "label": "PDFObjectNotFound",
-        "importPath": "pdfminer.pdftypes",
-        "description": "pdfminer.pdftypes",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdftypes",
-        "documentation": {}
-    },
-    {
-        "label": "PDFValueError",
-        "importPath": "pdfminer.pdftypes",
-        "description": "pdfminer.pdftypes",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdftypes",
-        "documentation": {}
-    },
-    {
-        "label": "PDFStream",
-        "importPath": "pdfminer.pdftypes",
-        "description": "pdfminer.pdftypes",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdftypes",
-        "documentation": {}
-    },
-    {
-        "label": "PDFObjRef",
-        "importPath": "pdfminer.pdftypes",
-        "description": "pdfminer.pdftypes",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdftypes",
-        "documentation": {}
-    },
-    {
-        "label": "resolve1",
-        "importPath": "pdfminer.pdftypes",
-        "description": "pdfminer.pdftypes",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdftypes",
-        "documentation": {}
-    },
-    {
-        "label": "stream_value",
-        "importPath": "pdfminer.pdftypes",
-        "description": "pdfminer.pdftypes",
-        "isExtraImport": true,
-        "detail": "pdfminer.pdftypes",
-        "documentation": {}
-    },
-    {
-        "label": "PSKeyword",
-        "importPath": "pdfminer.psparser",
-        "description": "pdfminer.psparser",
-        "isExtraImport": true,
-        "detail": "pdfminer.psparser",
-        "documentation": {}
-    },
-    {
-        "label": "PSLiteral",
-        "importPath": "pdfminer.psparser",
-        "description": "pdfminer.psparser",
-        "isExtraImport": true,
-        "detail": "pdfminer.psparser",
-        "documentation": {}
-    },
-    {
-        "label": "LIT",
-        "importPath": "pdfminer.psparser",
-        "description": "pdfminer.psparser",
-        "isExtraImport": true,
-        "detail": "pdfminer.psparser",
-        "documentation": {}
-    },
-    {
-        "label": "isnumber",
-        "importPath": "pdfminer.utils",
-        "description": "pdfminer.utils",
-        "isExtraImport": true,
-        "detail": "pdfminer.utils",
-        "documentation": {}
-    },
-    {
-        "label": "AnyIO",
-        "importPath": "pdfminer.utils",
-        "description": "pdfminer.utils",
-        "isExtraImport": true,
-        "detail": "pdfminer.utils",
-        "documentation": {}
-    },
-    {
-        "label": "pdfminer.high_level",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pdfminer.high_level",
-        "description": "pdfminer.high_level",
-        "detail": "pdfminer.high_level",
-        "documentation": {}
-    },
-    {
-        "label": "LAParams",
-        "importPath": "pdfminer.layout",
-        "description": "pdfminer.layout",
-        "isExtraImport": true,
-        "detail": "pdfminer.layout",
         "documentation": {}
     },
     {
@@ -2296,6 +1694,24 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
         "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
@@ -2683,6 +2099,254 @@
         "documentation": {}
     },
     {
+        "label": "Annotated",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Generic",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncGenerator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "HTTPAuthorizationCredentials",
         "importPath": "fastapi.security",
         "description": "fastapi.security",
@@ -2940,6 +2604,15 @@
         "importPath": "json",
         "description": "json",
         "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
         "documentation": {}
     },
     {
@@ -4074,6 +3747,24 @@
         "documentation": {}
     },
     {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
         "label": "ThreadPoolExecutor",
         "importPath": "concurrent.futures",
         "description": "concurrent.futures",
@@ -4228,258 +3919,6 @@
         "description": "agents.version_agent",
         "isExtraImport": true,
         "detail": "agents.version_agent",
-        "documentation": {}
-    },
-    {
-        "label": "bin_dir",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "base",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "os.environ[\"PATH\"]",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "os.environ[\"VIRTUAL_ENV\"]",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "prev_length",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "sys.path[:]",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "sys.real_prefix",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "sys.prefix",
-        "kind": 5,
-        "importPath": ".venv.bin.activate_this",
-        "description": ".venv.bin.activate_this",
-        "peekOfCode": "sys.prefix = base",
-        "detail": ".venv.bin.activate_this",
-        "documentation": {}
-    },
-    {
-        "label": "escape",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def escape(s: Union[str, bytes]) -> str:\n    if isinstance(s, bytes):\n        us = str(s, \"latin-1\")\n    else:\n        us = s\n    return ESC_PAT.sub(lambda m: \"&#%d;\" % ord(m.group(0)), us)\ndef dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "dumpxml",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return\n    if isinstance(obj, dict):\n        out.write('<dict size=\"%d\">\\n' % len(obj))\n        for (k, v) in obj.items():\n            out.write(\"<key>%s</key>\\n\" % k)\n            out.write(\"<value>\")\n            dumpxml(out, v)",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "dumptrailers",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def dumptrailers(\n    out: TextIO, doc: PDFDocument, show_fallback_xref: bool = False\n) -> None:\n    for xref in doc.xrefs:\n        if not isinstance(xref, PDFXRefFallback) or show_fallback_xref:\n            out.write(\"<trailer>\\n\")\n            dumpxml(out, xref.get_trailer())\n            out.write(\"\\n</trailer>\\n\\n\")\n    no_xrefs = all(isinstance(xref, PDFXRefFallback) for xref in doc.xrefs)\n    if no_xrefs and not show_fallback_xref:",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "dumpallobjs",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def dumpallobjs(\n    out: TextIO,\n    doc: PDFDocument,\n    codec: Optional[str] = None,\n    show_fallback_xref: bool = False,\n) -> None:\n    visited = set()\n    out.write(\"<pdf>\")\n    for xref in doc.xrefs:\n        for objid in xref.get_objids():",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "dumpoutline",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def dumpoutline(\n    outfp: TextIO,\n    fname: str,\n    objids: Any,\n    pagenos: Container[int],\n    password: str = \"\",\n    dumpall: bool = False,\n    codec: Optional[str] = None,\n    extractdir: Optional[str] = None,\n) -> None:",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "extractembedded",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: Dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                \"unable to process PDF: reference for %r is not a \"\n                \"PDFStream\" % filename\n            )",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "dumppdf",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def dumppdf(\n    outfp: TextIO,\n    fname: str,\n    objids: Iterable[int],\n    pagenos: Container[int],\n    password: str = \"\",\n    dumpall: bool = False,\n    codec: Optional[str] = None,\n    extractdir: Optional[str] = None,\n    show_fallback_xref: bool = False,",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "create_parser",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def create_parser() -> ArgumentParser:\n    parser = ArgumentParser(description=__doc__, add_help=True)\n    parser.add_argument(\n        \"files\",\n        type=str,\n        default=None,\n        nargs=\"+\",\n        help=\"One or more paths to PDF files.\",\n    )\n    parser.add_argument(",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> None:\n    parser = create_parser()\n    args = parser.parse_args(args=argv)\n    if args.debug:\n        logging.getLogger().setLevel(logging.DEBUG)\n    if args.outfile == \"-\":\n        outfp = sys.stdout\n    else:\n        outfp = open(args.outfile, \"w\")\n    if args.objects:",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "kind": 5,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "logger = logging.getLogger(__name__)\nESC_PAT = re.compile(r'[\\000-\\037&<>()\"\\042\\047\\134\\177-\\377]')\ndef escape(s: Union[str, bytes]) -> str:\n    if isinstance(s, bytes):\n        us = str(s, \"latin-1\")\n    else:\n        us = s\n    return ESC_PAT.sub(lambda m: \"&#%d;\" % ord(m.group(0)), us)\ndef dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "ESC_PAT",
-        "kind": 5,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "ESC_PAT = re.compile(r'[\\000-\\037&<>()\"\\042\\047\\134\\177-\\377]')\ndef escape(s: Union[str, bytes]) -> str:\n    if isinstance(s, bytes):\n        us = str(s, \"latin-1\")\n    else:\n        us = s\n    return ESC_PAT.sub(lambda m: \"&#%d;\" % ord(m.group(0)), us)\ndef dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "LITERAL_FILESPEC",
-        "kind": 5,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "LITERAL_FILESPEC = LIT(\"Filespec\")\nLITERAL_EMBEDDEDFILE = LIT(\"EmbeddedFile\")\ndef extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: Dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                \"unable to process PDF: reference for %r is not a \"",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "LITERAL_EMBEDDEDFILE",
-        "kind": 5,
-        "importPath": "backend..venv.bin.dumppdf",
-        "description": "backend..venv.bin.dumppdf",
-        "peekOfCode": "LITERAL_EMBEDDEDFILE = LIT(\"EmbeddedFile\")\ndef extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: Dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                \"unable to process PDF: reference for %r is not a \"\n                \"PDFStream\" % filename",
-        "detail": "backend..venv.bin.dumppdf",
-        "documentation": {}
-    },
-    {
-        "label": "float_or_disabled",
-        "kind": 2,
-        "importPath": "backend..venv.bin.pdf2txt",
-        "description": "backend..venv.bin.pdf2txt",
-        "peekOfCode": "def float_or_disabled(x: str) -> Optional[float]:\n    if x.lower().strip() == \"disabled\":\n        return None\n    try:\n        return float(x)\n    except ValueError:\n        raise argparse.ArgumentTypeError(\"invalid float value: {}\".format(x))\ndef extract_text(\n    files: Iterable[str] = [],\n    outfile: str = \"-\",",
-        "detail": "backend..venv.bin.pdf2txt",
-        "documentation": {}
-    },
-    {
-        "label": "extract_text",
-        "kind": 2,
-        "importPath": "backend..venv.bin.pdf2txt",
-        "description": "backend..venv.bin.pdf2txt",
-        "peekOfCode": "def extract_text(\n    files: Iterable[str] = [],\n    outfile: str = \"-\",\n    laparams: Optional[LAParams] = None,\n    output_type: str = \"text\",\n    codec: str = \"utf-8\",\n    strip_control: bool = False,\n    maxpages: int = 0,\n    page_numbers: Optional[Container[int]] = None,\n    password: str = \"\",",
-        "detail": "backend..venv.bin.pdf2txt",
-        "documentation": {}
-    },
-    {
-        "label": "create_parser",
-        "kind": 2,
-        "importPath": "backend..venv.bin.pdf2txt",
-        "description": "backend..venv.bin.pdf2txt",
-        "peekOfCode": "def create_parser() -> argparse.ArgumentParser:\n    parser = argparse.ArgumentParser(description=__doc__, add_help=True)\n    parser.add_argument(\n        \"files\",\n        type=str,\n        default=None,\n        nargs=\"+\",\n        help=\"One or more paths to PDF files.\",\n    )\n    parser.add_argument(",
-        "detail": "backend..venv.bin.pdf2txt",
-        "documentation": {}
-    },
-    {
-        "label": "parse_args",
-        "kind": 2,
-        "importPath": "backend..venv.bin.pdf2txt",
-        "description": "backend..venv.bin.pdf2txt",
-        "peekOfCode": "def parse_args(args: Optional[List[str]]) -> argparse.Namespace:\n    parsed_args = create_parser().parse_args(args=args)\n    # Propagate parsed layout parameters to LAParams object\n    if parsed_args.no_laparams:\n        parsed_args.laparams = None\n    else:\n        parsed_args.laparams = LAParams(\n            line_overlap=parsed_args.line_overlap,\n            char_margin=parsed_args.char_margin,\n            line_margin=parsed_args.line_margin,",
-        "detail": "backend..venv.bin.pdf2txt",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "backend..venv.bin.pdf2txt",
-        "description": "backend..venv.bin.pdf2txt",
-        "peekOfCode": "def main(args: Optional[List[str]] = None) -> int:\n    parsed_args = parse_args(args)\n    outfp = extract_text(**vars(parsed_args))\n    outfp.close()\n    return 0\nif __name__ == \"__main__\":\n    sys.exit(main())",
-        "detail": "backend..venv.bin.pdf2txt",
-        "documentation": {}
-    },
-    {
-        "label": "OUTPUT_TYPES",
-        "kind": 5,
-        "importPath": "backend..venv.bin.pdf2txt",
-        "description": "backend..venv.bin.pdf2txt",
-        "peekOfCode": "OUTPUT_TYPES = ((\".htm\", \"html\"), (\".html\", \"html\"), (\".xml\", \"xml\"), (\".tag\", \"tag\"))\ndef float_or_disabled(x: str) -> Optional[float]:\n    if x.lower().strip() == \"disabled\":\n        return None\n    try:\n        return float(x)\n    except ValueError:\n        raise argparse.ArgumentTypeError(\"invalid float value: {}\".format(x))\ndef extract_text(\n    files: Iterable[str] = [],",
-        "detail": "backend..venv.bin.pdf2txt",
         "documentation": {}
     },
     {
@@ -5164,6 +4603,42 @@
         "description": "backend.tests.test_users",
         "peekOfCode": "pytestmark = pytest.mark.asyncio\nasync def test_get_me(client: AsyncClient) -> None:\n    tokens = await register_and_login(client, \"alice@test.com\", \"securepass1\")\n    resp = await client.get(\n        \"/api/v1/users/me\",\n        headers={\"Authorization\": f\"Bearer {tokens['access_token']}\"},\n    )\n    assert resp.status_code == 200\n    assert resp.json()[\"data\"][\"email\"] == \"alice@test.com\"\nasync def test_get_me_unauthenticated(client: AsyncClient) -> None:",
         "detail": "backend.tests.test_users",
+        "documentation": {}
+    },
+    {
+        "label": "_Known",
+        "kind": 6,
+        "importPath": "frontend.node_modules.flatted.python.flatted",
+        "description": "frontend.node_modules.flatted.python.flatted",
+        "peekOfCode": "class _Known:\n    def __init__(self):\n        self.key = []\n        self.value = []\nclass _String:\n    def __init__(self, value):\n        self.value = value\ndef _array_keys(value):\n    keys = []\n    i = 0",
+        "detail": "frontend.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "_String",
+        "kind": 6,
+        "importPath": "frontend.node_modules.flatted.python.flatted",
+        "description": "frontend.node_modules.flatted.python.flatted",
+        "peekOfCode": "class _String:\n    def __init__(self, value):\n        self.value = value\ndef _array_keys(value):\n    keys = []\n    i = 0\n    for _ in value:\n        keys.append(i)\n        i += 1\n    return keys",
+        "detail": "frontend.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "parse",
+        "kind": 2,
+        "importPath": "frontend.node_modules.flatted.python.flatted",
+        "description": "frontend.node_modules.flatted.python.flatted",
+        "peekOfCode": "def parse(value, *args, **kwargs):\n    json = _json.loads(value, *args, **kwargs)\n    wrapped = []\n    for value in json:\n        wrapped.append(_wrap(value))\n    input = []\n    for value in wrapped:\n        if isinstance(value, _String):\n            input.append(value.value)\n        else:",
+        "detail": "frontend.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "stringify",
+        "kind": 2,
+        "importPath": "frontend.node_modules.flatted.python.flatted",
+        "description": "frontend.node_modules.flatted.python.flatted",
+        "peekOfCode": "def stringify(value, *args, **kwargs):\n    known = _Known()\n    input = []\n    output = []\n    i = int(_index(known, input, value))\n    while i < len(input):\n        output.append(_transform(known, input, input[i]))\n        i += 1\n    return _json.dumps(output, *args, **kwargs)",
+        "detail": "frontend.node_modules.flatted.python.flatted",
         "documentation": {}
     },
     {

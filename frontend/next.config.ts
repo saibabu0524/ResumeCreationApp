@@ -1,6 +1,27 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // ── Bundle optimisation ───────────────────────────────────────────────────
+  // Tree-shake large packages so only imported icons/utilities are bundled.
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "date-fns",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-label",
+      "@radix-ui/react-slot",
+    ],
+  },
+
+  // Gzip/Brotli compression (improves TTFB on static assets)
+  compress: true,
+
+  // ── Image optimisation ────────────────────────────────────────────────────
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+  },
+
   // ── Security Headers ──────────────────────────────────────────────────────
   async headers() {
     return [
