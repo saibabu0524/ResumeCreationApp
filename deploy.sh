@@ -17,7 +17,9 @@ cd "$(dirname "$0")" || exit 1
 # 3. Build and restart Docker containers for both frontend and backend
 echo "🏭 Building and restarting all Docker containers..."
 # This uses the root docker-compose.yml which includes frontend, api, nginx, worker, and redis
-docker compose up -d --build
+docker compose build api
+docker compose build frontend
+docker compose up -d
 
 # 4. Clean up dangling images to save disk space
 echo "🧹 Cleaning up old Docker images..."

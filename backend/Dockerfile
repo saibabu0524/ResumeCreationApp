@@ -22,6 +22,7 @@ RUN pip install --no-cache-dir -e "."
 FROM python:3.12-slim AS runtime
 
 # Install TeX Live (pdflatex) for compiling resumes
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-latex-base \
     texlive-latex-extra \
