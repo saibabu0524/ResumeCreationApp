@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // Output standalone for Docker deployment
+  output: "standalone",
+
   // Gzip/Brotli compression (improves TTFB on static assets)
   compress: true,
 
