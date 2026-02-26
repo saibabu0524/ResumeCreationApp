@@ -16,6 +16,17 @@ const nextConfig: NextConfig = {
   // Output standalone for Docker deployment
   output: "standalone",
 
+  // ── Build Memory Optimizations for EC2 ────────────────────────────────────
+  // We disable type checking & eslint during the production build 
+  // because the t3.micro runs out of memory (1GB RAM) trying to compile.
+  // We rely on local development and CI to catch these errors instead!
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   // Gzip/Brotli compression (improves TTFB on static assets)
   compress: true,
 
