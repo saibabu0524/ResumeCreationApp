@@ -14,11 +14,17 @@ git pull origin "$BRANCH"
 echo "📂 Changing to the project root directory..."
 cd "$(dirname "$0")" || exit 1
 
-# 3. Build and restart Docker containers for both frontend and backend
-echo "🏭 Building and restarting all Docker containers..."
-# This uses the root docker-compose.yml which includes frontend, api, nginx, worker, and redis
+# 3. Stop existing containers to free up memory for the build
+echo "🛑 Stopping existing containers..."
+docker compose down
+
+# 4. Build Docker containers sequentially
+echo "🏭 Building Docker containers..."
 docker compose build api
 docker compose build frontend
+
+# 5. Start the newly built containers
+echo "🔄 Starting new containers..."
 docker compose up -d
 
 # 4. Clean up dangling images to save disk space
