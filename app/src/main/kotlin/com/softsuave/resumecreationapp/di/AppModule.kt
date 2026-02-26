@@ -34,6 +34,24 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideTokenAuthenticator(
+        tokenStorage: TokenStorage,
+        authApiProvider: javax.inject.Provider<com.softsuave.resumecreationapp.core.network.api.AuthApi>
+    ): com.softsuave.resumecreationapp.core.network.interceptor.TokenAuthenticator =
+        com.softsuave.resumecreationapp.core.network.interceptor.TokenAuthenticator(
+            authApiProvider = authApiProvider,
+            tokenProvider = { tokenStorage.accessToken },
+            refreshTokenProvider = { tokenStorage.refreshToken },
+            onTokenRefreshed = { newAccess, newRefresh ->
+                tokenStorage.saveTokens(newAccess, newRefresh)
+            },
+            onLogout = {
+                tokenStorage.clearTokens()
+            }
+        )
+
+    @Provides
+    @Singleton
     @Named(NAMED_BASE_URL)
     fun provideBaseUrl(): String = BuildConfig.BASE_URL
 

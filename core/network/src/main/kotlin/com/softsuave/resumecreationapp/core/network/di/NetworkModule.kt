@@ -89,12 +89,14 @@ object NetworkModule {
         loggingInterceptor: HttpLoggingInterceptor,
         connectivityInterceptor: ConnectivityInterceptor,
         authInterceptor: AuthInterceptor,
+        tokenAuthenticator: com.softsuave.resumecreationapp.core.network.interceptor.TokenAuthenticator,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(connectivityInterceptor)
         .addInterceptor(authInterceptor)
+        .authenticator(tokenAuthenticator)
         .addInterceptor(loggingInterceptor)
         .build()
 

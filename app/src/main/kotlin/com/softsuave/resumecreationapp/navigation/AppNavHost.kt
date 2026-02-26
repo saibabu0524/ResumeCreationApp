@@ -93,6 +93,11 @@ fun AppNavHost(
             onNavigateBack = {
                 navController.popBackStack()
             },
+            onNavigateToLogin = {
+                navController.navigate(AuthGraphRoute) {
+                    popUpTo(0)
+                }
+            }
         )
 
         // ─── Profile ─────────────────────────────────────────────────

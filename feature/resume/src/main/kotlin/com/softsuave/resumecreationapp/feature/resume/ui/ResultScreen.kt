@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -132,7 +133,7 @@ fun ResultScreen(
                             "${pdfBitmaps.size} page${if (pdfBitmaps.size > 1) "s" else ""}  ·  pinch to zoom",
                             fontFamily = FontFamily.Monospace,
                             fontSize = 9.sp,
-                            color = TextMuted.copy(0.6f)
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.6f)
                         )
                     }
                 }
@@ -140,14 +141,14 @@ fun ResultScreen(
                 Box(Modifier.size(48.dp))
             }
 
-            HorizontalDivider(color = Border, thickness = 0.5.dp)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
             // ── PDF Viewer ────────────────────────────────────────────────────
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .background(Color(0xFF0A0908))
+                    .background(MaterialTheme.colorScheme.surfaceContainer)
             ) {
                 when {
                     isLoading -> RenderingIndicator()
@@ -157,7 +158,7 @@ fun ResultScreen(
                             fontFamily = FontFamily.Monospace,
                             fontSize = 11.sp,
                             letterSpacing = 2.sp,
-                            color = ErrorRed,
+                            color = MaterialTheme.colorScheme.error,
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
@@ -181,14 +182,14 @@ fun ResultScreen(
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .border(0.5.dp, BorderMid, RoundedCornerShape(1.dp))
+                                        .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(1.dp))
                                 ) {
                                     // Page number label
                                     Text(
                                         "P.${index + 1}",
                                         fontFamily = FontFamily.Monospace,
                                         fontSize = 8.sp,
-                                        color = Amber.copy(0.4f),
+                                        color = MaterialTheme.colorScheme.primary.copy(0.4f),
                                         letterSpacing = 1.sp,
                                         modifier = Modifier
                                             .align(Alignment.TopEnd)
@@ -215,13 +216,13 @@ fun ResultScreen(
                 }
             }
 
-            HorizontalDivider(color = Border, thickness = 0.5.dp)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
             // ── Bottom Bar ────────────────────────────────────────────────────
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Surface)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .navigationBarsPadding()
                     .padding(horizontal = 20.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -238,10 +239,10 @@ fun ResultScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(1.dp))
-                                .background(if (isSuccess) Color(0xFF0F1F14) else Color(0xFF1F0F0D))
+                                .background(if (isSuccess) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer)
                                 .border(
                                     0.5.dp,
-                                    if (isSuccess) SuccessGreen.copy(0.4f) else ErrorRed.copy(0.4f),
+                                    if (isSuccess) MaterialTheme.colorScheme.tertiary.copy(0.4f) else MaterialTheme.colorScheme.error.copy(0.4f),
                                     RoundedCornerShape(1.dp)
                                 )
                                 .padding(horizontal = 14.dp, vertical = 10.dp),
@@ -252,14 +253,14 @@ fun ResultScreen(
                                 if (isSuccess) "✓" else "✗",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 12.sp,
-                                color = if (isSuccess) SuccessGreen else ErrorRed
+                                color = if (isSuccess) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error
                             )
                             Text(
                                 status.uppercase(),
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 10.sp,
                                 letterSpacing = 1.sp,
-                                color = if (isSuccess) SuccessGreen else ErrorRed
+                                color = if (isSuccess) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error
                             )
                         }
                     }
@@ -308,15 +309,15 @@ fun ResultScreen(
                         enabled = !isSaving && pdfBitmaps.isNotEmpty(),
                         shape = RoundedCornerShape(2.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Amber,
-                            disabledContainerColor = SurfaceHigh,
-                            contentColor = Canvas,
-                            disabledContentColor = TextMuted
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            contentColor = MaterialTheme.colorScheme.background,
+                            disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                         ),
                         elevation = ButtonDefaults.buttonElevation(0.dp)
                     ) {
                         if (isSaving) {
-                            CircularProgressIndicator(Modifier.size(14.dp), color = Canvas, strokeWidth = 1.5.dp)
+                            CircularProgressIndicator(Modifier.size(14.dp), color = MaterialTheme.colorScheme.background, strokeWidth = 1.5.dp)
                             Spacer(Modifier.width(8.dp))
                         } else {
                             Icon(Icons.Default.Download, null, modifier = Modifier.size(16.dp))
@@ -348,8 +349,8 @@ fun ResultScreen(
                         modifier = Modifier.weight(1f).height(52.dp),
                         enabled = pdfBitmaps.isNotEmpty(),
                         shape = RoundedCornerShape(2.dp),
-                        border = androidx.compose.foundation.BorderStroke(0.5.dp, if (pdfBitmaps.isNotEmpty()) Amber.copy(0.5f) else BorderMid),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Amber)
+                        border = androidx.compose.foundation.BorderStroke(0.5.dp, if (pdfBitmaps.isNotEmpty()) MaterialTheme.colorScheme.primary.copy(0.5f) else MaterialTheme.colorScheme.outline),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
                     ) {
                         Icon(Icons.Default.Share, null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(6.dp))
@@ -373,7 +374,7 @@ fun ResultScreen(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 10.sp,
                         letterSpacing = 3.sp,
-                        color = TextMuted
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -394,6 +395,10 @@ private fun RenderingIndicator() {
         label = "a"
     )
 
+    val primary = MaterialTheme.colorScheme.primary
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -405,13 +410,13 @@ private fun RenderingIndicator() {
                 .drawBehind {
                     rotate(rot) {
                         drawArc(
-                            brush = Brush.sweepGradient(listOf(Color.Transparent, Amber.copy(0.4f), Amber)),
+                            brush = Brush.sweepGradient(listOf(Color.Transparent, primary.copy(0.4f), primary)),
                             startAngle = 0f, sweepAngle = 260f, useCenter = false,
                             style = Stroke(4f, cap = StrokeCap.Round)
                         )
                     }
                     drawCircle(
-                        brush = Brush.radialGradient(listOf(Color(0xFF2A2218), Color(0xFF111109))),
+                        brush = Brush.radialGradient(listOf(primaryContainer, surfaceVariant)),
                         radius = size.minDimension * 0.32f
                     )
                 },
@@ -422,7 +427,7 @@ private fun RenderingIndicator() {
                 fontFamily = FontFamily.Monospace,
                 fontSize = 10.sp,
                 letterSpacing = 2.sp,
-                color = Amber.copy(alpha)
+                color = MaterialTheme.colorScheme.primary.copy(alpha)
             )
         }
         Spacer(Modifier.height(20.dp))
@@ -431,7 +436,7 @@ private fun RenderingIndicator() {
             fontFamily = FontFamily.Monospace,
             fontSize = 10.sp,
             letterSpacing = 4.sp,
-            color = Amber.copy(alpha)
+            color = MaterialTheme.colorScheme.primary.copy(alpha)
         )
     }
 }

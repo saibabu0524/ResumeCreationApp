@@ -56,6 +56,7 @@ import com.softsuave.resumecreationapp.feature.settings.R
 @Composable
 fun SettingsRoute(
     onNavigateBack: () -> Unit,
+    onNavigateToLogin: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -64,6 +65,7 @@ fun SettingsRoute(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is SettingsUiEvent.NavigateBack -> onNavigateBack()
+                is SettingsUiEvent.NavigateToLogin -> onNavigateToLogin()
                 is SettingsUiEvent.ShowSnackbar -> { /* handled by scaffold */ }
             }
         }
@@ -235,6 +237,30 @@ fun SettingsScreen(
                 }
 
                 Spacer(Modifier.height(16.dp))
+
+                // ─── Account / Logout Section ──────────────────────────────────
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(MaterialTheme.colorScheme.errorContainer)
+                        .border(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.5f), RoundedCornerShape(4.dp))
+                        .clickable { onEvent(SettingsUserIntent.LogoutClicked) }
+                        .padding(horizontal = 16.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Text(
+                        text = "SIGN OUT",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 12.sp,
+                        letterSpacing = 2.sp,
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+
+                Spacer(Modifier.height(32.dp))
             }
         }
     }

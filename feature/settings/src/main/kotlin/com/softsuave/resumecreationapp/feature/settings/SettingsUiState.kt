@@ -11,10 +11,12 @@ data class SettingsUiState(
 sealed interface SettingsUserIntent {
     data class ThemeModeChanged(val mode: ThemeMode) : SettingsUserIntent
     data class NotificationsToggled(val enabled: Boolean) : SettingsUserIntent
+    data object LogoutClicked : SettingsUserIntent
     data object BackClicked : SettingsUserIntent
 }
 
 sealed interface SettingsUiEvent {
     data object NavigateBack : SettingsUiEvent
+    data object NavigateToLogin : SettingsUiEvent
     data class ShowSnackbar(val message: String) : SettingsUiEvent
 }

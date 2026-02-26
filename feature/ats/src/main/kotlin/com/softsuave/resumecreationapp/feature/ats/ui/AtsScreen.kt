@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -90,7 +91,7 @@ fun AtsScreen(
                 .size(400.dp)
                 .background(
                     Brush.radialGradient(
-                        listOf(Amber80.copy(alpha = 0.04f + glowAnim * 0.03f), Color.Transparent)
+                        listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.04f + glowAnim * 0.03f), Color.Transparent)
                     )
                 )
         )
@@ -128,7 +129,7 @@ fun AtsScreen(
                                 Icon(
                                     Icons.Default.ArrowBack,
                                     contentDescription = "Back",
-                                    tint = TextMuted,
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
@@ -139,14 +140,14 @@ fun AtsScreen(
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 10.sp,
                                     letterSpacing = 3.sp,
-                                    color = Amber80.copy(alpha = 0.6f)
+                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
                                 )
                                 Text(
                                     buildAnnotatedString {
-                                        withStyle(SpanStyle(color = TextPrimary, fontWeight = FontWeight.Light)) {
+                                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Light)) {
                                             append("Optimise your ")
                                         }
-                                        withStyle(SpanStyle(color = Amber80, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
+                                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
                                             append("chances")
                                         }
                                     },
@@ -156,23 +157,26 @@ fun AtsScreen(
                             }
                         }
                         // Logo mark
+                        val primary = MaterialTheme.colorScheme.primary
+                        val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+                        val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
                         Box(
                             modifier = Modifier
                                 .size(44.dp)
                                 .drawBehind {
-                                    drawCircle(color = Amber80.copy(alpha = 0.2f), style = Stroke(1f))
+                                    drawCircle(color = primary.copy(alpha = 0.2f), style = Stroke(1f))
                                     drawCircle(
-                                        brush = Brush.radialGradient(listOf(Color(0xFF2A2218), Color(0xFF151210))),
+                                        brush = Brush.radialGradient(listOf(primaryContainer, surfaceVariant)),
                                         radius = size.minDimension / 2 - 3
                                     )
                                 },
                             contentAlignment = Alignment.Center
                         ) {
-                            Text("ATS", fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold, fontSize = 9.sp, color = Amber80, letterSpacing = 1.sp)
+                            Text("ATS", fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold, fontSize = 9.sp, color = MaterialTheme.colorScheme.primary, letterSpacing = 1.sp)
                         }
                     }
 
-                    HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp)
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
                     Column(
                         modifier = Modifier
@@ -193,7 +197,7 @@ fun AtsScreen(
                         )
 
                         Spacer(Modifier.height(28.dp))
-                        HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
                         Spacer(Modifier.height(28.dp))
 
                         // Section 02: Job Description
@@ -203,21 +207,21 @@ fun AtsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(2.dp))
-                                .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
-                                .background(Surface0)
+                                .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
+                                .background(MaterialTheme.colorScheme.surfaceVariant)
                         ) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(Surface1)
+                                    .background(MaterialTheme.colorScheme.surfaceVariant)
                                     .padding(horizontal = 16.dp, vertical = 10.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Icon(Icons.Default.Work, null, tint = Amber80, modifier = Modifier.size(14.dp))
-                                Text("PASTE JOB DESCRIPTION", fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp, color = TextMuted)
+                                Icon(Icons.Default.Work, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(14.dp))
+                                Text("PASTE JOB DESCRIPTION", fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
-                            HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp)
+                            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
                             OutlinedTextField(
                                 value = jobDescription,
                                 onValueChange = { jobDescription = it },
@@ -226,7 +230,7 @@ fun AtsScreen(
                                         "We are looking for a Senior Android Engineer…",
                                         fontFamily = FontFamily.Monospace,
                                         fontSize = 12.sp,
-                                        color = TextMuted.copy(alpha = 0.4f),
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                                         lineHeight = 20.sp
                                     )
                                 },
@@ -235,11 +239,11 @@ fun AtsScreen(
                                     .heightIn(min = 160.dp),
                                 maxLines = 18,
                                 colors = OutlinedTextFieldDefaults.colors(
-                                    focusedContainerColor = Surface0,
-                                    unfocusedContainerColor = Surface0,
-                                    focusedTextColor = TextPrimary,
-                                    unfocusedTextColor = TextPrimary,
-                                    cursorColor = Amber80,
+                                    focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                    focusedTextColor = MaterialTheme.colorScheme.onBackground,
+                                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
+                                    cursorColor = MaterialTheme.colorScheme.primary,
                                     focusedBorderColor = Color.Transparent,
                                     unfocusedBorderColor = Color.Transparent,
                                 ),
@@ -247,13 +251,13 @@ fun AtsScreen(
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 13.sp,
                                     lineHeight = 22.sp,
-                                    color = TextPrimary
+                                    color = MaterialTheme.colorScheme.onBackground
                                 )
                             )
                         }
 
                         Spacer(Modifier.height(28.dp))
-                        HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
                         Spacer(Modifier.height(28.dp))
 
                         // Section 03: AI Provider
@@ -288,14 +292,14 @@ fun AtsScreen(
                                             .fillMaxWidth()
                                             .clip(RoundedCornerShape(2.dp))
                                             .background(SemanticErrorDim)
-                                            .border(0.5.dp, SemanticError.copy(alpha = 0.4f), RoundedCornerShape(2.dp))
+                                            .border(0.5.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.4f), RoundedCornerShape(2.dp))
                                             .padding(14.dp)
                                     ) {
                                         Text(
                                             "⚠  ${(uiState as AtsUiState.Error).message}",
                                             fontFamily = FontFamily.Monospace,
                                             fontSize = 11.sp,
-                                            color = SemanticError,
+                                            color = MaterialTheme.colorScheme.error,
                                             lineHeight = 18.sp
                                         )
                                     }
@@ -319,10 +323,10 @@ fun AtsScreen(
                                 .height(60.dp),
                             shape = RoundedCornerShape(2.dp),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = Amber80,
-                                disabledContainerColor = BorderMid,
-                                contentColor = Canvas,
-                                disabledContentColor = TextMuted
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                disabledContainerColor = MaterialTheme.colorScheme.outline,
+                                contentColor = MaterialTheme.colorScheme.background,
+                                disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                             ),
                             elevation = ButtonDefaults.buttonElevation(0.dp)
                         ) {
@@ -369,20 +373,20 @@ private fun AtsResultScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             IconButton(onClick = onNavigateBack) {
-                Icon(Icons.Default.ArrowBack, null, tint = TextMuted, modifier = Modifier.size(20.dp))
+                Icon(Icons.Default.ArrowBack, null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(20.dp))
             }
             Text(
                 "ATS ANALYSIS REPORT",
                 fontFamily = FontFamily.Monospace,
                 fontSize = 10.sp,
                 letterSpacing = 3.sp,
-                color = Amber80.copy(alpha = 0.7f)
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
             )
             TextButton(onClick = onScanAgain) {
                 Text("RESCAN", fontFamily = FontFamily.Monospace, fontSize = 9.sp, letterSpacing = 2.sp, color = Amber40)
             }
         }
-        HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp)
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
         Column(
             modifier = Modifier
@@ -403,8 +407,8 @@ private fun AtsResultScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
-                        .background(Surface0.copy(alpha = 0.5f))
+                        .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
                         .padding(16.dp)
                 ) {
                     Text(
@@ -412,14 +416,14 @@ private fun AtsResultScreen(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 12.sp,
                         lineHeight = 20.sp,
-                        color = TextMuted,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
                 }
             }
 
             Spacer(Modifier.height(28.dp))
-            HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
             Spacer(Modifier.height(24.dp))
 
             // ── Section Scores ────────────────────────────────────────────────
@@ -431,7 +435,7 @@ private fun AtsResultScreen(
             SectionScoreRow("Formatting",            result.sectionScores.formatting)
 
             Spacer(Modifier.height(28.dp))
-            HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
             Spacer(Modifier.height(24.dp))
 
             // ── Keywords ──────────────────────────────────────────────────────
@@ -439,7 +443,7 @@ private fun AtsResultScreen(
             Spacer(Modifier.height(14.dp))
 
             if (result.keywordsPresent.isNotEmpty()) {
-                KeywordChipsRow(label = "✓  FOUND", chips = result.keywordsPresent, chipColor = SemanticSuccess, chipBg = SemanticSuccessDim)
+                KeywordChipsRow(label = "✓  FOUND", chips = result.keywordsPresent, chipColor = MaterialTheme.colorScheme.tertiary, chipBg = SemanticSuccessDim)
                 Spacer(Modifier.height(12.dp))
             }
             if (result.keywordsMissing.isNotEmpty()) {
@@ -447,7 +451,7 @@ private fun AtsResultScreen(
             }
 
             Spacer(Modifier.height(28.dp))
-            HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
             Spacer(Modifier.height(24.dp))
 
             // ── Strengths ─────────────────────────────────────────────────────
@@ -455,12 +459,12 @@ private fun AtsResultScreen(
                 AtsSectionHeader("03", "Strengths")
                 Spacer(Modifier.height(12.dp))
                 result.strengths.forEach { strength ->
-                    BulletItem(text = strength, accent = SemanticSuccess, prefix = "✓")
+                    BulletItem(text = strength, accent = MaterialTheme.colorScheme.tertiary, prefix = "✓")
                     Spacer(Modifier.height(6.dp))
                 }
 
                 Spacer(Modifier.height(28.dp))
-                HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
                 Spacer(Modifier.height(24.dp))
             }
 
@@ -474,7 +478,7 @@ private fun AtsResultScreen(
                 }
 
                 Spacer(Modifier.height(28.dp))
-                HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
                 Spacer(Modifier.height(24.dp))
             }
 
@@ -494,7 +498,7 @@ private fun AtsResultScreen(
                     .height(52.dp),
                 shape = RoundedCornerShape(2.dp),
                 border = BorderStroke(0.5.dp, Amber40),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = Amber80)
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
             ) {
                 Icon(Icons.Default.Refresh, null, modifier = Modifier.size(16.dp))
                 Spacer(Modifier.width(8.dp))
@@ -521,8 +525,8 @@ private fun ResumeDiffSection(suggestions: List<String>) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(2.dp))
-                .background(Surface0.copy(alpha = 0.5f))
-                .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+                .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
                 .padding(12.dp)
         ) {
             Text(
@@ -530,7 +534,7 @@ private fun ResumeDiffSection(suggestions: List<String>) {
                 fontFamily = FontFamily.Monospace,
                 fontSize = 10.sp,
                 lineHeight = 16.sp,
-                color = TextMuted
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
@@ -551,13 +555,13 @@ private fun DiffCard(index: Int, suggestion: String) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(2.dp))
-            .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
+            .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
     ) {
         // Diff header
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Surface1)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(horizontal = 14.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -566,7 +570,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                 modifier = Modifier
                     .size(22.dp)
                     .clip(CircleShape)
-                    .background(Amber80.copy(alpha = 0.15f))
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
                     .border(0.5.dp, Amber40, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
@@ -574,7 +578,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                     "$index",
                     fontFamily = FontFamily.Monospace,
                     fontSize = 9.sp,
-                    color = Amber80,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -583,11 +587,11 @@ private fun DiffCard(index: Int, suggestion: String) {
                 fontFamily = FontFamily.Monospace,
                 fontSize = 9.sp,
                 letterSpacing = 2.sp,
-                color = TextMuted
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
-        HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp)
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
         // "Before" row (current issue)
         Row(
@@ -602,7 +606,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                 fontFamily = FontFamily.Monospace,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = SemanticError
+                color = MaterialTheme.colorScheme.error
             )
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -610,7 +614,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                     fontFamily = FontFamily.Monospace,
                     fontSize = 8.sp,
                     letterSpacing = 2.sp,
-                    color = SemanticError.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
@@ -618,12 +622,12 @@ private fun DiffCard(index: Int, suggestion: String) {
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     lineHeight = 18.sp,
-                    color = SemanticError
+                    color = MaterialTheme.colorScheme.error
                 )
             }
         }
 
-        HorizontalDivider(color = BorderSubtle, thickness = 0.5.dp)
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
         // "After" row (suggested improvement)
         Row(
@@ -638,7 +642,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                 fontFamily = FontFamily.Monospace,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = SemanticSuccess
+                color = MaterialTheme.colorScheme.tertiary
             )
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -646,7 +650,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                     fontFamily = FontFamily.Monospace,
                     fontSize = 8.sp,
                     letterSpacing = 2.sp,
-                    color = SemanticSuccess.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.7f)
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
@@ -654,7 +658,7 @@ private fun DiffCard(index: Int, suggestion: String) {
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     lineHeight = 18.sp,
-                    color = SemanticSuccess
+                    color = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
@@ -668,10 +672,10 @@ private fun DiffCard(index: Int, suggestion: String) {
 @Composable
 private fun ScoreGauge(score: Int, label: String) {
     val scoreColor = when {
-        score >= 85 -> SemanticSuccess
-        score >= 70 -> Amber80
-        score >= 50 -> Color(0xFFB08A30)
-        else        -> SemanticError
+        score >= 85 -> MaterialTheme.colorScheme.tertiary
+        score >= 70 -> MaterialTheme.colorScheme.primary
+        score >= 50 -> MaterialTheme.colorScheme.primary
+        else        -> MaterialTheme.colorScheme.error
     }
 
     // Animate score arc
@@ -686,6 +690,9 @@ private fun ScoreGauge(score: Int, label: String) {
         label = "r"
     )
 
+    val outline = MaterialTheme.colorScheme.outline
+    val primary = MaterialTheme.colorScheme.primary
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -696,7 +703,7 @@ private fun ScoreGauge(score: Int, label: String) {
                 .drawBehind {
                     // Background track
                     drawArc(
-                        color = BorderMid,
+                        color = outline,
                         startAngle = 135f,
                         sweepAngle = 270f,
                         useCenter = false,
@@ -714,7 +721,7 @@ private fun ScoreGauge(score: Int, label: String) {
                     rotate(rotation) {
                         drawArc(
                             brush = Brush.sweepGradient(
-                                listOf(Color.Transparent, Amber80.copy(0.2f), Color.Transparent)
+                                listOf(Color.Transparent, primary.copy(0.2f), Color.Transparent)
                             ),
                             startAngle = 0f, sweepAngle = 360f, useCenter = false,
                             style = Stroke(1.5f)
@@ -735,7 +742,7 @@ private fun ScoreGauge(score: Int, label: String) {
                     "/ 100",
                     fontFamily = FontFamily.Monospace,
                     fontSize = 12.sp,
-                    color = TextMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     letterSpacing = 2.sp
                 )
             }
@@ -769,9 +776,9 @@ private fun ScoreGauge(score: Int, label: String) {
 @Composable
 private fun SectionScoreRow(label: String, value: Int) {
     val barColor = when {
-        value >= 75 -> SemanticSuccess
-        value >= 50 -> Amber80
-        else        -> SemanticError
+        value >= 75 -> MaterialTheme.colorScheme.tertiary
+        value >= 50 -> MaterialTheme.colorScheme.primary
+        else        -> MaterialTheme.colorScheme.error
     }
     val animatedWidth by animateFloatAsState(
         targetValue = value / 100f,
@@ -785,7 +792,7 @@ private fun SectionScoreRow(label: String, value: Int) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(label, fontFamily = FontFamily.Monospace, fontSize = 11.sp, color = TextMuted)
+            Text(label, fontFamily = FontFamily.Monospace, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text("$value%", fontFamily = FontFamily.Monospace, fontSize = 11.sp, color = barColor, fontWeight = FontWeight.Bold)
         }
         Spacer(Modifier.height(4.dp))
@@ -794,7 +801,7 @@ private fun SectionScoreRow(label: String, value: Int) {
                 .fillMaxWidth()
                 .height(3.dp)
                 .clip(RoundedCornerShape(50))
-                .background(BorderMid)
+                .background(MaterialTheme.colorScheme.outline)
         ) {
             Box(
                 modifier = Modifier
@@ -852,7 +859,7 @@ private fun BulletItem(text: String, accent: Color, prefix: String) {
             fontFamily = FontFamily.Monospace,
             fontSize = 11.sp,
             lineHeight = 18.sp,
-            color = TextMuted,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f)
         )
     }
@@ -864,8 +871,8 @@ private fun SuggestionItem(number: String, text: String) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(2.dp))
-            .border(0.5.dp, BorderSubtle, RoundedCornerShape(2.dp))
-            .background(Surface0)
+            .border(0.5.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(2.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -873,18 +880,18 @@ private fun SuggestionItem(number: String, text: String) {
             modifier = Modifier
                 .size(24.dp)
                 .clip(CircleShape)
-                .background(Surface1)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .border(0.5.dp, Amber40, CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            Text(number, fontFamily = FontFamily.Monospace, fontSize = 9.sp, color = Amber80, fontWeight = FontWeight.Bold)
+            Text(number, fontFamily = FontFamily.Monospace, fontSize = 9.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
         }
         Text(
             text,
             fontFamily = FontFamily.Monospace,
             fontSize = 11.sp,
             lineHeight = 18.sp,
-            color = TextMuted,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f)
         )
     }
@@ -896,16 +903,16 @@ private fun AtsSectionHeader(number: String, title: String) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text(number, fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp, color = Amber80.copy(0.5f))
-        Box(Modifier.width(1.dp).height(14.dp).background(BorderMid))
-        Text(title.uppercase(), fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 3.sp, color = TextMuted)
+        Text(number, fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp, color = MaterialTheme.colorScheme.primary.copy(0.5f))
+        Box(Modifier.width(1.dp).height(14.dp).background(MaterialTheme.colorScheme.outline))
+        Text(title.uppercase(), fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 3.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
 @Composable
 private fun AtsUploadCard(hasFile: Boolean, fileName: String, onClick: () -> Unit) {
-    val borderColor by animateColorAsState(if (hasFile) Amber80.copy(0.6f) else BorderMid, tween(300), label = "ub")
-    val bgColor     by animateColorAsState(if (hasFile) Color(0xFF1E1C14) else Surface0, tween(300), label = "ubg")
+    val borderColor by animateColorAsState(if (hasFile) MaterialTheme.colorScheme.primary.copy(0.6f) else MaterialTheme.colorScheme.outline, tween(300), label = "ub")
+    val bgColor     by animateColorAsState(if (hasFile) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant, tween(300), label = "ubg")
 
     Box(
         modifier = Modifier
@@ -921,14 +928,14 @@ private fun AtsUploadCard(hasFile: Boolean, fileName: String, onClick: () -> Uni
                 modifier = Modifier
                     .size(48.dp)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(if (hasFile) Amber40.copy(0.3f) else Surface1)
-                    .border(0.5.dp, if (hasFile) Amber80.copy(0.3f) else BorderMid, RoundedCornerShape(2.dp)),
+                    .background(if (hasFile) Amber40.copy(0.3f) else MaterialTheme.colorScheme.surfaceVariant)
+                    .border(0.5.dp, if (hasFile) MaterialTheme.colorScheme.primary.copy(0.3f) else MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     if (hasFile) Icons.Default.CheckCircle else Icons.Default.UploadFile,
                     null,
-                    tint = if (hasFile) Amber80 else TextMuted,
+                    tint = if (hasFile) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(22.dp)
                 )
             }
@@ -936,14 +943,14 @@ private fun AtsUploadCard(hasFile: Boolean, fileName: String, onClick: () -> Uni
                 Text(
                     if (hasFile) "PDF READY" else "SELECT PDF",
                     fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp,
-                    color = if (hasFile) Amber80 else TextMuted
+                    color = if (hasFile) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
                     if (hasFile) fileName.take(32) + if (fileName.length > 32) "…" else ""
                     else "Tap to browse your files",
                     fontFamily = FontFamily.Monospace, fontSize = 13.sp,
-                    color = if (hasFile) TextPrimary else TextMuted.copy(0.6f)
+                    color = if (hasFile) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onSurfaceVariant.copy(0.6f)
                 )
             }
             if (hasFile) {
@@ -956,7 +963,7 @@ private fun AtsUploadCard(hasFile: Boolean, fileName: String, onClick: () -> Uni
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             } else {
-                Icon(Icons.Default.ChevronRight, null, tint = TextMuted.copy(0.5f), modifier = Modifier.size(20.dp))
+                Icon(Icons.Default.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.5f), modifier = Modifier.size(20.dp))
             }
         }
     }
@@ -970,8 +977,8 @@ private fun AtsProviderChip(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val border by animateColorAsState(if (selected) Amber80.copy(0.7f) else BorderMid, tween(250), label = "pc")
-    val bg     by animateColorAsState(if (selected) Color(0xFF1E1C12) else Surface0, tween(250), label = "pbg")
+    val border by animateColorAsState(if (selected) MaterialTheme.colorScheme.primary.copy(0.7f) else MaterialTheme.colorScheme.outline, tween(250), label = "pc")
+    val bg     by animateColorAsState(if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant, tween(250), label = "pbg")
 
     Box(
         modifier = modifier
@@ -987,11 +994,11 @@ private fun AtsProviderChip(
                     modifier = Modifier
                         .size(8.dp)
                         .clip(RoundedCornerShape(50))
-                        .background(if (selected) Amber80 else BorderMid)
+                        .background(if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline)
                 )
-                Text(label, fontFamily = FontFamily.Monospace, fontSize = 11.sp, letterSpacing = 2.sp, fontWeight = FontWeight.Bold, color = if (selected) Amber80 else TextMuted)
+                Text(label, fontFamily = FontFamily.Monospace, fontSize = 11.sp, letterSpacing = 2.sp, fontWeight = FontWeight.Bold, color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Text(sub, fontFamily = FontFamily.Monospace, fontSize = 10.sp, color = TextMuted.copy(if (selected) 0.8f else 0.5f))
+            Text(sub, fontFamily = FontFamily.Monospace, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(if (selected) 0.8f else 0.5f))
         }
     }
 }
@@ -1015,10 +1022,14 @@ private fun AtsLoadingOverlay(message: String) {
         0.85f, 1f, infiniteRepeatable(tween(900, easing = FastOutSlowInEasing), RepeatMode.Reverse), label = "p"
     )
 
+    val primary = MaterialTheme.colorScheme.primary
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Canvas.copy(alpha = 0.96f)),
+            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.96f)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -1031,7 +1042,7 @@ private fun AtsLoadingOverlay(message: String) {
                     .drawBehind {
                         rotate(rot1) {
                             drawArc(
-                                brush = Brush.sweepGradient(listOf(Color.Transparent, Amber80.copy(0.3f), Amber80)),
+                                brush = Brush.sweepGradient(listOf(Color.Transparent, primary.copy(0.3f), primary)),
                                 startAngle = 0f, sweepAngle = 280f, useCenter = false,
                                 style = Stroke(8f, cap = StrokeCap.Round)
                             )
@@ -1049,7 +1060,7 @@ private fun AtsLoadingOverlay(message: String) {
                         for (i in 0..2) {
                             val angle = Math.toRadians((orbitAngle + i * 120.0))
                             drawCircle(
-                                color = Amber80.copy(alpha = 1f - i * 0.25f),
+                                color = primary.copy(alpha = 1f - i * 0.25f),
                                 radius = 6f - i * 1.5f,
                                 center = Offset(
                                     size.width / 2 + orbitR * cos(angle).toFloat(),
@@ -1058,18 +1069,18 @@ private fun AtsLoadingOverlay(message: String) {
                             )
                         }
                         drawCircle(
-                            brush = Brush.radialGradient(listOf(Color(0xFF2A2218), Color(0xFF111109))),
+                            brush = Brush.radialGradient(listOf(primaryContainer, surfaceVariant)),
                             radius = size.minDimension * 0.28f * pulse
                         )
                         drawCircle(
-                            color = Amber80.copy(0.25f),
+                            color = primary.copy(0.25f),
                             radius = size.minDimension * 0.28f * pulse,
                             style = Stroke(1f)
                         )
                     },
                 contentAlignment = Alignment.Center
             ) {
-                Icon(Icons.Default.Analytics, null, tint = Amber80, modifier = Modifier.size(32.dp))
+                Icon(Icons.Default.Analytics, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(32.dp))
             }
 
             Column(
@@ -1078,11 +1089,11 @@ private fun AtsLoadingOverlay(message: String) {
             ) {
                 Text(
                     "SCANNING YOUR RESUME",
-                    fontFamily = FontFamily.Monospace, fontSize = 11.sp, letterSpacing = 4.sp, color = Amber80
+                    fontFamily = FontFamily.Monospace, fontSize = 11.sp, letterSpacing = 4.sp, color = MaterialTheme.colorScheme.primary
                 )
                 Text(
                     message,
-                    fontFamily = FontFamily.Monospace, fontSize = 12.sp, color = TextMuted,
+                    fontFamily = FontFamily.Monospace, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(horizontal = 48.dp),
                     lineHeight = 20.sp
                 )
@@ -1109,18 +1120,18 @@ private fun AtsLoadingSteps() {
             val isPast    = idx < active
             val isCurrent = idx == active
             val bg by animateColorAsState(
-                when { isCurrent -> Amber80; isPast -> Amber40; else -> Surface0 },
+                when { isCurrent -> MaterialTheme.colorScheme.primary; isPast -> Amber40; else -> MaterialTheme.colorScheme.surfaceVariant },
                 tween(300), label = "sbg"
             )
             val tc by animateColorAsState(
-                when { isCurrent -> Canvas; isPast -> TextMuted; else -> TextMuted.copy(0.4f) },
+                when { isCurrent -> MaterialTheme.colorScheme.background; isPast -> MaterialTheme.colorScheme.onSurfaceVariant; else -> MaterialTheme.colorScheme.onSurfaceVariant.copy(0.4f) },
                 tween(300), label = "stc"
             )
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(2.dp))
                     .background(bg)
-                    .border(0.5.dp, if (isCurrent) Amber80 else BorderMid, RoundedCornerShape(2.dp))
+                    .border(0.5.dp, if (isCurrent) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
                     .padding(horizontal = 8.dp, vertical = 5.dp)
             ) {
                 Text(step, fontFamily = FontFamily.Monospace, fontSize = 9.sp, color = tc, letterSpacing = 1.sp)

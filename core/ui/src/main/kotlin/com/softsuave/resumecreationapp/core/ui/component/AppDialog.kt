@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -21,27 +20,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.softsuave.resumecreationapp.core.ui.R
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas    = Color(0xFF0E0D0B)
-private val Surface0  = Color(0xFF1A1814)
-private val Surface1  = Color(0xFF242019)
-private val Amber     = Color(0xFFD4A853)
-private val AmberDim  = Color(0xFF8A6930)
-private val TextPri   = Color(0xFFF0EAD6)
-private val TextMuted = Color(0xFF9A8E78)
-private val BorderMid = Color(0xFF4A4238)
-private val BorderSub = Color(0xFF2E2A24)
-private val ErrorRed  = Color(0xFFB04A3A)
-
 /**
- * Dark editorial application dialog.
+ * Editorial application dialog, theme aware.
  *
- * Replaces Material3 AlertDialog with a fully custom layout to match the app's
- * dark canvas / amber accent aesthetic:
- * - Warm near-black container with hairline border
+ * Replaces Material3 AlertDialog with a fully custom layout:
+ * - Container with hairline border
  * - Serif italic title
  * - Monospace body text
- * - Amber confirm button · Outlined/text cancel button
+ * - Confirm button · Outlined/text cancel button
  */
 @Composable
 fun AppDialog(
@@ -54,6 +40,15 @@ fun AppDialog(
     onConfirm: () -> Unit = onDismiss,
     icon: @Composable (() -> Unit)? = null,
 ) {
+    val surface = MaterialTheme.colorScheme.surfaceVariant
+    val primary = MaterialTheme.colorScheme.primary
+    val onPrimary = MaterialTheme.colorScheme.onPrimary
+    val outline = MaterialTheme.colorScheme.outline
+    val outlineVariant = MaterialTheme.colorScheme.outlineVariant
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val error = MaterialTheme.colorScheme.error
+
     Dialog(onDismissRequest = onDismiss) {
         Box(
             modifier = modifier
@@ -61,10 +56,10 @@ fun AppDialog(
                 .clip(RoundedCornerShape(4.dp))
                 .border(
                     width  = 0.5.dp,
-                    brush  = Brush.verticalGradient(listOf(BorderMid, BorderSub)),
+                    brush  = Brush.verticalGradient(listOf(outline, outlineVariant)),
                     shape  = RoundedCornerShape(4.dp),
                 )
-                .background(Surface0)
+                .background(surface)
                 .padding(24.dp),
         ) {
             Column(verticalArrangement = Arrangement.spacedBy(0.dp)) {
@@ -83,7 +78,7 @@ fun AppDialog(
                     fontFamily    = FontFamily.Monospace,
                     fontSize      = 9.sp,
                     letterSpacing = 3.sp,
-                    color         = Amber.copy(alpha = 0.5f),
+                    color         = primary.copy(alpha = 0.5f),
                 )
 
                 Spacer(Modifier.height(6.dp))
@@ -95,7 +90,7 @@ fun AppDialog(
                     fontSize   = 22.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle  = FontStyle.Italic,
-                    color      = TextPri,
+                    color      = onSurface,
                 )
 
                 Spacer(Modifier.height(12.dp))
@@ -105,7 +100,7 @@ fun AppDialog(
                     Modifier
                         .fillMaxWidth()
                         .height(0.5.dp)
-                        .background(BorderSub)
+                        .background(outlineVariant)
                 )
 
                 Spacer(Modifier.height(12.dp))
@@ -116,7 +111,7 @@ fun AppDialog(
                     fontFamily    = FontFamily.Monospace,
                     fontSize      = 12.sp,
                     lineHeight    = 20.sp,
-                    color         = TextMuted,
+                    color         = onSurfaceVariant,
                     letterSpacing = 0.3.sp,
                 )
 
@@ -130,7 +125,7 @@ fun AppDialog(
                     if (dismissText != null) {
                         TextButton(
                             onClick = onDismiss,
-                            colors  = ButtonDefaults.textButtonColors(contentColor = TextMuted),
+                            colors  = ButtonDefaults.textButtonColors(contentColor = onSurfaceVariant),
                         ) {
                             Text(
                                 dismissText.uppercase(),
@@ -146,8 +141,8 @@ fun AppDialog(
                         shape      = RoundedCornerShape(2.dp),
                         elevation  = ButtonDefaults.buttonElevation(0.dp),
                         colors     = ButtonDefaults.buttonColors(
-                            containerColor = Amber,
-                            contentColor   = Canvas,
+                            containerColor = primary,
+                            contentColor   = onPrimary,
                         ),
                     ) {
                         Text(

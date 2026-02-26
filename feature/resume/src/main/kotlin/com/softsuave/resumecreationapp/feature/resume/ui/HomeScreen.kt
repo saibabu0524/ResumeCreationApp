@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -136,12 +137,12 @@ fun HomeScreenContent(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 10.sp,
                         letterSpacing = 3.sp,
-                        color = Amber.copy(alpha = 0.6f)
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
                     )
                     Text(
                         buildAnnotatedString {
-                            withStyle(SpanStyle(color = TextPrimary, fontWeight = FontWeight.Light)) { append("Craft your ") }
-                            withStyle(SpanStyle(color = Amber, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) { append("story") }
+                            withStyle(SpanStyle(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Light)) { append("Craft your ") }
+                            withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) { append("story") }
                         },
                         fontFamily = FontFamily.Serif,
                         fontSize = 26.sp
@@ -162,22 +163,22 @@ fun HomeScreenContent(
                         modifier = Modifier
                             .size(40.dp)
                             .clip(RoundedCornerShape(2.dp))
-                            .background(SurfaceHigh.copy(alpha = 0.6f))
-                            .border(0.5.dp, Border, RoundedCornerShape(2.dp))
+                            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
+                            .border(0.5.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(2.dp))
                             .clickable(onClick = onNavigateToHistory),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             Icons.Default.History,
                             contentDescription = "View history",
-                            tint = Amber.copy(alpha = 0.7f),
+                            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                             modifier = Modifier.size(18.dp),
                         )
                     }
                 }
             }
 
-            HorizontalDivider(color = Border, thickness = 0.5.dp)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
 
             // ── Scrollable Content ───────────────────────────────────────────
             Column(
@@ -202,7 +203,7 @@ fun HomeScreenContent(
 
                 Spacer(Modifier.height(28.dp))
                 HorizontalDivider(
-                    color = Border,
+                    color = MaterialTheme.colorScheme.outlineVariant,
                     thickness = 0.5.dp,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
@@ -216,22 +217,22 @@ fun HomeScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(2.dp))
-                        .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
-                        .background(Surface)
+                        .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                 ) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .border(width = 0.dp, color = Color.Transparent)
-                            .background(SurfaceHigh)
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
                             .padding(horizontal = 16.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Icon(Icons.Default.Work, null, tint = Amber, modifier = Modifier.size(14.dp))
-                        Text("PASTE JOB DESCRIPTION", fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp, color = TextMuted)
+                        Icon(Icons.Default.Work, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(14.dp))
+                        Text("PASTE JOB DESCRIPTION", fontFamily = FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 2.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
-                    HorizontalDivider(color = Border, thickness = 0.5.dp)
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
                     OutlinedTextField(
                         value = jobDescription,
                         onValueChange = { jobDescription = it },
@@ -240,7 +241,7 @@ fun HomeScreenContent(
                                 "We are looking for a Senior Android Engineer...",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 12.sp,
-                                color = TextMuted.copy(alpha = 0.4f),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                                 lineHeight = 20.sp
                             )
                         },
@@ -249,11 +250,11 @@ fun HomeScreenContent(
                             .heightIn(min = 180.dp),
                         maxLines = 20,
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Surface,
-                            unfocusedContainerColor = Surface,
-                            focusedTextColor = TextPrimary,
-                            unfocusedTextColor = TextPrimary,
-                            cursorColor = Amber,
+                            focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            focusedTextColor = MaterialTheme.colorScheme.onBackground,
+                            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
+                            cursorColor = MaterialTheme.colorScheme.primary,
                             focusedBorderColor = Color.Transparent,
                             unfocusedBorderColor = Color.Transparent,
                         ),
@@ -261,16 +262,16 @@ fun HomeScreenContent(
                             fontFamily = FontFamily.Monospace,
                             fontSize = 13.sp,
                             lineHeight = 22.sp,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     )
                     if (jobDescription.isNotEmpty()) {
-                        HorizontalDivider(color = Border, thickness = 0.5.dp)
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp)
                         Text(
                             "${jobDescription.length} chars",
                             fontFamily = FontFamily.Monospace,
                             fontSize = 10.sp,
-                            color = TextMuted,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             letterSpacing = 1.sp,
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                         )
@@ -278,7 +279,7 @@ fun HomeScreenContent(
                 }
 
                 Spacer(Modifier.height(28.dp))
-                HorizontalDivider(color = Border, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
                 Spacer(Modifier.height(28.dp))
 
                 // ── Section 03: AI Provider ──────────────────────────────────
@@ -319,15 +320,15 @@ fun HomeScreenContent(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(2.dp))
-                                .background(ErrorDim)
-                                .border(0.5.dp, ErrorRed.copy(alpha = 0.4f), RoundedCornerShape(2.dp))
+                                .background(MaterialTheme.colorScheme.errorContainer)
+                                .border(0.5.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.4f), RoundedCornerShape(2.dp))
                                 .padding(14.dp)
                         ) {
                             Text(
                                 "⚠  ${(uiState as ResumeUiState.Error).message}",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 11.sp,
-                                color = ErrorRed,
+                                color = MaterialTheme.colorScheme.error,
                                 lineHeight = 18.sp
                             )
                         }
@@ -350,10 +351,10 @@ fun HomeScreenContent(
                         .height(60.dp),
                     shape = RoundedCornerShape(2.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Amber,
-                        disabledContainerColor = BorderMid,
-                        contentColor = Canvas,
-                        disabledContentColor = TextMuted
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        disabledContainerColor = MaterialTheme.colorScheme.outline,
+                        contentColor = MaterialTheme.colorScheme.background,
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),
                     elevation = ButtonDefaults.buttonElevation(0.dp)
                 ) {
@@ -373,8 +374,8 @@ fun HomeScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(2.dp))
-                        .border(0.5.dp, BorderMid, RoundedCornerShape(2.dp))
-                        .background(Surface)
+                        .border(0.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable(onClick = onNavigateToAts)
                         .padding(16.dp)
                 ) {
@@ -387,14 +388,14 @@ fun HomeScreenContent(
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(RoundedCornerShape(2.dp))
-                                .background(SurfaceHigh)
+                                .background(MaterialTheme.colorScheme.surfaceVariant)
                                 .border(0.5.dp, AmberDim, RoundedCornerShape(2.dp)),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 Icons.Default.Analytics,
                                 contentDescription = null,
-                                tint = Amber,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(20.dp)
                             )
                         }
@@ -404,14 +405,14 @@ fun HomeScreenContent(
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 10.sp,
                                 letterSpacing = 2.sp,
-                                color = Amber
+                                color = MaterialTheme.colorScheme.primary
                             )
                             Spacer(Modifier.height(2.dp))
                             Text(
                                 "Check your resume score before tailoring",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 11.sp,
-                                color = TextMuted.copy(0.7f)
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.7f)
                             )
                         }
                         Icon(
@@ -462,10 +463,14 @@ private fun EditorialLoadingOverlay(message: String) {
         0.4f, 1f, infiniteRepeatable(tween(1200), RepeatMode.Reverse), label = "ta"
     )
 
+    val primary = MaterialTheme.colorScheme.primary
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Canvas.copy(alpha = 0.96f)),
+            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.96f)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -481,7 +486,7 @@ private fun EditorialLoadingOverlay(message: String) {
                         rotate(rot1) {
                             drawArc(
                                 brush = Brush.sweepGradient(
-                                    listOf(Color.Transparent, Amber.copy(0.3f), Amber)
+                                    listOf(Color.Transparent, primary.copy(0.3f), primary)
                                 ),
                                 startAngle = 0f, sweepAngle = 280f, useCenter = false,
                                 style = Stroke(8f, cap = StrokeCap.Round)
@@ -506,7 +511,7 @@ private fun EditorialLoadingOverlay(message: String) {
                             val alpha = 1f - i * 0.25f
                             val dotR = (6f - i * 1.5f)
                             drawCircle(
-                                color = Amber.copy(alpha = alpha),
+                                color = primary.copy(alpha = alpha),
                                 radius = dotR,
                                 center = Offset(
                                     size.width / 2 + orbitR * cos(angle).toFloat(),
@@ -516,11 +521,11 @@ private fun EditorialLoadingOverlay(message: String) {
                         }
                         // Centre circle
                         drawCircle(
-                            brush = Brush.radialGradient(listOf(Color(0xFF2A2218), Color(0xFF111109))),
+                            brush = Brush.radialGradient(listOf(primaryContainer, surfaceVariant)),
                             radius = size.minDimension * 0.28f * pulse
                         )
                         drawCircle(
-                            color = Amber.copy(0.25f),
+                            color = primary.copy(0.25f),
                             radius = size.minDimension * 0.28f * pulse,
                             style = Stroke(1f)
                         )
@@ -530,7 +535,7 @@ private fun EditorialLoadingOverlay(message: String) {
                 Icon(
                     Icons.Default.Description,
                     null,
-                    tint = Amber,
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(32.dp)
                 )
             }
@@ -542,13 +547,13 @@ private fun EditorialLoadingOverlay(message: String) {
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     letterSpacing = 4.sp,
-                    color = Amber
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Text(
                     message,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 12.sp,
-                    color = TextMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier
                         .padding(horizontal = 48.dp)
                         .alpha(textAlpha),
@@ -577,18 +582,18 @@ private fun LoadingSteps() {
             val isPast = idx < active
             val isCurrent = idx == active
             val bg by animateColorAsState(
-                when { isCurrent -> Amber; isPast -> AmberDim; else -> Surface },
+                when { isCurrent -> MaterialTheme.colorScheme.primary; isPast -> AmberDim; else -> MaterialTheme.colorScheme.surfaceVariant },
                 tween(300), label = "sbg"
             )
             val tc by animateColorAsState(
-                when { isCurrent -> Canvas; isPast -> TextMuted; else -> TextMuted.copy(0.4f) },
+                when { isCurrent -> MaterialTheme.colorScheme.background; isPast -> MaterialTheme.colorScheme.onSurfaceVariant; else -> MaterialTheme.colorScheme.onSurfaceVariant.copy(0.4f) },
                 tween(300), label = "stc"
             )
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(2.dp))
                     .background(bg)
-                    .border(0.5.dp, if (isCurrent) Amber else BorderMid, RoundedCornerShape(2.dp))
+                    .border(0.5.dp, if (isCurrent) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp))
                     .padding(horizontal = 8.dp, vertical = 5.dp)
             ) {
                 Text(step, fontFamily = FontFamily.Monospace, fontSize = 9.sp, color = tc, letterSpacing = 1.sp)
@@ -611,15 +616,15 @@ private fun SectionHeader(number: String, title: String) {
             fontFamily = FontFamily.Monospace,
             fontSize = 10.sp,
             letterSpacing = 2.sp,
-            color = Amber.copy(0.5f)
+            color = MaterialTheme.colorScheme.primary.copy(0.5f)
         )
-        Box(Modifier.width(1.dp).height(14.dp).background(BorderMid))
+        Box(Modifier.width(1.dp).height(14.dp).background(MaterialTheme.colorScheme.outline))
         Text(
             title.uppercase(),
             fontFamily = FontFamily.Monospace,
             fontSize = 10.sp,
             letterSpacing = 3.sp,
-            color = TextMuted
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
@@ -627,11 +632,11 @@ private fun SectionHeader(number: String, title: String) {
 @Composable
 private fun UploadCard(hasFile: Boolean, fileName: String, onClick: () -> Unit) {
     val borderColor by animateColorAsState(
-        if (hasFile) Amber.copy(0.6f) else BorderMid,
+        if (hasFile) MaterialTheme.colorScheme.primary.copy(0.6f) else MaterialTheme.colorScheme.outline,
         tween(300), label = "ub"
     )
     val bgColor by animateColorAsState(
-        if (hasFile) Color(0xFF1E1C14) else Surface,
+        if (hasFile) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
         tween(300), label = "ubg"
     )
 
@@ -653,14 +658,14 @@ private fun UploadCard(hasFile: Boolean, fileName: String, onClick: () -> Unit) 
                 modifier = Modifier
                     .size(48.dp)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(if (hasFile) AmberDim.copy(0.3f) else SurfaceHigh)
-                    .border(0.5.dp, if (hasFile) Amber.copy(0.3f) else BorderMid, RoundedCornerShape(2.dp)),
+                    .background(if (hasFile) AmberDim.copy(0.3f) else MaterialTheme.colorScheme.surfaceVariant)
+                    .border(0.5.dp, if (hasFile) MaterialTheme.colorScheme.primary.copy(0.3f) else MaterialTheme.colorScheme.outline, RoundedCornerShape(2.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     if (hasFile) Icons.Default.CheckCircle else Icons.Default.UploadFile,
                     null,
-                    tint = if (hasFile) Amber else TextMuted,
+                    tint = if (hasFile) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(22.dp)
                 )
             }
@@ -671,7 +676,7 @@ private fun UploadCard(hasFile: Boolean, fileName: String, onClick: () -> Unit) 
                     fontFamily = FontFamily.Monospace,
                     fontSize = 10.sp,
                     letterSpacing = 2.sp,
-                    color = if (hasFile) Amber else TextMuted
+                    color = if (hasFile) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
@@ -679,7 +684,7 @@ private fun UploadCard(hasFile: Boolean, fileName: String, onClick: () -> Unit) 
                     else "Tap to browse your files",
                     fontFamily = FontFamily.Monospace,
                     fontSize = 13.sp,
-                    color = if (hasFile) TextPrimary else TextMuted.copy(0.6f)
+                    color = if (hasFile) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onSurfaceVariant.copy(0.6f)
                 )
             }
 
@@ -696,7 +701,7 @@ private fun UploadCard(hasFile: Boolean, fileName: String, onClick: () -> Unit) 
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             } else {
-                Icon(Icons.Default.ChevronRight, null, tint = TextMuted.copy(0.5f), modifier = Modifier.size(20.dp))
+                Icon(Icons.Default.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.5f), modifier = Modifier.size(20.dp))
             }
         }
     }
@@ -711,8 +716,8 @@ private fun ProviderChip(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val border by animateColorAsState(if (selected) Amber.copy(0.7f) else BorderMid, tween(250), label = "pc")
-    val bg by animateColorAsState(if (selected) Color(0xFF1E1C12) else Surface, tween(250), label = "pbg")
+    val border by animateColorAsState(if (selected) MaterialTheme.colorScheme.primary.copy(0.7f) else MaterialTheme.colorScheme.outline, tween(250), label = "pc")
+    val bg by animateColorAsState(if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant, tween(250), label = "pbg")
 
     Box(
         modifier = modifier
@@ -735,7 +740,7 @@ private fun ProviderChip(
                     modifier = Modifier
                         .size(8.dp)
                         .clip(RoundedCornerShape(50))
-                        .background(if (selected) Amber else BorderMid)
+                        .background(if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline)
                 )
                 Text(
                     label,
@@ -743,14 +748,14 @@ private fun ProviderChip(
                     fontSize = 11.sp,
                     letterSpacing = 2.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (selected) Amber else TextMuted
+                    color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Text(
                 sub,
                 fontFamily = FontFamily.Monospace,
                 fontSize = 10.sp,
-                color = TextMuted.copy(if (selected) 0.8f else 0.5f)
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(if (selected) 0.8f else 0.5f)
             )
         }
     }
