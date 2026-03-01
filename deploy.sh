@@ -3,7 +3,7 @@
 # Ensure script fails on any error
 set -e
 
-echo "🚀 Starting full stack deployment process..."
+echo "🚀 Starting backend-only deployment process..."
 
 # 1. Pull latest code from the current branch
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -18,17 +18,16 @@ cd "$(dirname "$0")" || exit 1
 echo "🛑 Stopping existing containers..."
 docker compose down
 
-# 4. Build Docker containers sequentially
+# 4. Build Docker containers (backend only, frontend disabled)
 echo "🏭 Building Docker containers..."
 docker compose build api
-docker compose build frontend
 
 # 5. Start the newly built containers
 echo "🔄 Starting new containers..."
 docker compose up -d
 
-# 4. Clean up dangling images to save disk space
+# 6. Clean up dangling images to save disk space
 echo "🧹 Cleaning up old Docker images..."
 docker image prune -f
 
-echo "✅ Full deployment completed successfully!"
+echo "✅ Backend deployment completed successfully!"
