@@ -17,6 +17,8 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.ui)
     
+    testImplementation(projects.core.testing)
+    
     // PDF handling logic
     implementation("androidx.core:core-ktx:1.13.1")
     implementation(libs.okhttp.core)

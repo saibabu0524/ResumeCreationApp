@@ -2,6 +2,7 @@ package com.softsuave.resumecreationapp.core.ui.component
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -11,7 +12,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -24,24 +24,20 @@ import androidx.compose.ui.unit.sp
 import kotlin.math.cos
 import kotlin.math.sin
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas   = Color(0xFF0E0D0B)
-private val Amber    = Color(0xFFD4A853)
-private val AmberDim = Color(0xFF8A6930)
-private val TextMuted = Color(0xFF9A8E78)
-
 /**
- * Dark editorial loading indicator.
+ * Theme-aware editorial loading indicator.
  *
- * Replaces the plain CircularProgressIndicator with a canvas-drawn
- * multi-ring spinner using amber gradient arcs and orbiting dots —
- * matching the overlay used in HomeScreen's loading state.
+ * Multi-ring spinner using primary colour gradient arcs and orbiting dots.
  */
 @Composable
 fun LoadingIndicator(
     modifier: Modifier = Modifier,
     loadingDescription: String = "Loading",
 ) {
+    val primary    = MaterialTheme.colorScheme.primary
+    val primaryDim = MaterialTheme.colorScheme.primaryContainer
+    val bg         = MaterialTheme.colorScheme.background
+
     val rot1 by rememberInfiniteTransition(label = "r1").animateFloat(
         0f, 360f,
         infiniteRepeatable(tween(2200, easing = LinearEasing)),
@@ -82,7 +78,7 @@ fun LoadingIndicator(
                         // Outer sweep arc
                         rotate(rot1) {
                             drawArc(
-                                brush       = Brush.sweepGradient(listOf(Color.Transparent, Amber.copy(0.4f), Amber)),
+                                brush       = Brush.sweepGradient(listOf(primary.copy(0f), primary.copy(0.4f), primary)),
                                 startAngle  = 0f,
                                 sweepAngle  = 260f,
                                 useCenter   = false,
@@ -92,7 +88,7 @@ fun LoadingIndicator(
                         // Inner counter-arc
                         rotate(rot2) {
                             drawArc(
-                                brush       = Brush.sweepGradient(listOf(Color.Transparent, AmberDim.copy(0.6f), AmberDim)),
+                                brush       = Brush.sweepGradient(listOf(primaryDim.copy(0f), primaryDim.copy(0.6f), primaryDim)),
                                 startAngle  = 0f,
                                 sweepAngle  = 180f,
                                 useCenter   = false,
@@ -106,7 +102,7 @@ fun LoadingIndicator(
                         for (i in 0..2) {
                             val angle = Math.toRadians((orbitAngle + i * 120.0))
                             drawCircle(
-                                color  = Amber.copy(alpha = 1f - i * 0.28f),
+                                color  = primary.copy(alpha = 1f - i * 0.28f),
                                 radius = (4f - i * 1f),
                                 center = Offset(
                                     size.width / 2 + orbitR * cos(angle).toFloat(),
@@ -114,9 +110,9 @@ fun LoadingIndicator(
                                 ),
                             )
                         }
-                        // Centre fill
+                        // Centre fill (blends with background)
                         drawCircle(
-                            brush  = Brush.radialGradient(listOf(Color(0xFF2A2218), Canvas)),
+                            color  = bg,
                             radius = size.minDimension * 0.28f,
                         )
                     },
@@ -127,7 +123,7 @@ fun LoadingIndicator(
                 fontFamily    = FontFamily.Monospace,
                 fontSize      = 10.sp,
                 letterSpacing = 4.sp,
-                color         = Amber.copy(textAlpha),
+                color         = primary.copy(textAlpha),
                 modifier      = Modifier.alpha(textAlpha),
             )
         }

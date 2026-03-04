@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,23 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.softsuave.resumecreationapp.core.ui.theme.LocalSpacing
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Canvas    = Color(0xFF0E0D0B)
-private val Surface0  = Color(0xFF1A1814)
-private val Amber     = Color(0xFFD4A853)
-private val AmberDim  = Color(0xFF2A1E08)
-private val TextPri   = Color(0xFFF0EAD6)
-private val TextMuted = Color(0xFF9A8E78)
-private val BorderSub = Color(0xFF2E2A24)
-private val BorderMid = Color(0xFF4A4238)
-
 /**
- * Dark editorial empty state.
+ * Editorial empty state, theme aware.
  *
- * - Icon inside a subtle amber ring
+ * - Icon inside a subtle primary ring
  * - Serif italic "nothing here" heading
  * - Monospace subtitle
- * - Optional amber CTA button
+ * - Optional primary CTA button
  */
 @Composable
 fun EmptyState(
@@ -52,6 +43,13 @@ fun EmptyState(
     onAction: (() -> Unit)? = null,
 ) {
     val spacing = LocalSpacing.current
+    val primary = MaterialTheme.colorScheme.primary
+    val outlineVariant = MaterialTheme.colorScheme.outlineVariant
+    val bg = MaterialTheme.colorScheme.background
+    val surface = MaterialTheme.colorScheme.surfaceVariant
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val outline = MaterialTheme.colorScheme.outline
 
     Column(
         modifier = modifier
@@ -68,11 +66,11 @@ fun EmptyState(
                     .size(96.dp)
                     .drawBehind {
                         drawCircle(
-                            color  = Amber.copy(alpha = 0.15f),
+                            color  = primary.copy(alpha = 0.15f),
                             style  = Stroke(width = 0.5.dp.toPx()),
                         )
                         drawCircle(
-                            brush  = Brush.radialGradient(listOf(AmberDim, Canvas)),
+                            brush  = Brush.radialGradient(listOf(outlineVariant, bg)),
                             radius = size.minDimension * 0.35f,
                         )
                     },
@@ -82,7 +80,7 @@ fun EmptyState(
                     imageVector        = icon,
                     contentDescription = null,
                     modifier           = Modifier.size(36.dp),
-                    tint               = Amber.copy(alpha = 0.5f),
+                    tint               = primary.copy(alpha = 0.5f),
                 )
             }
 
@@ -95,7 +93,7 @@ fun EmptyState(
             fontFamily    = FontFamily.Monospace,
             fontSize      = 9.sp,
             letterSpacing = 3.sp,
-            color         = Amber.copy(0.4f),
+            color         = primary.copy(0.4f),
         )
 
         Spacer(Modifier.height(8.dp))
@@ -107,7 +105,7 @@ fun EmptyState(
             fontSize   = 22.sp,
             fontWeight = FontWeight.Bold,
             fontStyle  = FontStyle.Italic,
-            color      = TextPri,
+            color      = onSurface,
             textAlign  = TextAlign.Center,
         )
 
@@ -118,8 +116,8 @@ fun EmptyState(
                 modifier = Modifier
                     .fillMaxWidth(0.85f)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(Surface0)
-                    .border(0.5.dp, BorderSub, RoundedCornerShape(2.dp))
+                    .background(surface)
+                    .border(0.5.dp, outlineVariant, RoundedCornerShape(2.dp))
                     .padding(14.dp),
             ) {
                 Text(
@@ -127,7 +125,7 @@ fun EmptyState(
                     fontFamily    = FontFamily.Monospace,
                     fontSize      = 11.sp,
                     lineHeight    = 18.sp,
-                    color         = TextMuted,
+                    color         = onSurfaceVariant,
                     textAlign     = TextAlign.Center,
                     letterSpacing = 0.3.sp,
                 )

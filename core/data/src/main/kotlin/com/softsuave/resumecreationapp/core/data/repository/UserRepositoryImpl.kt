@@ -56,20 +56,21 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUserById(userId: String): Result<User> {
-        // Network-first: fetch from API and update cache
-        val result = safeApiCall(dispatcher) { userApi.getUser(userId) }
+        // Network-first: fetch from API and update cache.
+        // Note: backend only supports GET /users/me (JWT identity); path param is not forwarded.
+        val result = safeApiCall(dispatcher) { userApi.getMe() }
 
-        result.onSuccess { nestedResult ->
-            if (nestedResult is Result.Success) {
-                val dto = nestedResult.data
-                userDao.upsert(dto.toEntity())
-            }
-        }
-
-        // Unwrap the double-wrapped Result from ApiResultCallAdapterFactory
         return when (val r = result) {
-            is Result.Success -> when (val inner = r.data) {
-                is Result.Success -> Result.Success(inner.data.toDomain())
+            is Result.Success -> when (val inner = r.data) {  // inner: Result<ApiResponseDto<UserDto>>
+                is Result.Success -> {
+                    val dto = inner.data.data
+                    if (dto != null) {
+                        userDao.upsert(dto.toEntity())
+                        Result.Success(dto.toDomain())
+                    } else {
+                        Result.Error(AppException.Unknown())
+                    }
+                }
                 is Result.Error -> inner
                 is Result.Loading -> Result.Error(AppException.Unknown())
             }
@@ -82,24 +83,18 @@ class UserRepositoryImpl @Inject constructor(
         // Optimistically update local cache
         userDao.upsert(user.toEntity())
 
-        // Sync to network
-        val dto = com.softsuave.resumecreationapp.core.data.remote.dto.UserDto(
-            id = user.id,
+        // Sync to network — only send fields accepted by PATCH /users/me
+        val request = com.softsuave.resumecreationapp.core.data.remote.dto.UserUpdateRequestDto(
             email = user.email,
-            displayName = user.displayName,
-            avatarUrl = user.avatarUrl,
-            isEmailVerified = user.isEmailVerified,
-            createdAt = user.createdAt,
-            updatedAt = user.updatedAt,
         )
 
-        val result = safeApiCall(dispatcher) { userApi.updateUser(user.id, dto) }
+        val result = safeApiCall(dispatcher) { userApi.updateMe(request) }
 
         return when (val r = result) {
-            is Result.Success -> when (val inner = r.data) {
+            is Result.Success -> when (val inner = r.data) {  // inner: Result<ApiResponseDto<UserDto>>
                 is Result.Success -> {
                     // Update cache with server-confirmed data
-                    userDao.upsert(inner.data.toEntity())
+                    inner.data.data?.let { dto -> userDao.upsert(dto.toEntity()) }
                     Result.Success(Unit)
                 }
                 is Result.Error -> inner

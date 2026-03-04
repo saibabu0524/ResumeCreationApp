@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.softsuave.resumecreationapp.core.analytics.AnalyticsEvent
 import com.softsuave.resumecreationapp.core.analytics.AnalyticsTracker
 import com.softsuave.resumecreationapp.core.datastore.UserPreferencesRepository
+import com.softsuave.resumecreationapp.core.ui.component.ThemeMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,11 +15,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.softsuave.resumecreationapp.core.domain.repository.AuthRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val preferencesRepository: UserPreferencesRepository,
+    private val authRepository: AuthRepository,
     private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
 
@@ -37,24 +40,36 @@ class SettingsViewModel @Inject constructor(
         when (event) {
             is SettingsUserIntent.ThemeModeChanged -> onThemeModeChanged(event.mode)
             is SettingsUserIntent.NotificationsToggled -> onNotificationsToggled(event.enabled)
+            is SettingsUserIntent.LogoutClicked -> onLogoutClicked()
             is SettingsUserIntent.BackClicked -> viewModelScope.launch {
                 _uiEvent.send(SettingsUiEvent.NavigateBack)
             }
         }
     }
 
+    private fun onLogoutClicked() {
+        viewModelScope.launch {
+            authRepository.logout()
+            _uiEvent.send(SettingsUiEvent.NavigateToLogin)
+        }
+    }
+
     /**
-     * Reference implementation for [combine] operator —
-     * merges multiple preference flows into a single state.
+     * Merges theme-mode string and notifications preference into a single [SettingsUiState].
      */
     private fun observePreferences() {
         viewModelScope.launch {
             combine(
-                preferencesRepository.isDarkMode,
+                preferencesRepository.themeModeString,
                 preferencesRepository.isPushNotificationsEnabled,
-            ) { isDarkMode, isNotificationsEnabled ->
+            ) { themeModeStr, isNotificationsEnabled ->
+                val themeMode = when (themeModeStr) {
+                    "dark"   -> ThemeMode.Dark
+                    "light"  -> ThemeMode.Light
+                    else     -> ThemeMode.System
+                }
                 SettingsUiState(
-                    themeMode = if (isDarkMode) ThemeMode.Dark else ThemeMode.Light,
+                    themeMode = themeMode,
                     notificationsEnabled = isNotificationsEnabled,
                     isLoading = false,
                 )
@@ -67,7 +82,12 @@ class SettingsViewModel @Inject constructor(
     private fun onThemeModeChanged(mode: ThemeMode) {
         _uiState.update { it.copy(themeMode = mode) }
         viewModelScope.launch {
-            preferencesRepository.setDarkMode(mode == ThemeMode.Dark)
+            val modeStr = when (mode) {
+                ThemeMode.Dark   -> "dark"
+                ThemeMode.Light  -> "light"
+                ThemeMode.System -> "system"
+            }
+            preferencesRepository.setThemeMode(modeStr)
         }
     }
 

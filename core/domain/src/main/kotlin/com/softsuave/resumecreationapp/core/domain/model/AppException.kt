@@ -64,6 +64,38 @@ sealed class AppException(
         override val cause: Throwable? = null,
     ) : AppException(message, cause)
 
+    // ─── HTTP Client Errors ───────────────────────────────────────────────────
+
+    /** HTTP 400 — the request was malformed or validation failed server-side (e.g. inactive account). */
+    data class BadRequest(
+        override val message: String = "The request was invalid. Please check your input.",
+        override val cause: Throwable? = null,
+    ) : AppException(message, cause)
+
+    /** HTTP 409 — a unique constraint was violated (e.g. duplicate email on register). */
+    data class Conflict(
+        override val message: String = "This resource already exists.",
+        override val cause: Throwable? = null,
+    ) : AppException(message, cause)
+
+    /** HTTP 413 — the uploaded file exceeds the server size limit. */
+    data class FileTooLarge(
+        override val message: String = "The file is too large to upload.",
+        override val cause: Throwable? = null,
+    ) : AppException(message, cause)
+
+    /** HTTP 415 — the file MIME type is not accepted by the server. */
+    data class UnsupportedMediaType(
+        override val message: String = "This file type is not supported.",
+        override val cause: Throwable? = null,
+    ) : AppException(message, cause)
+
+    /** HTTP 429 — too many requests; the client is being rate-limited. */
+    data class RateLimited(
+        override val message: String = "Too many requests. Please wait a moment and try again.",
+        override val cause: Throwable? = null,
+    ) : AppException(message, cause)
+
     // ─── Auth ────────────────────────────────────────────────────────────────
 
     /** Attempt to access a resource before the user is authenticated. */

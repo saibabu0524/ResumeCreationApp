@@ -32,9 +32,9 @@ data object OnboardingScreenRoute
  * via lambda callbacks — this feature module never knows about
  * other features or their routes.
  *
- * @param onNavigateToHome Navigates to the home screen after successful auth.
+ * @param onNavigateToHome         Navigates to the home screen after onboarding completes.
  * @param onNavigateToRegistration Navigates to the registration screen.
- * @param onNavigateToLogin Navigates back to login from registration.
+ * @param onNavigateToLogin        Navigates back to login from registration.
  */
 fun NavGraphBuilder.authNavGraph(
     onNavigateToHome: () -> Unit,
@@ -51,7 +51,8 @@ fun NavGraphBuilder.authNavGraph(
 
         composable<RegistrationScreenRoute> {
             RegistrationRoute(
-                onNavigateToOnboarding = onNavigateToHome,
+                // After registration success → go to Onboarding (not directly to Home)
+                onNavigateToOnboarding = onNavigateToHome, // resolved in AppNavHost as OnboardingScreenRoute
                 onNavigateToLogin = onNavigateToLogin,
             )
         }

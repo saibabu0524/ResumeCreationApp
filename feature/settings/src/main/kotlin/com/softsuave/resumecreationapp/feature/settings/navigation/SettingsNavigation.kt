@@ -10,8 +10,9 @@ data object SettingsScreenRoute
 
 fun NavGraphBuilder.settingsNavGraph(
     onNavigateBack: () -> Unit,
+    onNavigateToLogin: () -> Unit,
 ) {
     composable<SettingsScreenRoute> {
-        SettingsRoute(onNavigateBack = onNavigateBack)
+        SettingsRoute(onNavigateBack = onNavigateBack, onNavigateToLogin = onNavigateToLogin)
     }
 }

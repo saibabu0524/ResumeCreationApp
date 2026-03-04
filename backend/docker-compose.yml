@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  # ── FastAPI API server ────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      target: runtime
+    ports:
+      - "8000:8000"
+    volumes:
+      # Hot-reload in development: mount source into the container.
+      # Remove this volume mount for production builds.
+      - .:/app
+      # Persist uploaded files across container restarts.
+      - uploads_data:/app/uploads
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # ── ARQ background worker ──────────────────────────────────────────────────
+  worker:
+    build:
+      context: .
+      target: runtime
+    volumes:
+      - .:/app
+      - uploads_data:/app/uploads
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_started
+    restart: unless-stopped
+    command: arq app.workers.arq_worker.WorkerSettings
+
+  # ── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  uploads_data:

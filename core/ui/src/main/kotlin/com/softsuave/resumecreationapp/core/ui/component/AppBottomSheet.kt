@@ -11,19 +11,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Surface0  = Color(0xFF1A1814)
-private val Surface1  = Color(0xFF242019)
-private val Amber     = Color(0xFFD4A853)
-private val BorderSub = Color(0xFF2E2A24)
-
 /**
- * Dark editorial modal bottom sheet.
+ * Editorial modal bottom sheet.
  *
- * - Warm near-black [Surface0] container
- * - Amber drag handle for brand consistency
- * - Hairline top border for structural definition
- * - Square top corners (2 dp) matching the app's sharp aesthetic
+ * - Theme-aware container
+ * - Primary drag handle for brand consistency
+ * - Square top corners (4 dp) matching the app's aesthetic
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,17 +26,22 @@ fun AppBottomSheet(
     sheetState: SheetState = rememberModalBottomSheetState(),
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    val surface = MaterialTheme.colorScheme.surface
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    val primary = MaterialTheme.colorScheme.primary
+    val scrim = MaterialTheme.colorScheme.scrim
+
     ModalBottomSheet(
         onDismissRequest  = onDismiss,
         modifier          = modifier.testTag("app_bottom_sheet"),
         sheetState        = sheetState,
         shape             = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp),
-        containerColor    = Surface0,
-        contentColor      = Color(0xFFF0EAD6),
+        containerColor    = surface,
+        contentColor      = onSurface,
         tonalElevation    = 0.dp,
-        scrimColor        = Color(0xCC0E0D0B),
+        scrimColor        = scrim,
         dragHandle        = {
-            // Custom amber drag handle
+            // Custom primary drag handle
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -55,7 +53,7 @@ fun AppBottomSheet(
                         .width(40.dp)
                         .height(3.dp)
                         .background(
-                            color = Amber.copy(alpha = 0.5f),
+                            color = primary.copy(alpha = 0.5f),
                             shape = RoundedCornerShape(50),
                         )
                 )

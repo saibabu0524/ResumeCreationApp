@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.softsuave.resumecreationapp.core.analytics.AnalyticsEvent
 import com.softsuave.resumecreationapp.core.analytics.AnalyticsTracker
 import com.softsuave.resumecreationapp.core.common.util.ValidationUtil
+import com.softsuave.resumecreationapp.core.domain.usecase.auth.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +25,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: com.softsuave.resumecreationapp.core.domain.repository.AuthRepository,
+    private val loginUseCase: LoginUseCase,
     private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
 
@@ -82,7 +83,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, generalError = null) }
 
-            val result = authRepository.login(state.email, state.password)
+            val result = loginUseCase(LoginUseCase.Params(state.email, state.password))
 
             if (result.isSuccess) {
                 analyticsTracker.track(AnalyticsEvent.Login(method = "email_password"))

@@ -1,25 +1,54 @@
-FROM python:3.11-slim
-
-# Install system dependencies including pdflatex + fontawesome5
-RUN apt-get update && apt-get install -y \
-    texlive-latex-recommended \
-    texlive-fonts-recommended \
-    texlive-fonts-extra \
-    texlive-latex-extra \
-    fonts-liberation \
-    && rm -rf /var/lib/apt/lists/*
+# ─────────────────────────────────────────────────────────────────────────────
+# Stage 1 — Builder: install dependencies into a virtual environment
+# ─────────────────────────────────────────────────────────────────────────────
+FROM python:3.12-slim AS builder
 
 WORKDIR /app
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install build tools
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
-# Copy application code
-COPY . .
+# Copy only the dependency manifest first (better layer caching)
+COPY pyproject.toml .
 
-# Expose the port
+# Install runtime dependencies into an isolated venv
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN pip install --no-cache-dir -e "."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Stage 2 — Runtime: lean production image
+# ─────────────────────────────────────────────────────────────────────────────
+FROM python:3.12-slim AS runtime
+
+# Install TeX Live (pdflatex) for compiling resumes
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-recommended \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a non-root user for security
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+
+WORKDIR /app
+
+# Copy the venv from the builder stage
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy the application source
+COPY app/ ./app/
+COPY alembic/ ./alembic/
+COPY alembic.ini .
+
+# Ensure the uploads and data directories exist with correct permissions
+RUN mkdir -p /app/uploads /app/data && chown -R appuser:appgroup /app/uploads /app/data
+
+USER appuser
+
 EXPOSE 8000
 
-# Run the FastAPI application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run with Uvicorn.  Port and log level can be overridden via environment.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

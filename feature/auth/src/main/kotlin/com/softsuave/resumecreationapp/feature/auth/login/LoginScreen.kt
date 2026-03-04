@@ -19,7 +19,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -42,22 +41,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.softsuave.resumecreationapp.core.ui.component.AppButton
 import com.softsuave.resumecreationapp.core.ui.component.AppButtonVariant
 import com.softsuave.resumecreationapp.core.ui.component.AppTextField
-import com.softsuave.resumecreationapp.core.ui.theme.LocalSpacing
+import com.softsuave.resumecreationapp.core.ui.theme.Amber80
 import com.softsuave.resumecreationapp.feature.auth.R
-
-// ── Design Tokens ────────────────────────────────────────────────────────────
-private val Canvas      = Color(0xFF0E0D0B)
-private val Surface     = Color(0xFF1A1814)
-private val SurfaceHigh = Color(0xFF242019)
-private val Amber       = Color(0xFFD4A853)
-private val AmberGlow   = Color(0xFFEFC97A)
-private val AmberDim    = Color(0xFF8A6930)
-private val TextPrimary = Color(0xFFF0EAD6)
-private val TextMuted   = Color(0xFF9A8E78)
-private val Border      = Color(0xFF2E2A24)
-private val BorderMid   = Color(0xFF4A4238)
-private val ErrorRed    = Color(0xFFB04A3A)
-private val ErrorDim    = Color(0xFF2D1410)
 
 @Composable
 fun LoginRoute(
@@ -97,6 +82,17 @@ fun LoginScreen(
     var contentVisible by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { contentVisible = true }
 
+    // Theme tokens
+    val bg         = MaterialTheme.colorScheme.background
+    val onBg       = MaterialTheme.colorScheme.onBackground
+    val primary    = MaterialTheme.colorScheme.primary
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val surface    = MaterialTheme.colorScheme.surfaceVariant
+    val outline    = MaterialTheme.colorScheme.outline
+    val error      = MaterialTheme.colorScheme.error
+    val errorContainer = MaterialTheme.colorScheme.errorContainer
+    val onErrorContainer = MaterialTheme.colorScheme.onErrorContainer
+
     // Animated ambient glow
     val glowAnim by rememberInfiniteTransition(label = "glow").animateFloat(
         initialValue = 0f, targetValue = 1f,
@@ -107,10 +103,10 @@ fun LoginScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Canvas),
+            .background(bg),
         contentAlignment = Alignment.Center
     ) {
-        // Ambient top glow
+        // Ambient top glow (subtle primary colour)
         Box(
             modifier = Modifier
                 .align(Alignment.TopCenter)
@@ -119,7 +115,7 @@ fun LoginScreen(
                 .background(
                     Brush.radialGradient(
                         colors = listOf(
-                            Amber.copy(alpha = 0.06f + glowAnim * 0.04f),
+                            primary.copy(alpha = 0.06f + glowAnim * 0.04f),
                             Color.Transparent
                         ),
                         radius = 600f
@@ -128,7 +124,7 @@ fun LoginScreen(
         )
 
         // Decorative corner lines
-        DecorativeCornerLines()
+        DecorativeCornerLines(accentColor = primary)
 
         AnimatedVisibility(
             visible = contentVisible,
@@ -144,17 +140,17 @@ fun LoginScreen(
                 Spacer(Modifier.height(64.dp))
 
                 // ── Logo Mark ────────────────────────────────────────────────
-                LogoMark()
+                LogoMark(bg = bg, primary = primary)
 
                 Spacer(Modifier.height(40.dp))
 
                 // ── Heading ──────────────────────────────────────────────────
                 Text(
                     text = buildAnnotatedString {
-                        withStyle(SpanStyle(color = TextPrimary, fontWeight = FontWeight.Light)) {
+                        withStyle(SpanStyle(color = onBg, fontWeight = FontWeight.Light)) {
                             append("Sign into\n")
                         }
-                        withStyle(SpanStyle(color = Amber, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
+                        withStyle(SpanStyle(color = primary, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
                             append("Your Account")
                         }
                     },
@@ -171,7 +167,7 @@ fun LoginScreen(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     letterSpacing = 1.5.sp,
-                    color = TextMuted,
+                    color = onSurfaceVariant,
                 )
 
                 Spacer(Modifier.height(40.dp))
@@ -181,43 +177,43 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(4.dp))
-                        .border(
-                            width = 0.5.dp,
-                            brush = Brush.verticalGradient(listOf(BorderMid, Border)),
-                            shape = RoundedCornerShape(4.dp)
-                        )
-                        .background(Surface)
+                        .border(0.5.dp, outline, RoundedCornerShape(4.dp))
+                        .background(surface)
                         .padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     // Email field
-                    EditorialTextField(
+                    AppTextField(
                         value = uiState.email,
                         onValueChange = onEmailChanged,
                         label = "EMAIL ADDRESS",
                         placeholder = "you@example.com",
-                        error = uiState.emailError,
+                        errorMessage = uiState.emailError,
                         leadingIcon = {
-                            Icon(Icons.Default.Email, null, tint = if (uiState.emailError != null) ErrorRed else TextMuted, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Email, null,
+                                tint = if (uiState.emailError != null) error else onSurfaceVariant,
+                                modifier = Modifier.size(18.dp))
                         },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next)
                     )
 
                     // Password field
-                    EditorialTextField(
+                    AppTextField(
                         value = uiState.password,
                         onValueChange = onPasswordChanged,
                         label = "PASSWORD",
                         placeholder = "••••••••",
-                        error = uiState.passwordError,
+                        errorMessage = uiState.passwordError,
                         leadingIcon = {
-                            Icon(Icons.Default.Lock, null, tint = if (uiState.passwordError != null) ErrorRed else TextMuted, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Lock, null,
+                                tint = if (uiState.passwordError != null) error else onSurfaceVariant,
+                                modifier = Modifier.size(18.dp))
                         },
                         trailingIcon = {
                             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                                 Icon(
                                     if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                                    null, tint = TextMuted, modifier = Modifier.size(18.dp)
+                                    null, tint = onSurfaceVariant, modifier = Modifier.size(18.dp)
                                 )
                             }
                         },
@@ -236,15 +232,15 @@ fun LoginScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clip(RoundedCornerShape(2.dp))
-                                    .background(ErrorDim)
-                                    .border(0.5.dp, ErrorRed.copy(alpha = 0.5f), RoundedCornerShape(2.dp))
+                                    .background(errorContainer)
+                                    .border(0.5.dp, error.copy(alpha = 0.5f), RoundedCornerShape(2.dp))
                                     .padding(12.dp)
                             ) {
                                 Text(
                                     err,
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 11.sp,
-                                    color = ErrorRed,
+                                    color = onErrorContainer,
                                     letterSpacing = 0.5.sp
                                 )
                             }
@@ -255,7 +251,7 @@ fun LoginScreen(
                 Spacer(Modifier.height(20.dp))
 
                 // ── Login Button ─────────────────────────────────────────────
-                EditorialButton(
+                AppButton(
                     text = if (uiState.isLoading) "SIGNING IN..." else "SIGN IN",
                     onClick = onLoginClicked,
                     isLoading = uiState.isLoading,
@@ -268,10 +264,10 @@ fun LoginScreen(
                 TextButton(onClick = onRegisterClicked) {
                     Text(
                         buildAnnotatedString {
-                            withStyle(SpanStyle(color = TextMuted, fontSize = 12.sp)) {
+                            withStyle(SpanStyle(color = onSurfaceVariant, fontSize = 12.sp)) {
                                 append("New here? ")
                             }
-                            withStyle(SpanStyle(color = AmberGlow, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)) {
+                            withStyle(SpanStyle(color = primary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)) {
                                 append("Create an account →")
                             }
                         },
@@ -291,27 +287,27 @@ fun LoginScreen(
 // ─────────────────────────────────────────────────────────────
 
 @Composable
-private fun LogoMark() {
+private fun LogoMark(bg: Color, primary: Color) {
     Box(
         modifier = Modifier
             .size(64.dp)
             .drawBehind {
-                // Outer amber ring
+                // Outer primary ring
                 drawCircle(
-                    color = Amber.copy(alpha = 0.25f),
+                    color = primary.copy(alpha = 0.25f),
                     radius = size.minDimension / 2,
                     style = Stroke(width = 1f)
                 )
-                // Inner fill
+                // Inner fill (blends with bg)
                 drawCircle(
                     brush = Brush.radialGradient(
-                        listOf(Color(0xFF2A2218), Color(0xFF1A1410))
+                        listOf(primary.copy(0.08f), bg)
                     ),
                     radius = size.minDimension / 2 - 4
                 )
                 // Accent arc
                 drawArc(
-                    color = Amber,
+                    color = primary,
                     startAngle = -90f,
                     sweepAngle = 90f,
                     useCenter = false,
@@ -325,14 +321,14 @@ private fun LogoMark() {
             fontFamily = FontFamily.Serif,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            color = Amber,
+            color = primary,
             letterSpacing = 2.sp
         )
     }
 }
 
 @Composable
-private fun DecorativeCornerLines() {
+private fun DecorativeCornerLines(accentColor: Color) {
     Box(modifier = Modifier.fillMaxSize()) {
         // Top-left corner bracket
         Box(
@@ -341,7 +337,7 @@ private fun DecorativeCornerLines() {
                 .padding(16.dp)
                 .size(40.dp)
                 .drawBehind {
-                    val c = Amber.copy(alpha = 0.3f)
+                    val c = accentColor.copy(alpha = 0.3f)
                     drawLine(c, Offset(0f, 0f), Offset(30f, 0f), strokeWidth = 1f)
                     drawLine(c, Offset(0f, 0f), Offset(0f, 30f), strokeWidth = 1f)
                 }
@@ -353,140 +349,10 @@ private fun DecorativeCornerLines() {
                 .padding(16.dp)
                 .size(40.dp)
                 .drawBehind {
-                    val c = Amber.copy(alpha = 0.3f)
+                    val c = accentColor.copy(alpha = 0.3f)
                     drawLine(c, Offset(size.width, size.height), Offset(size.width - 30f, size.height), strokeWidth = 1f)
                     drawLine(c, Offset(size.width, size.height), Offset(size.width, size.height - 30f), strokeWidth = 1f)
                 }
-        )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun EditorialTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    placeholder: String,
-    error: String?,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-) {
-    val hasError = error != null
-    val borderColor = when {
-        hasError -> ErrorRed
-        value.isNotEmpty() -> Amber.copy(alpha = 0.6f)
-        else -> BorderMid
-    }
-
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(
-            label,
-            fontFamily = FontFamily.Monospace,
-            fontSize = 10.sp,
-            letterSpacing = 2.sp,
-            color = if (hasError) ErrorRed else TextMuted
-        )
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            placeholder = {
-                Text(placeholder, fontFamily = FontFamily.Monospace, fontSize = 13.sp, color = TextMuted.copy(alpha = 0.5f))
-            },
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
-            isError = hasError,
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(2.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = SurfaceHigh,
-                unfocusedContainerColor = SurfaceHigh,
-                focusedTextColor = TextPrimary,
-                unfocusedTextColor = TextPrimary,
-                cursorColor = Amber,
-                focusedBorderColor = Amber,
-                unfocusedBorderColor = borderColor,
-                errorBorderColor = ErrorRed,
-                errorCursorColor = ErrorRed,
-                focusedLeadingIconColor = Amber,
-                unfocusedLeadingIconColor = TextMuted,
-                focusedTrailingIconColor = TextMuted,
-                unfocusedTrailingIconColor = TextMuted,
-            ),
-            textStyle = LocalTextStyle.current.copy(
-                fontFamily = FontFamily.Monospace,
-                fontSize = 14.sp,
-                color = TextPrimary
-            )
-        )
-        AnimatedVisibility(visible = hasError) {
-            error?.let {
-                Text(
-                    "⚠ $it",
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 10.sp,
-                    color = ErrorRed,
-                    letterSpacing = 0.5.sp
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun EditorialButton(
-    text: String,
-    onClick: () -> Unit,
-    isLoading: Boolean = false,
-    modifier: Modifier = Modifier,
-) {
-    val glowAlpha by rememberInfiniteTransition(label = "btnGlow").animateFloat(
-        initialValue = 0.4f, targetValue = 0.9f,
-        animationSpec = if (isLoading) infiniteRepeatable(tween(800), RepeatMode.Reverse)
-        else infiniteRepeatable(tween(3000), RepeatMode.Reverse),
-        label = "g"
-    )
-
-    Button(
-        onClick = onClick,
-        enabled = !isLoading,
-        modifier = modifier
-            .height(56.dp)
-            .drawBehind {
-                drawRect(
-                    brush = Brush.horizontalGradient(
-                        listOf(Amber.copy(alpha = glowAlpha * 0.15f), Color.Transparent)
-                    )
-                )
-            },
-        shape = RoundedCornerShape(2.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Amber,
-            disabledContainerColor = AmberDim,
-            contentColor = Canvas,
-            disabledContentColor = Canvas.copy(alpha = 0.6f)
-        ),
-        elevation = ButtonDefaults.buttonElevation(0.dp)
-    ) {
-        if (isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(16.dp),
-                color = Canvas,
-                strokeWidth = 2.dp
-            )
-            Spacer(Modifier.width(10.dp))
-        }
-        Text(
-            text,
-            fontFamily = FontFamily.Monospace,
-            fontSize = 13.sp,
-            letterSpacing = 3.sp,
-            fontWeight = FontWeight.Bold
         )
     }
 }

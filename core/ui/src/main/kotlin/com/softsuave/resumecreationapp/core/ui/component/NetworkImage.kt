@@ -26,17 +26,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Surface0  = Color(0xFF1A1814)
-private val Surface1  = Color(0xFF242019)
-private val Amber     = Color(0xFFD4A853)
-private val TextMuted = Color(0xFF9A8E78)
-
 /**
- * Dark editorial network image with animated loading ring and error fallback.
+ * Editorial network image with animated loading ring and error fallback.
  *
- * Loading state: canvas-drawn amber arc spinner (no plain CircularProgressIndicator).
- * Error state: amber-tinted broken-image icon on [Surface0] background.
+ * Loading state: canvas-drawn primary arc spinner.
+ * Error state: primary-tinted broken-image icon on surface background.
  */
 @Composable
 fun NetworkImage(
@@ -67,15 +61,17 @@ private fun EditorialImageLoader(shape: Shape) {
         animationSpec   = infiniteRepeatable(tween(1800, easing = LinearEasing)),
         label           = "ir",
     )
+    val surface = MaterialTheme.colorScheme.surfaceVariant
+    val primary = MaterialTheme.colorScheme.primary
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Surface1, shape)
+            .background(surface, shape)
             .drawBehind {
                 rotate(rotation) {
                     drawArc(
-                        brush      = Brush.sweepGradient(listOf(Color.Transparent, Amber.copy(0.5f), Amber)),
+                        brush      = Brush.sweepGradient(listOf(Color.Transparent, primary.copy(0.5f), primary)),
                         startAngle = 0f,
                         sweepAngle = 220f,
                         useCenter  = false,
@@ -91,16 +87,19 @@ private fun EditorialImageLoader(shape: Shape) {
 
 @Composable
 private fun EditorialImageError(shape: Shape) {
+    val surface = MaterialTheme.colorScheme.surfaceVariant
+    val primary = MaterialTheme.colorScheme.primary
+    
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Surface0, shape),
+            .background(surface, shape),
         contentAlignment = Alignment.Center,
     ) {
         Icon(
             imageVector        = Icons.Default.BrokenImage,
             contentDescription = null,
-            tint               = Amber.copy(alpha = 0.25f),
+            tint               = primary.copy(alpha = 0.25f),
             modifier           = Modifier.fillMaxSize(0.35f),
         )
     }

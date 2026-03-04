@@ -9,7 +9,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontFamily
@@ -17,18 +16,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// ── Local tokens ─────────────────────────────────────────────────────────────
-private val Surface1  = Color(0xFF242019)
-private val Amber     = Color(0xFFD4A853)
-private val BorderMid = Color(0xFF4A4238)
-private val TextPri   = Color(0xFFF0EAD6)
-private val TextMuted = Color(0xFF9A8E78)
-private val ErrorRed  = Color(0xFFB04A3A)
-
 /**
- * Standard application text field with dark editorial styling.
+ * Standard application text field — theme-aware (light + dark).
  *
- * - Amber focus ring
+ * - Primary colour focus ring
  * - Monospace label (all-caps) floated above the field
  * - Error message with ⚠ prefix, animated in/out
  * - Proper semantic error state for accessibility
@@ -52,6 +43,12 @@ fun AppTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     val isError = errorMessage != null
+    val primary  = MaterialTheme.colorScheme.primary
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val outline  = MaterialTheme.colorScheme.outline
+    val error    = MaterialTheme.colorScheme.error
 
     Column(modifier = modifier) {
         // Floating monospace label
@@ -61,7 +58,7 @@ fun AppTextField(
                 fontFamily    = FontFamily.Monospace,
                 fontSize      = 10.sp,
                 letterSpacing = 2.sp,
-                color = if (isError) ErrorRed else TextMuted,
+                color = if (isError) error else onSurfaceVariant,
                 modifier = Modifier.padding(bottom = 4.dp),
             )
         }
@@ -76,7 +73,7 @@ fun AppTextField(
                     else Modifier,
                 ),
             placeholder    = placeholder?.let {
-                { Text(it, fontFamily = FontFamily.Monospace, fontSize = 13.sp, color = TextMuted.copy(alpha = 0.45f)) }
+                { Text(it, fontFamily = FontFamily.Monospace, fontSize = 13.sp, color = onSurfaceVariant.copy(alpha = 0.45f)) }
             },
             leadingIcon    = leadingIcon,
             trailingIcon   = trailingIcon,
@@ -84,35 +81,45 @@ fun AppTextField(
             enabled        = enabled,
             singleLine     = singleLine,
             maxLines       = maxLines,
-            keyboardOptions  = keyboardOptions,
-            keyboardActions  = keyboardActions,
+            keyboardOptions   = keyboardOptions,
+            keyboardActions   = keyboardActions,
             visualTransformation = visualTransformation,
             shape          = MaterialTheme.shapes.extraSmall,
             textStyle      = LocalTextStyle.current.copy(
                 fontFamily    = FontFamily.Monospace,
                 fontSize      = 14.sp,
-                color         = TextPri,
+                color         = onSurface,
             ),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor   = Surface1,
-                unfocusedContainerColor = Surface1,
-                disabledContainerColor  = Surface1.copy(alpha = 0.5f),
-                focusedTextColor        = TextPri,
-                unfocusedTextColor      = TextPri,
-                disabledTextColor       = TextMuted,
-                cursorColor             = Amber,
-                focusedBorderColor      = Amber,
-                unfocusedBorderColor    = if (value.isNotEmpty()) Amber.copy(alpha = 0.4f) else BorderMid,
-                disabledBorderColor     = BorderMid.copy(alpha = 0.4f),
-                errorBorderColor        = ErrorRed,
-                errorCursorColor        = ErrorRed,
-                focusedLeadingIconColor  = Amber,
-                unfocusedLeadingIconColor = TextMuted,
-                disabledLeadingIconColor  = TextMuted.copy(alpha = 0.4f),
-                errorLeadingIconColor    = ErrorRed,
-                focusedTrailingIconColor  = TextMuted,
-                unfocusedTrailingIconColor = TextMuted,
-                errorTrailingIconColor   = ErrorRed,
+                // Container
+                focusedContainerColor   = surfaceVariant,
+                unfocusedContainerColor = surfaceVariant,
+                disabledContainerColor  = surfaceVariant.copy(alpha = 0.5f),
+                // Text
+                focusedTextColor        = onSurface,
+                unfocusedTextColor      = onSurface,
+                disabledTextColor       = onSurfaceVariant,
+                // Cursor
+                cursorColor             = primary,
+                // Border
+                focusedBorderColor      = primary,
+                unfocusedBorderColor    = if (value.isNotEmpty()) primary.copy(alpha = 0.4f) else outline,
+                disabledBorderColor     = outline.copy(alpha = 0.4f),
+                errorBorderColor        = error,
+                errorCursorColor        = error,
+                // Leading icon
+                focusedLeadingIconColor  = primary,
+                unfocusedLeadingIconColor = onSurfaceVariant,
+                disabledLeadingIconColor  = onSurfaceVariant.copy(alpha = 0.4f),
+                errorLeadingIconColor    = error,
+                // Trailing icon
+                focusedTrailingIconColor  = onSurfaceVariant,
+                unfocusedTrailingIconColor = onSurfaceVariant,
+                errorTrailingIconColor   = error,
+                // Label inside the field (when no external label)
+                focusedLabelColor        = primary,
+                unfocusedLabelColor      = onSurfaceVariant,
+                errorLabelColor          = error,
             ),
         )
 
@@ -128,7 +135,7 @@ fun AppTextField(
                     fontFamily    = FontFamily.Monospace,
                     fontSize      = 10.sp,
                     letterSpacing = 0.5.sp,
-                    color         = ErrorRed,
+                    color         = error,
                     modifier      = Modifier.padding(start = 4.dp, top = 4.dp),
                 )
             }

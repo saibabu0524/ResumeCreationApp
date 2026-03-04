@@ -34,7 +34,7 @@
 <network-security-config>
 
     <!-- Trust only system CAs for all connections by default (no user-added CAs in release) -->
-    <base-config cleartextTrafficPermitted="false">
+    <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>

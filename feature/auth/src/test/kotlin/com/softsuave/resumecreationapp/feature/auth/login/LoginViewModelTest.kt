@@ -1,12 +1,23 @@
 package com.softsuave.resumecreationapp.feature.auth.login
 
 import app.cash.turbine.test
+import com.softsuave.resumecreationapp.core.common.util.ValidationUtil
+import com.softsuave.resumecreationapp.core.domain.model.AppException
+import com.softsuave.resumecreationapp.core.domain.model.Result
+import com.softsuave.resumecreationapp.core.domain.usecase.auth.LoginUseCase
 import com.softsuave.resumecreationapp.core.testing.fake.FakeAnalyticsTracker
 import com.softsuave.resumecreationapp.core.testing.rule.MainDispatcherExtension
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.mockkObject
+import io.mockk.unmockkObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -16,22 +27,33 @@ import org.junit.jupiter.api.extension.ExtendWith
 /**
  * Unit tests for [LoginViewModel].
  *
- * Note: Tests that trigger [ValidationUtil.isValidEmail] are skipped because
- * that utility uses [android.util.Patterns] which is not available in JVM
- * unit tests. Those paths are tested in instrumented tests or via Robolectric.
+ * Paths that call [android.util.Patterns] (via [ValidationUtil.isValidEmail]) are
+ * covered by stubbing [ValidationUtil] with MockK's mockkObject so they run on the
+ * JVM without Robolectric. Tests that only exercise blank-string fast-paths need
+ * no stubbing because [ValidationUtil.isValidEmail] short-circuits before calling
+ * [android.util.Patterns] when the input is blank.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(MainDispatcherExtension::class)
 class LoginViewModelTest {
 
     private lateinit var analyticsTracker: FakeAnalyticsTracker
+    private lateinit var loginUseCase: LoginUseCase
     private lateinit var viewModel: LoginViewModel
 
     @BeforeEach
     fun setup() {
         analyticsTracker = FakeAnalyticsTracker()
-        viewModel = LoginViewModel(analyticsTracker)
+        loginUseCase = mockk(relaxed = true)
+        viewModel = LoginViewModel(loginUseCase, analyticsTracker)
     }
+
+    @AfterEach
+    fun tearDown() {
+        try { unmockkObject(ValidationUtil) } catch (_: Exception) { /* not mocked */ }
+    }
+
+    // ─── Initial state ────────────────────────────────────────────────────────
 
     @Test
     fun `initial state is empty`() {
@@ -43,6 +65,8 @@ class LoginViewModelTest {
         assertNull(state.passwordError)
         assertNull(state.generalError)
     }
+
+    // ─── Field updates ────────────────────────────────────────────────────────
 
     @Test
     fun `email changed updates state`() {
@@ -62,9 +86,7 @@ class LoginViewModelTest {
 
     @Test
     fun `email change clears email error`() {
-        // Manually set an error state
         viewModel.onEvent(LoginUserIntent.EmailChanged("bad"))
-        // Change email again — error should be cleared
         viewModel.onEvent(LoginUserIntent.EmailChanged("new@example.com"))
         assertNull(viewModel.uiState.value.emailError)
     }
@@ -72,10 +94,11 @@ class LoginViewModelTest {
     @Test
     fun `password change clears password error`() {
         viewModel.onEvent(LoginUserIntent.PasswordChanged(""))
-        // Change password — error should be cleared
         viewModel.onEvent(LoginUserIntent.PasswordChanged("newpass"))
         assertNull(viewModel.uiState.value.passwordError)
     }
+
+    // ─── Navigation event ─────────────────────────────────────────────────────
 
     @Test
     fun `register clicked emits navigate to registration event`() = runTest {
@@ -88,11 +111,73 @@ class LoginViewModelTest {
         }
     }
 
+    // ─── Validation ───────────────────────────────────────────────────────────
+
     @Test
-    fun `analytics tracker is available`() {
-        // LoginViewModel doesn't auto-track screen view in init
-        // (unlike HomeViewModel/ProfileViewModel, screen tracking
-        // happens at the composable level for auth flows)
+    fun `blank email shows email error and does not start loading`() {
+        // ValidationUtil.isValidEmail("") short-circuits before Patterns — no stub needed
+        viewModel.onEvent(LoginUserIntent.PasswordChanged("Password1"))
+        viewModel.onEvent(LoginUserIntent.LoginClicked)
+
+        assertNotNull(viewModel.uiState.value.emailError)
+        assertFalse(viewModel.uiState.value.isLoading)
+    }
+
+    @Test
+    fun `blank password shows password error and does not start loading`() {
+        mockkObject(ValidationUtil)
+        every { ValidationUtil.isValidEmail(any()) } returns true
+
+        viewModel.onEvent(LoginUserIntent.EmailChanged("valid@example.com"))
+        // password left blank
+        viewModel.onEvent(LoginUserIntent.LoginClicked)
+
+        assertNotNull(viewModel.uiState.value.passwordError)
+        assertFalse(viewModel.uiState.value.isLoading)
+    }
+
+    // ─── Submit paths ─────────────────────────────────────────────────────────
+
+    @Test
+    fun `login success emits NavigateToHome and clears loading`() = runTest {
+        mockkObject(ValidationUtil)
+        every { ValidationUtil.isValidEmail(any()) } returns true
+        coEvery { loginUseCase(any()) } returns Result.Success(Unit)
+
+        viewModel.onEvent(LoginUserIntent.EmailChanged("valid@example.com"))
+        viewModel.onEvent(LoginUserIntent.PasswordChanged("Password1"))
+
+        viewModel.uiEvent.test {
+            viewModel.onEvent(LoginUserIntent.LoginClicked)
+
+            val event = awaitItem()
+            assertTrue(event is LoginUiEvent.NavigateToHome)
+            cancelAndConsumeRemainingEvents()
+        }
+        assertFalse(viewModel.uiState.value.isLoading)
+        assertNull(viewModel.uiState.value.generalError)
+    }
+
+    @Test
+    fun `login failure shows general error and clears loading`() = runTest {
+        mockkObject(ValidationUtil)
+        every { ValidationUtil.isValidEmail(any()) } returns true
+        coEvery { loginUseCase(any()) } returns Result.Error(
+            AppException.Unauthorized(message = "Bad credentials"),
+        )
+
+        viewModel.onEvent(LoginUserIntent.EmailChanged("valid@example.com"))
+        viewModel.onEvent(LoginUserIntent.PasswordChanged("Password1"))
+        viewModel.onEvent(LoginUserIntent.LoginClicked)
+
+        assertFalse(viewModel.uiState.value.isLoading)
+        assertEquals("Bad credentials", viewModel.uiState.value.generalError)
+    }
+
+    // ─── Analytics ────────────────────────────────────────────────────────────
+
+    @Test
+    fun `analytics tracker starts empty`() {
         assertTrue(analyticsTracker.events.isEmpty())
     }
 }

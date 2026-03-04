@@ -22,10 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -40,21 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.softsuave.resumecreationapp.core.ui.component.AppTextField
 import com.softsuave.resumecreationapp.feature.auth.R
-
-// ── Design Tokens ────────────────────────────────────────────────────────────
-private val Canvas      = Color(0xFF0E0D0B)
-private val Surface     = Color(0xFF1A1814)
-private val SurfaceHigh = Color(0xFF242019)
-private val Amber       = Color(0xFFD4A853)
-private val AmberGlow   = Color(0xFFEFC97A)
-private val AmberDim    = Color(0xFF8A6930)
-private val TextPrimary = Color(0xFFF0EAD6)
-private val TextMuted   = Color(0xFF9A8E78)
-private val Border      = Color(0xFF2E2A24)
-private val BorderMid   = Color(0xFF4A4238)
-private val ErrorRed    = Color(0xFFB04A3A)
-private val ErrorDim    = Color(0xFF2D1410)
 
 @Composable
 fun RegistrationRoute(
@@ -86,6 +71,16 @@ fun RegistrationScreen(
     var contentVisible by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { contentVisible = true }
 
+    // Theme tokens
+    val bg           = MaterialTheme.colorScheme.background
+    val onBg         = MaterialTheme.colorScheme.onBackground
+    val primary      = MaterialTheme.colorScheme.primary
+    val onPrimary    = MaterialTheme.colorScheme.onPrimary
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+    val surface      = MaterialTheme.colorScheme.surfaceVariant
+    val outline      = MaterialTheme.colorScheme.outline
+    val error        = MaterialTheme.colorScheme.error
+
     // Password strength calculation
     val strength = remember(uiState.password) {
         when {
@@ -111,17 +106,17 @@ fun RegistrationScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Canvas),
+            .background(bg),
         contentAlignment = Alignment.TopCenter
     ) {
-        // Ambient bottom glow (different position than login)
+        // Ambient bottom glow
         Box(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .size(400.dp)
                 .background(
                     Brush.radialGradient(
-                        colors = listOf(Amber.copy(alpha = 0.05f + glowAnim * 0.03f), Color.Transparent),
+                        colors = listOf(primary.copy(alpha = 0.05f + glowAnim * 0.03f), Color.Transparent),
                         radius = 500f
                     )
                 )
@@ -136,7 +131,7 @@ fun RegistrationScreen(
                 .padding(start = 16.dp)
                 .background(
                     Brush.verticalGradient(
-                        listOf(Color.Transparent, Amber.copy(alpha = 0.2f), Color.Transparent)
+                        listOf(Color.Transparent, primary.copy(alpha = 0.2f), Color.Transparent)
                     )
                 )
         )
@@ -167,7 +162,7 @@ fun RegistrationScreen(
                             .width(3.dp)
                             .height(72.dp)
                             .background(
-                                Brush.verticalGradient(listOf(Amber, AmberDim))
+                                Brush.verticalGradient(listOf(primary, primary.copy(alpha = 0.4f)))
                             )
                     )
                     Column {
@@ -176,14 +171,14 @@ fun RegistrationScreen(
                             fontFamily = FontFamily.Monospace,
                             fontSize = 10.sp,
                             letterSpacing = 4.sp,
-                            color = Amber.copy(alpha = 0.7f)
+                            color = primary.copy(alpha = 0.7f)
                         )
                         Text(
                             buildAnnotatedString {
-                                withStyle(SpanStyle(color = TextPrimary, fontWeight = FontWeight.Light)) {
+                                withStyle(SpanStyle(color = onBg, fontWeight = FontWeight.Light)) {
                                     append("Your ")
                                 }
-                                withStyle(SpanStyle(color = Amber, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
+                                withStyle(SpanStyle(color = primary, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
                                     append("Account")
                                 }
                             },
@@ -200,7 +195,7 @@ fun RegistrationScreen(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     lineHeight = 17.sp,
-                    color = TextMuted,
+                    color = onSurfaceVariant,
                     letterSpacing = 0.3.sp
                 )
 
@@ -211,60 +206,62 @@ fun RegistrationScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(4.dp))
-                        .border(
-                            0.5.dp,
-                            Brush.verticalGradient(listOf(BorderMid, Border)),
-                            RoundedCornerShape(4.dp)
-                        )
-                        .background(Surface)
+                        .border(0.5.dp, outline, RoundedCornerShape(4.dp))
+                        .background(surface)
                         .padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(18.dp)
                 ) {
                     // Display Name
-                    RegTextField(
+                    AppTextField(
                         value = uiState.displayName,
                         onValueChange = { onEvent(RegistrationUserIntent.DisplayNameChanged(it)) },
                         label = "DISPLAY NAME",
                         placeholder = "John Doe",
-                        error = uiState.displayNameError,
+                        errorMessage = uiState.displayNameError,
                         leadingIcon = {
-                            Icon(Icons.Default.Person, null, tint = if (uiState.displayNameError != null) ErrorRed else TextMuted, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Person, null,
+                                tint = if (uiState.displayNameError != null) error else onSurfaceVariant,
+                                modifier = Modifier.size(18.dp))
                         },
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
                     )
 
-                    HorizontalDivider(color = Border, thickness = 0.5.dp)
+                    HorizontalDivider(color = outline, thickness = 0.5.dp)
 
                     // Email
-                    RegTextField(
+                    AppTextField(
                         value = uiState.email,
                         onValueChange = { onEvent(RegistrationUserIntent.EmailChanged(it)) },
                         label = "EMAIL ADDRESS",
                         placeholder = "you@example.com",
-                        error = uiState.emailError,
+                        errorMessage = uiState.emailError,
                         leadingIcon = {
-                            Icon(Icons.Default.Email, null, tint = if (uiState.emailError != null) ErrorRed else TextMuted, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Email, null,
+                                tint = if (uiState.emailError != null) error else onSurfaceVariant,
+                                modifier = Modifier.size(18.dp))
                         },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next)
                     )
 
-                    HorizontalDivider(color = Border, thickness = 0.5.dp)
+                    HorizontalDivider(color = outline, thickness = 0.5.dp)
 
                     // Password
-                    RegTextField(
+                    AppTextField(
                         value = uiState.password,
                         onValueChange = { onEvent(RegistrationUserIntent.PasswordChanged(it)) },
                         label = "PASSWORD",
                         placeholder = "Min. 8 characters",
-                        error = uiState.passwordError,
+                        errorMessage = uiState.passwordError,
                         leadingIcon = {
-                            Icon(Icons.Default.Lock, null, tint = if (uiState.passwordError != null) ErrorRed else TextMuted, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Lock, null,
+                                tint = if (uiState.passwordError != null) error else onSurfaceVariant,
+                                modifier = Modifier.size(18.dp))
                         },
                         trailingIcon = {
                             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                                 Icon(
                                     if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                                    null, tint = TextMuted, modifier = Modifier.size(18.dp)
+                                    null, tint = onSurfaceVariant, modifier = Modifier.size(18.dp)
                                 )
                             }
                         },
@@ -274,26 +271,28 @@ fun RegistrationScreen(
 
                     // Password strength bar
                     AnimatedVisibility(visible = uiState.password.isNotEmpty()) {
-                        PasswordStrengthBar(strength = strength)
+                        PasswordStrengthBar(strength = strength, outline = outline)
                     }
 
-                    HorizontalDivider(color = Border, thickness = 0.5.dp)
+                    HorizontalDivider(color = outline, thickness = 0.5.dp)
 
                     // Confirm Password
-                    RegTextField(
+                    AppTextField(
                         value = uiState.confirmPassword,
                         onValueChange = { onEvent(RegistrationUserIntent.ConfirmPasswordChanged(it)) },
                         label = "CONFIRM PASSWORD",
                         placeholder = "Repeat password",
-                        error = uiState.confirmPasswordError,
+                        errorMessage = uiState.confirmPasswordError,
                         leadingIcon = {
-                            Icon(Icons.Default.Lock, null, tint = if (uiState.confirmPasswordError != null) ErrorRed else TextMuted, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Lock, null,
+                                tint = if (uiState.confirmPasswordError != null) error else onSurfaceVariant,
+                                modifier = Modifier.size(18.dp))
                         },
                         trailingIcon = {
                             IconButton(onClick = { confirmVisible = !confirmVisible }) {
                                 Icon(
                                     if (confirmVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                                    null, tint = TextMuted, modifier = Modifier.size(18.dp)
+                                    null, tint = onSurfaceVariant, modifier = Modifier.size(18.dp)
                                 )
                             }
                         },
@@ -322,20 +321,21 @@ fun RegistrationScreen(
                         .drawBehind {
                             drawRect(
                                 Brush.horizontalGradient(
-                                    listOf(Amber.copy(alpha = btnGlow * 0.12f), Color.Transparent)
+                                    listOf(primary.copy(alpha = btnGlow * 0.12f), Color.Transparent)
                                 )
                             )
                         },
                     shape = RoundedCornerShape(2.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Amber,
-                        disabledContainerColor = AmberDim,
-                        contentColor = Canvas
+                        containerColor = primary,
+                        disabledContainerColor = primary.copy(alpha = 0.4f),
+                        contentColor = onPrimary,
+                        disabledContentColor = onPrimary.copy(alpha = 0.6f),
                     ),
                     elevation = ButtonDefaults.buttonElevation(0.dp)
                 ) {
                     if (uiState.isLoading) {
-                        CircularProgressIndicator(Modifier.size(16.dp), color = Canvas, strokeWidth = 2.dp)
+                        CircularProgressIndicator(Modifier.size(16.dp), color = onPrimary, strokeWidth = 2.dp)
                         Spacer(Modifier.width(10.dp))
                     }
                     Text(
@@ -353,8 +353,8 @@ fun RegistrationScreen(
                 TextButton(onClick = { onEvent(RegistrationUserIntent.LoginClicked) }) {
                     Text(
                         buildAnnotatedString {
-                            withStyle(SpanStyle(color = TextMuted, fontSize = 12.sp)) { append("Already have an account? ") }
-                            withStyle(SpanStyle(color = AmberGlow, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)) { append("Sign in →") }
+                            withStyle(SpanStyle(color = onSurfaceVariant, fontSize = 12.sp)) { append("Already have an account? ") }
+                            withStyle(SpanStyle(color = primary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)) { append("Sign in →") }
                         },
                         fontFamily = FontFamily.Monospace,
                         letterSpacing = 0.5.sp
@@ -368,7 +368,7 @@ fun RegistrationScreen(
 }
 
 @Composable
-private fun PasswordStrengthBar(strength: Int) {
+private fun PasswordStrengthBar(strength: Int, outline: Color) {
     val labels = listOf("Weak", "Fair", "Good", "Strong")
     val colors = listOf(
         Color(0xFFB04A3A),
@@ -386,7 +386,7 @@ private fun PasswordStrengthBar(strength: Int) {
             repeat(4) { i ->
                 val filled = i < strength
                 val color by animateColorAsState(
-                    targetValue = if (filled) colors[idx] else BorderMid,
+                    targetValue = if (filled) colors[idx] else outline,
                     animationSpec = tween(300),
                     label = "barC$i"
                 )
@@ -407,66 +407,6 @@ private fun PasswordStrengthBar(strength: Int) {
                 color = colors[idx],
                 letterSpacing = 1.sp
             )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun RegTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    placeholder: String,
-    error: String?,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-) {
-    val hasError = error != null
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(
-            label,
-            fontFamily = FontFamily.Monospace,
-            fontSize = 10.sp,
-            letterSpacing = 2.sp,
-            color = if (hasError) ErrorRed else TextMuted
-        )
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            placeholder = { Text(placeholder, fontFamily = FontFamily.Monospace, fontSize = 13.sp, color = TextMuted.copy(alpha = 0.4f)) },
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
-            isError = hasError,
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(2.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = SurfaceHigh,
-                unfocusedContainerColor = SurfaceHigh,
-                focusedTextColor = TextPrimary,
-                unfocusedTextColor = TextPrimary,
-                cursorColor = Amber,
-                focusedBorderColor = Amber,
-                unfocusedBorderColor = if (value.isNotEmpty()) Amber.copy(alpha = 0.4f) else BorderMid,
-                errorBorderColor = ErrorRed,
-                focusedLeadingIconColor = Amber,
-                unfocusedLeadingIconColor = TextMuted,
-            ),
-            textStyle = LocalTextStyle.current.copy(
-                fontFamily = FontFamily.Monospace,
-                fontSize = 14.sp,
-                color = TextPrimary
-            )
-        )
-        AnimatedVisibility(visible = hasError) {
-            error?.let {
-                Text("⚠ $it", fontFamily = FontFamily.Monospace, fontSize = 10.sp, color = ErrorRed, letterSpacing = 0.5.sp)
-            }
         }
     }
 }

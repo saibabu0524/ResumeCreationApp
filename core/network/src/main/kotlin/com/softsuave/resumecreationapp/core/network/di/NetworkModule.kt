@@ -89,12 +89,14 @@ object NetworkModule {
         loggingInterceptor: HttpLoggingInterceptor,
         connectivityInterceptor: ConnectivityInterceptor,
         authInterceptor: AuthInterceptor,
+        tokenAuthenticator: com.softsuave.resumecreationapp.core.network.interceptor.TokenAuthenticator,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(connectivityInterceptor)
         .addInterceptor(authInterceptor)
+        .authenticator(tokenAuthenticator)
         .addInterceptor(loggingInterceptor)
         .build()
 
@@ -129,8 +131,16 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideAuthApi(
-        @Named("UnauthenticatedRetrofit") retrofit: Retrofit
-    ): com.softsuave.resumecreationapp.core.network.api.AuthApi = retrofit.create(com.softsuave.resumecreationapp.core.network.api.AuthApi::class.java)
+        @Named("UnauthenticatedRetrofit") retrofit: Retrofit,
+    ): com.softsuave.resumecreationapp.core.network.api.AuthApi =
+        retrofit.create(com.softsuave.resumecreationapp.core.network.api.AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUploadsApi(
+        @AuthenticatedClient retrofit: Retrofit,
+    ): com.softsuave.resumecreationapp.core.network.api.UploadsApi =
+        retrofit.create(com.softsuave.resumecreationapp.core.network.api.UploadsApi::class.java)
 
     @Provides
     @Singleton

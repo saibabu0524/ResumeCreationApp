@@ -40,18 +40,6 @@ import androidx.compose.ui.unit.sp
 import com.softsuave.resumecreationapp.feature.auth.R
 import kotlinx.coroutines.launch
 
-// ── Design Tokens ────────────────────────────────────────────────────────────
-private val Canvas      = Color(0xFF0E0D0B)
-private val Surface     = Color(0xFF1A1814)
-private val SurfaceHigh = Color(0xFF242019)
-private val Amber       = Color(0xFFD4A853)
-private val AmberGlow   = Color(0xFFEFC97A)
-private val AmberDim    = Color(0xFF8A6930)
-private val TextPrimary = Color(0xFFF0EAD6)
-private val TextMuted   = Color(0xFF9A8E78)
-private val Border      = Color(0xFF2E2A24)
-private val BorderMid   = Color(0xFF4A4238)
-
 @Immutable
 private data class OnboardingPage(
     val icon: ImageVector,
@@ -72,6 +60,15 @@ fun OnboardingScreen(
     onOnboardingComplete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Theme tokens
+    val bg           = MaterialTheme.colorScheme.background
+    val onBg         = MaterialTheme.colorScheme.onBackground
+    val primary      = MaterialTheme.colorScheme.primary
+    val onPrimary    = MaterialTheme.colorScheme.onPrimary
+    val surface      = MaterialTheme.colorScheme.surfaceVariant
+    val outline      = MaterialTheme.colorScheme.outline
+    val onSurfaceVariant = MaterialTheme.colorScheme.onSurfaceVariant
+
     val pages = listOf(
         OnboardingPage(
             icon = Icons.Default.Explore,
@@ -110,7 +107,7 @@ fun OnboardingScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Canvas)
+            .background(bg)
     ) {
         // Background glow that shifts per page
         val glowX by animateFloatAsState(
@@ -123,7 +120,7 @@ fun OnboardingScreen(
                 .fillMaxSize()
                 .background(
                     Brush.radialGradient(
-                        colors = listOf(Amber.copy(alpha = 0.07f), Color.Transparent),
+                        colors = listOf(primary.copy(alpha = 0.07f), Color.Transparent),
                         center = Offset(glowX * 1000f + 100f, 400f),
                         radius = 700f
                     )
@@ -157,13 +154,13 @@ fun OnboardingScreen(
                                 .weight(1f)
                                 .height(2.dp)
                                 .clip(RoundedCornerShape(50))
-                                .background(BorderMid)
+                                .background(outline)
                         ) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxHeight()
                                     .fillMaxWidth(progress)
-                                    .background(Amber)
+                                    .background(primary)
                             )
                         }
                     }
@@ -178,7 +175,13 @@ fun OnboardingScreen(
                 OnboardingPageContent(
                     page = pages[pageIndex],
                     rotation = rotation,
-                    isActive = pageIndex == pagerState.currentPage
+                    isActive = pageIndex == pagerState.currentPage,
+                    bg = bg,
+                    primary = primary,
+                    onBg = onBg,
+                    surface = surface,
+                    outline = outline,
+                    onSurfaceVariant = onSurfaceVariant,
                 )
             }
 
@@ -206,7 +209,7 @@ fun OnboardingScreen(
                                 .height(6.dp)
                                 .width(width)
                                 .clip(CircleShape)
-                                .background(if (isActive) Amber else BorderMid)
+                                .background(if (isActive) primary else outline)
                         )
                     }
                 }
@@ -224,8 +227,8 @@ fun OnboardingScreen(
                         .height(56.dp),
                     shape = RoundedCornerShape(2.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Amber,
-                        contentColor = Canvas
+                        containerColor = primary,
+                        contentColor = onPrimary
                     ),
                     elevation = ButtonDefaults.buttonElevation(0.dp)
                 ) {
@@ -245,7 +248,7 @@ fun OnboardingScreen(
                             "Skip for now",
                             fontFamily = FontFamily.Monospace,
                             fontSize = 12.sp,
-                            color = TextMuted,
+                            color = onSurfaceVariant,
                             letterSpacing = 1.sp
                         )
                     }
@@ -260,6 +263,12 @@ private fun OnboardingPageContent(
     page: OnboardingPage,
     rotation: Float,
     isActive: Boolean,
+    bg: Color,
+    primary: Color,
+    onBg: Color,
+    surface: Color,
+    outline: Color,
+    onSurfaceVariant: Color,
 ) {
     val contentAlpha by animateFloatAsState(
         targetValue = if (isActive) 1f else 0.3f,
@@ -285,11 +294,11 @@ private fun OnboardingPageContent(
             modifier = Modifier
                 .size(140.dp)
                 .drawBehind {
-                    // Outer dashed-effect ring
+                    // Outer sweep ring
                     rotate(rotation) {
                         drawArc(
                             brush = Brush.sweepGradient(
-                                listOf(Color.Transparent, Amber.copy(alpha = 0.5f), Amber, Color.Transparent)
+                                listOf(Color.Transparent, primary.copy(alpha = 0.5f), primary, Color.Transparent)
                             ),
                             startAngle = 0f,
                             sweepAngle = 360f,
@@ -300,7 +309,7 @@ private fun OnboardingPageContent(
                     // Counter-rotating inner ring
                     rotate(-rotation * 0.6f) {
                         drawArc(
-                            color = Amber.copy(alpha = 0.15f),
+                            color = primary.copy(alpha = 0.15f),
                             startAngle = 0f,
                             sweepAngle = 200f,
                             useCenter = false,
@@ -309,13 +318,11 @@ private fun OnboardingPageContent(
                     }
                     // Solid center circle
                     drawCircle(
-                        brush = Brush.radialGradient(
-                            listOf(Color(0xFF2A2218), Color(0xFF151210))
-                        ),
+                        color = bg,
                         radius = size.minDimension * 0.35f
                     )
                     drawCircle(
-                        color = Amber.copy(alpha = 0.2f),
+                        color = primary.copy(alpha = 0.2f),
                         radius = size.minDimension * 0.35f,
                         style = Stroke(width = 0.5f)
                     )
@@ -326,7 +333,7 @@ private fun OnboardingPageContent(
                 imageVector = page.icon,
                 contentDescription = null,
                 modifier = Modifier.size(42.dp),
-                tint = Amber
+                tint = primary
             )
         }
 
@@ -338,7 +345,7 @@ private fun OnboardingPageContent(
             fontFamily = FontFamily.Monospace,
             fontSize = 10.sp,
             letterSpacing = 3.sp,
-            color = Amber.copy(alpha = 0.7f),
+            color = primary.copy(alpha = 0.7f),
             modifier = Modifier.offset(y = contentOffset.y.dp)
         )
 
@@ -347,10 +354,10 @@ private fun OnboardingPageContent(
         // Title
         Text(
             buildAnnotatedString {
-                withStyle(SpanStyle(color = TextPrimary, fontWeight = FontWeight.Light)) {
+                withStyle(SpanStyle(color = onBg, fontWeight = FontWeight.Light)) {
                     append(page.title + "\n")
                 }
-                withStyle(SpanStyle(color = Amber, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
+                withStyle(SpanStyle(color = primary, fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)) {
                     append(page.italic)
                 }
             },
@@ -367,8 +374,8 @@ private fun OnboardingPageContent(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(0.5.dp, Border, RoundedCornerShape(2.dp))
-                .background(Surface.copy(alpha = 0.5f))
+                .border(0.5.dp, outline, RoundedCornerShape(2.dp))
+                .background(surface.copy(alpha = 0.5f))
                 .padding(16.dp)
         ) {
             Text(
@@ -376,7 +383,7 @@ private fun OnboardingPageContent(
                 fontFamily = FontFamily.Monospace,
                 fontSize = 12.sp,
                 lineHeight = 20.sp,
-                color = TextMuted,
+                color = onSurfaceVariant,
                 textAlign = TextAlign.Center,
                 letterSpacing = 0.3.sp
             )
