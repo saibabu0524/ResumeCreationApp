@@ -3,14 +3,17 @@ import { useAuthStore } from "@/lib/stores/auth-store";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-if (!BASE_URL) {
-    throw new Error(
-        "NEXT_PUBLIC_API_BASE_URL is not set. Copy .env.local.example to .env.local."
+// Warn in dev — do NOT throw at module scope; doing so breaks Next.js SSR
+// prerendering of pages (like /_not-found) that import this module indirectly.
+if (!BASE_URL && process.env.NODE_ENV === "development") {
+    console.warn(
+        "[api/client] NEXT_PUBLIC_API_BASE_URL is not set. " +
+        "Copy .env.local.example to .env.local."
     );
 }
 
 export const client: AxiosInstance = axios.create({
-    baseURL: BASE_URL,
+    baseURL: BASE_URL ?? "",
     headers: { "Content-Type": "application/json" },
 });
 
