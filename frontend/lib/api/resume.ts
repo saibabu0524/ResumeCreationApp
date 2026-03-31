@@ -24,10 +24,14 @@ export async function tailorResume(
     resume: File,
     jobDescription: string,
     onProgress?: (message: string) => void,
+    provider: string = "gemini",
+    model?: string | null,
 ): Promise<ArrayBuffer> {
     const formData = new FormData();
     formData.append("resume", resume);
     formData.append("job_description", jobDescription);
+    formData.append("provider", provider);
+    if (model) formData.append("model", model);
 
     // Step 1: Submit job → 202 Accepted
     const submitRes = await client.post<ApiWrapper<TailorJobResponse>>(

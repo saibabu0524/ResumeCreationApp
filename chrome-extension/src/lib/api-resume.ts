@@ -45,11 +45,15 @@ export async function tailorResume(params: {
   file?: File;
   jobDescription: string;
   provider?: string;
+  model?: string | null;
   onProgress?: (message: string) => void;
 }): Promise<Blob> {
   const form = new FormData();
   form.append("job_description", params.jobDescription);
   form.append("provider", params.provider ?? "gemini");
+  if (params.model) {
+    form.append("model", params.model);
+  }
 
   if (params.storedResumeId) {
     form.append("stored_resume_id", params.storedResumeId);

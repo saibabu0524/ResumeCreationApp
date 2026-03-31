@@ -42,6 +42,27 @@ import com.softsuave.resumecreationapp.core.ui.component.ThemeSwitcherIcon
 import kotlin.math.cos
 import kotlin.math.sin
 
+// ─────────────────────────────────────────────────────────────
+//  Model data
+// ─────────────────────────────────────────────────────────────
+private data class AiModelOption(
+    val id: String,
+    val label: String,
+    val sub: String,
+    val provider: String,
+    val model: String?,
+)
+
+private val AI_MODELS = listOf(
+    AiModelOption("gemini-flash", "Gemini 2.0 Flash", "Fast · Recommended", "gemini", "gemini-2.0-flash"),
+    AiModelOption("gemini-pro", "Gemini 2.5 Pro", "Powerful · Slower", "gemini", "gemini-2.5-pro"),
+    AiModelOption("kimi-8k", "Kimi 8K", "Moonshot · 8K context", "cloud", "moonshot-v1-8k"),
+    AiModelOption("kimi-32k", "Kimi 32K", "Moonshot · 32K context", "cloud", "moonshot-v1-32k"),
+    AiModelOption("kimi-128k", "Kimi 128K", "Moonshot · 128K context", "cloud", "moonshot-v1-128k"),
+    AiModelOption("qwen-72b", "Qwen 2.5 72B", "SiliconFlow · Powerful", "qwen", "Qwen/Qwen2.5-72B-Instruct"),
+    AiModelOption("ollama", "Ollama", "Local / Custom", "ollama", null),
+)
+
 /**
  * Production entry-point: wires up the [ResumeViewModel] via Hilt and delegates to
  * the stateless [HomeScreenContent] overload.
@@ -66,7 +87,7 @@ fun HomeScreen(
 
     HomeScreenContent(
         uiState = uiState,
-        onTailorResume = { uri, jd, provider -> viewModel.tailorResume(uri, jd, provider) },
+        onTailorResume = { uri, jd, provider, model -> viewModel.tailorResume(uri, jd, provider, model) },
         onNavigateToAts = onNavigateToAts,
         onNavigateToHistory = onNavigateToHistory,
         currentThemeMode = currentThemeMode,
@@ -81,7 +102,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenContent(
     uiState: ResumeUiState = ResumeUiState.Idle,
-    onTailorResume: (Uri, String, String) -> Unit = { _, _, _ -> },
+    onTailorResume: (Uri, String, String, String?) -> Unit = { _, _, _, _ -> },
     onNavigateToAts: () -> Unit = {},
     onNavigateToHistory: () -> Unit = {},
     currentThemeMode: ThemeMode = ThemeMode.System,
@@ -90,7 +111,7 @@ fun HomeScreenContent(
     var selectedPdfUri by remember<MutableState<Uri?>> { mutableStateOf(null) }
     var selectedPdfName by remember { mutableStateOf("") }
     var jobDescription by remember { mutableStateOf("") }
-    var selectedProvider by remember { mutableStateOf("gemini") }
+    var selectedModelId by remember { mutableStateOf("gemini-flash") }
 
     val pdfPickerLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.GetContent()
@@ -283,30 +304,18 @@ fun HomeScreenContent(
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant, thickness = 0.5.dp, modifier = Modifier.padding(horizontal = 8.dp))
                 Spacer(Modifier.height(28.dp))
 
-                // ── Section 03: AI Provider ──────────────────────────────────
-                SectionHeader(number = "03", title = "AI Provider")
+                // ── Section 03: AI Model ─────────────────────────────────────
+                SectionHeader(number = "03", title = "AI Model")
                 Spacer(Modifier.height(12.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    ProviderChip(
-                        label = "GEMINI",
-                        sub = "Cloud · Fast",
-                        value = "gemini",
-                        selected = selectedProvider == "gemini",
-                        onClick = { selectedProvider = "gemini" },
-                        modifier = Modifier.weight(1f)
-                    )
-                    ProviderChip(
-                        label = "OLLAMA",
-                        sub = "Local · Private",
-                        value = "ollama",
-                        selected = selectedProvider == "ollama",
-                        onClick = { selectedProvider = "ollama" },
-                        modifier = Modifier.weight(1f)
-                    )
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    AI_MODELS.forEach { option ->
+                        ModelRow(
+                            option = option,
+                            selected = selectedModelId == option.id,
+                            onClick = { selectedModelId = option.id },
+                        )
+                    }
                 }
 
                 // ── Error ────────────────────────────────────────────────────
@@ -343,7 +352,8 @@ fun HomeScreenContent(
                 Button(
                     onClick = {
                         selectedPdfUri?.let { uri ->
-                            onTailorResume(uri, jobDescription, selectedProvider)
+                            val option = AI_MODELS.first { it.id == selectedModelId }
+                            onTailorResume(uri, jobDescription, option.provider, option.model)
                         }
                     },
                     enabled = canSubmit,
@@ -757,6 +767,73 @@ private fun ProviderChip(
                 fontFamily = FontFamily.Monospace,
                 fontSize = 10.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(if (selected) 0.8f else 0.5f)
+            )
+        }
+    }
+}
+
+@Composable
+private fun ModelRow(
+    option: AiModelOption,
+    selected: Boolean,
+    onClick: () -> Unit,
+) {
+    val border by animateColorAsState(
+        if (selected) MaterialTheme.colorScheme.primary.copy(0.6f) else MaterialTheme.colorScheme.outline,
+        tween(250), label = "mrow-b"
+    )
+    val bg by animateColorAsState(
+        if (selected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f) else MaterialTheme.colorScheme.surfaceVariant,
+        tween(250), label = "mrow-bg"
+    )
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(2.dp))
+            .border(if (selected) 1.dp else 0.5.dp, border, RoundedCornerShape(2.dp))
+            .background(bg)
+            .clickable(onClick = onClick)
+            .padding(horizontal = 14.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        RadioButton(
+            selected = selected,
+            onClick = onClick,
+            colors = RadioButtonDefaults.colors(
+                selectedColor = MaterialTheme.colorScheme.primary,
+                unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                option.label,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                option.sub,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 10.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(50))
+                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
+                .padding(horizontal = 10.dp, vertical = 6.dp)
+        ) {
+            Text(
+                option.provider.uppercase(),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 10.sp,
+                letterSpacing = 2.sp,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }

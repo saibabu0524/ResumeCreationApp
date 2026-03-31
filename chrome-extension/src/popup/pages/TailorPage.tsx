@@ -3,6 +3,16 @@ import { tailorResume } from "../../lib/api-resume";
 import type { StoredResume, ExtractionResult } from "../../types";
 import { listResumes } from "../../lib/api-resume";
 
+const MODEL_OPTIONS = [
+  { id: "gemini-flash", label: "Gemini 2.0 Flash", provider: "gemini", model: "gemini-2.0-flash" },
+  { id: "gemini-pro", label: "Gemini 2.5 Pro", provider: "gemini", model: "gemini-2.5-pro" },
+  { id: "kimi-8k", label: "Kimi 8K", provider: "cloud", model: "moonshot-v1-8k" },
+  { id: "kimi-32k", label: "Kimi 32K", provider: "cloud", model: "moonshot-v1-32k" },
+  { id: "kimi-128k", label: "Kimi 128K", provider: "cloud", model: "moonshot-v1-128k" },
+  { id: "qwen-72b", label: "Qwen 2.5 72B", provider: "qwen", model: "Qwen/Qwen2.5-72B-Instruct" },
+  { id: "ollama", label: "Ollama (local/custom)", provider: "ollama", model: null },
+];
+
 export function TailorPage() {
   const [jobDescription, setJobDescription] = useState("");
   const [extractionSource, setExtractionSource] = useState("");
@@ -10,7 +20,7 @@ export function TailorPage() {
   const [selectedResumeId, setSelectedResumeId] = useState("");
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [useUpload, setUseUpload] = useState(false);
-  const [provider, setProvider] = useState("gemini");
+  const [selectedModelId, setSelectedModelId] = useState("gemini-flash");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -51,6 +61,7 @@ export function TailorPage() {
   };
 
   const handleTailor = async () => {
+    const selected = MODEL_OPTIONS.find((m) => m.id === selectedModelId) ?? MODEL_OPTIONS[0];
     if (!jobDescription.trim()) {
       setError("Job description is required");
       return;
@@ -74,7 +85,8 @@ export function TailorPage() {
         storedResumeId: !useUpload ? selectedResumeId : undefined,
         file: useUpload ? uploadFile! : undefined,
         jobDescription,
-        provider,
+        provider: selected.provider,
+        model: selected.model,
         onProgress: setProgressMsg,
       });
 
@@ -175,17 +187,19 @@ export function TailorPage() {
         )}
       </div>
 
-      {/* Provider */}
+      {/* AI Model */}
       <div>
-        <label className="text-sm font-medium text-gray-700 block mb-1">AI Provider</label>
+        <label className="text-sm font-medium text-gray-700 block mb-1">AI Model</label>
         <select
-          value={provider}
-          onChange={(e) => setProvider(e.target.value)}
+          value={selectedModelId}
+          onChange={(e) => setSelectedModelId(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs"
         >
-          <option value="gemini">Gemini</option>
-          <option value="ollama">Ollama (Local)</option>
-          <option value="cloud">Cloud</option>
+          {MODEL_OPTIONS.map((opt) => (
+            <option key={opt.id} value={opt.id}>
+              {opt.label} — {opt.provider}
+            </option>
+          ))}
         </select>
       </div>
 

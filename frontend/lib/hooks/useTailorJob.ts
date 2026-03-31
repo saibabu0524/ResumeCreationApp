@@ -8,9 +8,9 @@ import { tailorResume } from "@/lib/api/resume";
 export function useTailorJob() {
     const [progressMessage, setProgressMessage] = useState<string | null>(null);
 
-    const mutation = useMutation<ArrayBuffer, Error, { file: File; jobDescription: string }>({
-        mutationFn: ({ file, jobDescription }) =>
-            tailorResume(file, jobDescription, setProgressMessage),
+    const mutation = useMutation<ArrayBuffer, Error, { file: File; jobDescription: string; provider: string; model?: string | null }>({
+        mutationFn: ({ file, jobDescription, provider, model }) =>
+            tailorResume(file, jobDescription, setProgressMessage, provider, model),
         onMutate: () => {
             setProgressMessage("Uploading resume\u2026");
         },

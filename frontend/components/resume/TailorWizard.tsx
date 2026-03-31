@@ -16,6 +16,16 @@ const STEPS = [
 
 const MAX_SIZE = 5 * 1024 * 1024;
 
+const MODEL_OPTIONS = [
+    { id: "gemini-flash", label: "Gemini 2.0 Flash", sub: "Fast · Recommended", provider: "gemini", model: "gemini-2.0-flash" },
+    { id: "gemini-pro", label: "Gemini 2.5 Pro", sub: "Powerful · Slower", provider: "gemini", model: "gemini-2.5-pro" },
+    { id: "kimi-8k", label: "Kimi 8K", sub: "Moonshot · 8K context", provider: "cloud", model: "moonshot-v1-8k" },
+    { id: "kimi-32k", label: "Kimi 32K", sub: "Moonshot · 32K context", provider: "cloud", model: "moonshot-v1-32k" },
+    { id: "kimi-128k", label: "Kimi 128K", sub: "Moonshot · 128K context", provider: "cloud", model: "moonshot-v1-128k" },
+    { id: "qwen-72b", label: "Qwen 2.5 72B", sub: "SiliconFlow · Powerful", provider: "qwen", model: "Qwen/Qwen2.5-72B-Instruct" },
+    { id: "ollama", label: "Ollama", sub: "Local / Custom", provider: "ollama", model: null },
+];
+
 export function TailorWizard() {
     const [step, setStep] = useState(1);
     const [file, setFile] = useState<File | null>(null);
@@ -23,8 +33,11 @@ export function TailorWizard() {
     const [jobDescription, setJobDescription] = useState("");
     const [jdError, setJdError] = useState<string | null>(null);
     const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+    const [selectedModelId, setSelectedModelId] = useState("gemini-flash");
 
     const { mutate, isPending, isError, error, progressMessage } = useTailorJob();
+
+    const selectedModel = MODEL_OPTIONS.find((m) => m.id === selectedModelId) ?? MODEL_OPTIONS[0];
 
     const onDrop = useCallback((accepted: File[], rejected: FileRejection[]) => {
         setFileError(null);
@@ -57,7 +70,7 @@ export function TailorWizard() {
         setStep(3);
         // Kick off tailoring
         mutate(
-            { file: file!, jobDescription },
+            { file: file!, jobDescription, provider: selectedModel.provider, model: selectedModel.model },
             {
                 onSuccess: (arrayBuffer) => {
                     const blob = new Blob([arrayBuffer], { type: "application/pdf" });
@@ -179,6 +192,42 @@ export function TailorWizard() {
                                 ? <p className="text-xs text-destructive">{jdError}</p>
                                 : <span className="text-xs text-muted-foreground">Minimum 50 characters</span>}
                             <span className="text-xs text-muted-foreground">{jobDescription.length} chars</span>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3 rounded-xl border border-border bg-muted/40 p-4">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-semibold text-foreground">AI Model</p>
+                                <p className="text-xs text-muted-foreground">Choose provider + model</p>
+                            </div>
+                            <span className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">{selectedModel.label}</span>
+                        </div>
+                        <div className="space-y-2">
+                            {MODEL_OPTIONS.map((opt) => (
+                                <label
+                                    key={opt.id}
+                                    className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2 text-sm transition-colors ${
+                                        selectedModelId === opt.id
+                                            ? "border-primary bg-primary/5"
+                                            : "border-border hover:border-primary/40"
+                                    }`}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="model"
+                                        value={opt.id}
+                                        checked={selectedModelId === opt.id}
+                                        onChange={() => setSelectedModelId(opt.id)}
+                                        className="mt-1 h-4 w-4 accent-primary"
+                                    />
+                                    <div className="flex flex-col gap-0.5">
+                                        <span className="font-semibold text-foreground">{opt.label}</span>
+                                        <span className="text-xs text-muted-foreground">{opt.sub}</span>
+                                        <span className="text-[11px] font-mono text-primary">{opt.provider.toUpperCase()} {opt.model ? `· ${opt.model}` : ""}</span>
+                                    </div>
+                                </label>
+                            ))}
                         </div>
                     </div>
                     <div className="flex justify-between">
