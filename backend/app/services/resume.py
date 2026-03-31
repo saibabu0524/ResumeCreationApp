@@ -15,6 +15,7 @@ Rules
 
 from __future__ import annotations
 
+import asyncio
 import io
 import logging
 import os
@@ -178,7 +179,10 @@ async def call_llm(provider: str, prompt: str) -> str:
         if not gemini_client:
             raise HTTPException(status_code=503, detail="GEMINI_API_KEY not configured.")
         try:
-            response = gemini_client.models.generate_content(
+            # Use to_thread so the synchronous Gemini SDK doesn't block the
+            # asyncio event loop during the (potentially 30-second) LLM call.
+            response = await asyncio.to_thread(
+                gemini_client.models.generate_content,
                 model=settings.GEMINI_MODEL,
                 contents=prompt,
                 config=types.GenerateContentConfig(temperature=0.2),
@@ -269,7 +273,8 @@ async def process_resume_stage(
         raw_response = await call_llm(provider, prompt)
         latex_code = extract_latex(raw_response)
 
-        success, log = compile_latex_to_pdf(latex_code, work_dir)
+        # Run blocking subprocess in a thread to avoid stalling the event loop.
+        success, log = await asyncio.to_thread(compile_latex_to_pdf, latex_code, work_dir)
         if success:
             return latex_code
 

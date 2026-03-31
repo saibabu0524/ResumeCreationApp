@@ -81,6 +81,11 @@ def create_app() -> FastAPI:
     # ── Routers ───────────────────────────────────────────────────────────────
     app.include_router(v1_router, prefix="/api/v1")
 
+    # ── Health check ──────────────────────────────────────────────────────────
+    @app.get("/health", tags=["health"])
+    async def health_check() -> dict:
+        return {"status": "ok", "version": app.version}
+
     return app
 
 

@@ -1,10 +1,11 @@
 [
     {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
+        "label": "runpy",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "__future__",
+        "importPath": "runpy",
+        "description": "runpy",
+        "detail": "runpy",
         "documentation": {}
     },
     {
@@ -429,6 +430,695 @@
         "description": "__future__",
         "isExtraImport": true,
         "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "os.path",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.path",
+        "description": "os.path",
+        "detail": "os.path",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "ArgumentParser",
+        "importPath": "argparse",
+        "description": "argparse",
+        "isExtraImport": true,
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "Container",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "Container",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncGenerator",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncGenerator",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TextIO",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "cast",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Annotated",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Generic",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncGenerator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "pdfminer",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pdfminer",
+        "description": "pdfminer",
+        "detail": "pdfminer",
+        "documentation": {}
+    },
+    {
+        "label": "PDFDocument",
+        "importPath": "pdfminer.pdfdocument",
+        "description": "pdfminer.pdfdocument",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfdocument",
+        "documentation": {}
+    },
+    {
+        "label": "PDFNoOutlines",
+        "importPath": "pdfminer.pdfdocument",
+        "description": "pdfminer.pdfdocument",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfdocument",
+        "documentation": {}
+    },
+    {
+        "label": "PDFXRefFallback",
+        "importPath": "pdfminer.pdfdocument",
+        "description": "pdfminer.pdfdocument",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfdocument",
+        "documentation": {}
+    },
+    {
+        "label": "PDFIOError",
+        "importPath": "pdfminer.pdfexceptions",
+        "description": "pdfminer.pdfexceptions",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfexceptions",
+        "documentation": {}
+    },
+    {
+        "label": "PDFObjectNotFound",
+        "importPath": "pdfminer.pdfexceptions",
+        "description": "pdfminer.pdfexceptions",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfexceptions",
+        "documentation": {}
+    },
+    {
+        "label": "PDFTypeError",
+        "importPath": "pdfminer.pdfexceptions",
+        "description": "pdfminer.pdfexceptions",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfexceptions",
+        "documentation": {}
+    },
+    {
+        "label": "PDFValueError",
+        "importPath": "pdfminer.pdfexceptions",
+        "description": "pdfminer.pdfexceptions",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfexceptions",
+        "documentation": {}
+    },
+    {
+        "label": "PDFValueError",
+        "importPath": "pdfminer.pdfexceptions",
+        "description": "pdfminer.pdfexceptions",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfexceptions",
+        "documentation": {}
+    },
+    {
+        "label": "PDFPage",
+        "importPath": "pdfminer.pdfpage",
+        "description": "pdfminer.pdfpage",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfpage",
+        "documentation": {}
+    },
+    {
+        "label": "PDFParser",
+        "importPath": "pdfminer.pdfparser",
+        "description": "pdfminer.pdfparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfparser",
+        "documentation": {}
+    },
+    {
+        "label": "PDFObjRef",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "PDFStream",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "resolve1",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "stream_value",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "LIT",
+        "importPath": "pdfminer.psparser",
+        "description": "pdfminer.psparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.psparser",
+        "documentation": {}
+    },
+    {
+        "label": "PSKeyword",
+        "importPath": "pdfminer.psparser",
+        "description": "pdfminer.psparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.psparser",
+        "documentation": {}
+    },
+    {
+        "label": "PSLiteral",
+        "importPath": "pdfminer.psparser",
+        "description": "pdfminer.psparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.psparser",
+        "documentation": {}
+    },
+    {
+        "label": "isnumber",
+        "importPath": "pdfminer.utils",
+        "description": "pdfminer.utils",
+        "isExtraImport": true,
+        "detail": "pdfminer.utils",
+        "documentation": {}
+    },
+    {
+        "label": "AnyIO",
+        "importPath": "pdfminer.utils",
+        "description": "pdfminer.utils",
+        "isExtraImport": true,
+        "detail": "pdfminer.utils",
+        "documentation": {}
+    },
+    {
+        "label": "pdfminer.high_level",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pdfminer.high_level",
+        "description": "pdfminer.high_level",
+        "detail": "pdfminer.high_level",
+        "documentation": {}
+    },
+    {
+        "label": "LAParams",
+        "importPath": "pdfminer.layout",
+        "description": "pdfminer.layout",
+        "isExtraImport": true,
+        "detail": "pdfminer.layout",
         "documentation": {}
     },
     {
@@ -561,6 +1251,30 @@
         "documentation": {}
     },
     {
+        "label": "UTC",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -650,11 +1364,43 @@
         "documentation": {}
     },
     {
+        "label": "delete",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "select",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
         "isExtraImport": true,
         "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "select",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "op",
+        "importPath": "alembic",
+        "description": "alembic",
+        "isExtraImport": true,
+        "detail": "alembic",
+        "documentation": {}
+    },
+    {
+        "label": "op",
+        "importPath": "alembic",
+        "description": "alembic",
+        "isExtraImport": true,
+        "detail": "alembic",
         "documentation": {}
     },
     {
@@ -803,6 +1549,22 @@
         "documentation": {}
     },
     {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
         "label": "Relationship",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
@@ -836,6 +1598,14 @@
     },
     {
         "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "select",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
         "isExtraImport": true,
@@ -989,6 +1759,294 @@
         "documentation": {}
     },
     {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -1085,14 +2143,6 @@
         "documentation": {}
     },
     {
-        "label": "BackgroundTasks",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "File",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -1102,6 +2152,54 @@
     },
     {
         "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -1317,6 +2415,22 @@
         "documentation": {}
     },
     {
+        "label": "DbSession",
+        "importPath": "app.api.deps",
+        "description": "app.api.deps",
+        "isExtraImport": true,
+        "detail": "app.api.deps",
+        "documentation": {}
+    },
+    {
+        "label": "CurrentUser",
+        "importPath": "app.api.deps",
+        "description": "app.api.deps",
+        "isExtraImport": true,
+        "detail": "app.api.deps",
+        "documentation": {}
+    },
+    {
         "label": "CurrentUser",
         "importPath": "app.api.deps",
         "description": "app.api.deps",
@@ -1381,6 +2495,54 @@
         "documentation": {}
     },
     {
+        "label": "limiter",
+        "importPath": "app.core.limiter",
+        "description": "app.core.limiter",
+        "isExtraImport": true,
+        "detail": "app.core.limiter",
+        "documentation": {}
+    },
+    {
+        "label": "get_stored_resume",
+        "importPath": "app.crud.stored_resume",
+        "description": "app.crud.stored_resume",
+        "isExtraImport": true,
+        "detail": "app.crud.stored_resume",
+        "documentation": {}
+    },
+    {
+        "label": "get_stored_resume",
+        "importPath": "app.crud.stored_resume",
+        "description": "app.crud.stored_resume",
+        "isExtraImport": true,
+        "detail": "app.crud.stored_resume",
+        "documentation": {}
+    },
+    {
+        "label": "create_stored_resume",
+        "importPath": "app.crud.stored_resume",
+        "description": "app.crud.stored_resume",
+        "isExtraImport": true,
+        "detail": "app.crud.stored_resume",
+        "documentation": {}
+    },
+    {
+        "label": "delete_stored_resume",
+        "importPath": "app.crud.stored_resume",
+        "description": "app.crud.stored_resume",
+        "isExtraImport": true,
+        "detail": "app.crud.stored_resume",
+        "documentation": {}
+    },
+    {
+        "label": "get_user_resumes",
+        "importPath": "app.crud.stored_resume",
+        "description": "app.crud.stored_resume",
+        "isExtraImport": true,
+        "detail": "app.crud.stored_resume",
+        "documentation": {}
+    },
+    {
         "label": "ApiResponse",
         "importPath": "app.schemas.common",
         "description": "app.schemas.common",
@@ -1406,6 +2568,22 @@
     },
     {
         "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "ApiResponse",
+        "importPath": "app.schemas.common",
+        "description": "app.schemas.common",
+        "isExtraImport": true,
+        "detail": "app.schemas.common",
+        "documentation": {}
+    },
+    {
+        "label": "MessageResponse",
         "importPath": "app.schemas.common",
         "description": "app.schemas.common",
         "isExtraImport": true,
@@ -1685,275 +2863,6 @@
         "documentation": {}
     },
     {
-        "label": "io",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "io",
-        "description": "io",
-        "detail": "io",
-        "documentation": {}
-    },
-    {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "shutil",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "shutil",
-        "description": "shutil",
-        "detail": "shutil",
-        "documentation": {}
-    },
-    {
-        "label": "tempfile",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "tempfile",
-        "description": "tempfile",
-        "detail": "tempfile",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
         "label": "StreamingResponse",
         "importPath": "fastapi.responses",
         "description": "fastapi.responses",
@@ -1967,78 +2876,6 @@
         "description": "fastapi.responses",
         "isExtraImport": true,
         "detail": "fastapi.responses",
-        "documentation": {}
-    },
-    {
-        "label": "tailor_resume_pipeline",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "call_llm",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "extract_text_from_pdf",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "call_llm",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "compile_latex_to_pdf",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "extract_latex",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "extract_text_from_pdf",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "process_resume_stage",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
-        "documentation": {}
-    },
-    {
-        "label": "tailor_resume_pipeline",
-        "importPath": "app.services.resume",
-        "description": "app.services.resume",
-        "isExtraImport": true,
-        "detail": "app.services.resume",
         "documentation": {}
     },
     {
@@ -2056,6 +2893,22 @@
         "description": "app.models.resume",
         "isExtraImport": true,
         "detail": "app.models.resume",
+        "documentation": {}
+    },
+    {
+        "label": "TailoredResume",
+        "importPath": "app.models.resume",
+        "description": "app.models.resume",
+        "isExtraImport": true,
+        "detail": "app.models.resume",
+        "documentation": {}
+    },
+    {
+        "label": "StoredResumePublic",
+        "importPath": "app.schemas.stored_resume",
+        "description": "app.schemas.stored_resume",
+        "isExtraImport": true,
+        "detail": "app.schemas.stored_resume",
         "documentation": {}
     },
     {
@@ -2083,6 +2936,14 @@
         "documentation": {}
     },
     {
+        "label": "stored_resumes",
+        "importPath": "app.api.v1.routes",
+        "description": "app.api.v1.routes",
+        "isExtraImport": true,
+        "detail": "app.api.v1.routes",
+        "documentation": {}
+    },
+    {
         "label": "uploads",
         "importPath": "app.api.v1.routes",
         "description": "app.api.v1.routes",
@@ -2096,254 +2957,6 @@
         "description": "app.api.v1.routes",
         "isExtraImport": true,
         "detail": "app.api.v1.routes",
-        "documentation": {}
-    },
-    {
-        "label": "Annotated",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Literal",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TYPE_CHECKING",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TYPE_CHECKING",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Generic",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "TypeVar",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "AsyncGenerator",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
         "documentation": {}
     },
     {
@@ -2411,6 +3024,14 @@
         "documentation": {}
     },
     {
+        "label": "AsyncSession",
+        "importPath": "sqlmodel.ext.asyncio.session",
+        "description": "sqlmodel.ext.asyncio.session",
+        "isExtraImport": true,
+        "detail": "sqlmodel.ext.asyncio.session",
+        "documentation": {}
+    },
+    {
         "label": "get_db",
         "importPath": "app.db.session",
         "description": "app.db.session",
@@ -2420,6 +3041,14 @@
     },
     {
         "label": "engine",
+        "importPath": "app.db.session",
+        "description": "app.db.session",
+        "isExtraImport": true,
+        "detail": "app.db.session",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncSessionLocal",
         "importPath": "app.db.session",
         "description": "app.db.session",
         "isExtraImport": true,
@@ -2515,6 +3144,14 @@
         "documentation": {}
     },
     {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "BaseSettings",
         "importPath": "pydantic_settings",
         "description": "pydantic_settings",
@@ -2582,19 +3219,20 @@
         "documentation": {}
     },
     {
-        "label": "AsyncGenerator",
-        "importPath": "collections.abc",
-        "description": "collections.abc",
+        "label": "app.models.stored_resume",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "collections.abc",
+        "importPath": "app.models.stored_resume",
+        "description": "app.models.stored_resume",
+        "detail": "app.models.stored_resume",
         "documentation": {}
     },
     {
-        "label": "AsyncGenerator",
-        "importPath": "collections.abc",
-        "description": "collections.abc",
+        "label": "StoredResume",
+        "importPath": "app.models.stored_resume",
+        "description": "app.models.stored_resume",
         "isExtraImport": true,
-        "detail": "collections.abc",
+        "detail": "app.models.stored_resume",
         "documentation": {}
     },
     {
@@ -2607,12 +3245,84 @@
         "documentation": {}
     },
     {
-        "label": "logging",
+        "label": "call_llm",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "extract_text_from_pdf",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "tailor_resume_pipeline",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "call_llm",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "compile_latex_to_pdf",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "extract_latex",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "extract_text_from_pdf",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "process_resume_stage",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "tailor_resume_pipeline",
+        "importPath": "app.services.resume",
+        "description": "app.services.resume",
+        "isExtraImport": true,
+        "detail": "app.services.resume",
+        "documentation": {}
+    },
+    {
+        "label": "io",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "logging",
-        "description": "logging",
-        "detail": "logging",
+        "importPath": "io",
+        "description": "io",
+        "detail": "io",
         "documentation": {}
     },
     {
@@ -2635,6 +3345,22 @@
     },
     {
         "label": "ASGITransport",
+        "importPath": "httpx",
+        "description": "httpx",
+        "isExtraImport": true,
+        "detail": "httpx",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncClient",
+        "importPath": "httpx",
+        "description": "httpx",
+        "isExtraImport": true,
+        "detail": "httpx",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncClient",
         "importPath": "httpx",
         "description": "httpx",
         "isExtraImport": true,
@@ -2740,6 +3466,24 @@
         "documentation": {}
     },
     {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
         "label": "arq",
         "kind": 6,
         "isExtraImport": true,
@@ -2781,6 +3525,22 @@
         "documentation": {}
     },
     {
+        "label": "cleanup_expired_tokens",
+        "importPath": "app.tasks.cleanup",
+        "description": "app.tasks.cleanup",
+        "isExtraImport": true,
+        "detail": "app.tasks.cleanup",
+        "documentation": {}
+    },
+    {
+        "label": "cleanup_orphaned_uploads",
+        "importPath": "app.tasks.cleanup",
+        "description": "app.tasks.cleanup",
+        "isExtraImport": true,
+        "detail": "app.tasks.cleanup",
+        "documentation": {}
+    },
+    {
         "label": "send_password_reset_email",
         "importPath": "app.tasks.email",
         "description": "app.tasks.email",
@@ -2802,6 +3562,14 @@
         "description": "app.tasks.email",
         "isExtraImport": true,
         "detail": "app.tasks.email",
+        "documentation": {}
+    },
+    {
+        "label": "process_resume_tailor",
+        "importPath": "app.tasks.resume",
+        "description": "app.tasks.resume",
+        "isExtraImport": true,
+        "detail": "app.tasks.resume",
         "documentation": {}
     },
     {
@@ -2903,14 +3671,6 @@
         "documentation": {}
     },
     {
-        "label": "MagicMock",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
         "label": "patch",
         "importPath": "unittest.mock",
         "description": "unittest.mock",
@@ -2919,31 +3679,7 @@
         "documentation": {}
     },
     {
-        "label": "MagicMock",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "patch",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "patch",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "MagicMock",
+        "label": "AsyncMock",
         "importPath": "unittest.mock",
         "description": "unittest.mock",
         "isExtraImport": true,
@@ -2967,23 +3703,7 @@
         "documentation": {}
     },
     {
-        "label": "MagicMock",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "patch",
-        "importPath": "unittest.mock",
-        "description": "unittest.mock",
-        "isExtraImport": true,
-        "detail": "unittest.mock",
-        "documentation": {}
-    },
-    {
-        "label": "MagicMock",
+        "label": "AsyncMock",
         "importPath": "unittest.mock",
         "description": "unittest.mock",
         "isExtraImport": true,
@@ -3079,11 +3799,107 @@
         "documentation": {}
     },
     {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
         "label": "patch",
         "importPath": "unittest.mock",
         "description": "unittest.mock",
         "isExtraImport": true,
         "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "register_and_login",
+        "importPath": "tests.conftest",
+        "description": "tests.conftest",
+        "isExtraImport": true,
+        "detail": "tests.conftest",
+        "documentation": {}
+    },
+    {
+        "label": "register_and_login",
+        "importPath": "tests.conftest",
+        "description": "tests.conftest",
+        "isExtraImport": true,
+        "detail": "tests.conftest",
         "documentation": {}
     },
     {
@@ -3747,24 +4563,6 @@
         "documentation": {}
     },
     {
-        "label": "argparse",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "argparse",
-        "description": "argparse",
-        "detail": "argparse",
-        "documentation": {}
-    },
-    {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
-        "documentation": {}
-    },
-    {
         "label": "ThreadPoolExecutor",
         "importPath": "concurrent.futures",
         "description": "concurrent.futures",
@@ -3922,6 +4720,258 @@
         "documentation": {}
     },
     {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"../lib/python3.14/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "escape",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def escape(s: str | bytes) -> str:\n    us = str(s, \"latin-1\") if isinstance(s, bytes) else s\n    return ESC_PAT.sub(lambda m: f\"&#{ord(m.group(0))};\", us)\ndef dumpxml(out: TextIO, obj: object, codec: str | None = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return\n    if isinstance(obj, dict):\n        out.write(f'<dict size=\"{len(obj)}\">\\n')\n        for k, v in obj.items():",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumpxml",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def dumpxml(out: TextIO, obj: object, codec: str | None = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return\n    if isinstance(obj, dict):\n        out.write(f'<dict size=\"{len(obj)}\">\\n')\n        for k, v in obj.items():\n            out.write(f\"<key>{k}</key>\\n\")\n            out.write(\"<value>\")\n            dumpxml(out, v)",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumptrailers",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def dumptrailers(\n    out: TextIO,\n    doc: PDFDocument,\n    show_fallback_xref: bool = False,\n) -> None:\n    for xref in doc.xrefs:\n        if not isinstance(xref, PDFXRefFallback) or show_fallback_xref:\n            out.write(\"<trailer>\\n\")\n            dumpxml(out, xref.get_trailer())\n            out.write(\"\\n</trailer>\\n\\n\")",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumpallobjs",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def dumpallobjs(\n    out: TextIO,\n    doc: PDFDocument,\n    codec: str | None = None,\n    show_fallback_xref: bool = False,\n) -> None:\n    visited = set()\n    out.write(\"<pdf>\")\n    for xref in doc.xrefs:\n        for objid in xref.get_objids():",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumpoutline",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def dumpoutline(\n    outfp: TextIO,\n    fname: str,\n    objids: Any,\n    pagenos: Container[int],\n    password: str = \"\",\n    dumpall: bool = False,\n    codec: str | None = None,\n    extractdir: str | None = None,\n) -> None:",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "extractembedded",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                f\"unable to process PDF: reference for {filename!r} is not a PDFStream\"\n            )\n            raise PDFValueError(error_msg)",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumppdf",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def dumppdf(\n    outfp: TextIO,\n    fname: str,\n    objids: Iterable[int],\n    pagenos: Container[int],\n    password: str = \"\",\n    dumpall: bool = False,\n    codec: str | None = None,\n    extractdir: str | None = None,\n    show_fallback_xref: bool = False,",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "create_parser",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def create_parser() -> ArgumentParser:\n    parser = ArgumentParser(description=__doc__, add_help=True)\n    parser.add_argument(\n        \"files\",\n        type=str,\n        default=None,\n        nargs=\"+\",\n        help=\"One or more paths to PDF files.\",\n    )\n    parser.add_argument(",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "def main(argv: list[str] | None = None) -> None:\n    parser = create_parser()\n    args = parser.parse_args(args=argv)\n    if args.debug:\n        logging.getLogger().setLevel(logging.DEBUG)\n    objids = [int(x) for x in args.objects.split(\",\")] if args.objects else []\n    if args.page_numbers:\n        pagenos = {x - 1 for x in args.page_numbers}\n    elif args.pagenos:\n        pagenos = {int(x) - 1 for x in args.pagenos.split(\",\")}",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nESC_PAT = re.compile(r'[\\000-\\037&<>()\"\\042\\047\\134\\177-\\377]')\ndef escape(s: str | bytes) -> str:\n    us = str(s, \"latin-1\") if isinstance(s, bytes) else s\n    return ESC_PAT.sub(lambda m: f\"&#{ord(m.group(0))};\", us)\ndef dumpxml(out: TextIO, obj: object, codec: str | None = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return\n    if isinstance(obj, dict):",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "ESC_PAT",
+        "kind": 5,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "ESC_PAT = re.compile(r'[\\000-\\037&<>()\"\\042\\047\\134\\177-\\377]')\ndef escape(s: str | bytes) -> str:\n    us = str(s, \"latin-1\") if isinstance(s, bytes) else s\n    return ESC_PAT.sub(lambda m: f\"&#{ord(m.group(0))};\", us)\ndef dumpxml(out: TextIO, obj: object, codec: str | None = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return\n    if isinstance(obj, dict):\n        out.write(f'<dict size=\"{len(obj)}\">\\n')",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "LITERAL_FILESPEC",
+        "kind": 5,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "LITERAL_FILESPEC = LIT(\"Filespec\")\nLITERAL_EMBEDDEDFILE = LIT(\"EmbeddedFile\")\ndef extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                f\"unable to process PDF: reference for {filename!r} is not a PDFStream\"",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "LITERAL_EMBEDDEDFILE",
+        "kind": 5,
+        "importPath": ".venv.bin.dumppdf",
+        "description": ".venv.bin.dumppdf",
+        "peekOfCode": "LITERAL_EMBEDDEDFILE = LIT(\"EmbeddedFile\")\ndef extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                f\"unable to process PDF: reference for {filename!r} is not a PDFStream\"\n            )",
+        "detail": ".venv.bin.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "float_or_disabled",
+        "kind": 2,
+        "importPath": ".venv.bin.pdf2txt",
+        "description": ".venv.bin.pdf2txt",
+        "peekOfCode": "def float_or_disabled(x: str) -> float | None:\n    if x.lower().strip() == \"disabled\":\n        return None\n    try:\n        return float(x)\n    except ValueError as err:\n        raise argparse.ArgumentTypeError(f\"invalid float value: {x}\") from err\ndef extract_text(\n    files: Iterable[str] = [],\n    outfile: str = \"-\",",
+        "detail": ".venv.bin.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "extract_text",
+        "kind": 2,
+        "importPath": ".venv.bin.pdf2txt",
+        "description": ".venv.bin.pdf2txt",
+        "peekOfCode": "def extract_text(\n    files: Iterable[str] = [],\n    outfile: str = \"-\",\n    laparams: LAParams | None = None,\n    output_type: str = \"text\",\n    codec: str = \"utf-8\",\n    strip_control: bool = False,\n    maxpages: int = 0,\n    page_numbers: Container[int] | None = None,\n    password: str = \"\",",
+        "detail": ".venv.bin.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "create_parser",
+        "kind": 2,
+        "importPath": ".venv.bin.pdf2txt",
+        "description": ".venv.bin.pdf2txt",
+        "peekOfCode": "def create_parser() -> argparse.ArgumentParser:\n    parser = argparse.ArgumentParser(description=__doc__, add_help=True)\n    parser.add_argument(\n        \"files\",\n        type=str,\n        default=None,\n        nargs=\"+\",\n        help=\"One or more paths to PDF files.\",\n    )\n    parser.add_argument(",
+        "detail": ".venv.bin.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "parse_args",
+        "kind": 2,
+        "importPath": ".venv.bin.pdf2txt",
+        "description": ".venv.bin.pdf2txt",
+        "peekOfCode": "def parse_args(args: list[str] | None) -> argparse.Namespace:\n    parsed_args = create_parser().parse_args(args=args)\n    # Propagate parsed layout parameters to LAParams object\n    if parsed_args.no_laparams:\n        parsed_args.laparams = None\n    else:\n        parsed_args.laparams = LAParams(\n            line_overlap=parsed_args.line_overlap,\n            char_margin=parsed_args.char_margin,\n            line_margin=parsed_args.line_margin,",
+        "detail": ".venv.bin.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".venv.bin.pdf2txt",
+        "description": ".venv.bin.pdf2txt",
+        "peekOfCode": "def main(args: list[str] | None = None) -> int:\n    parsed_args = parse_args(args)\n    extract_text(**vars(parsed_args))\n    return 0\nif __name__ == \"__main__\":\n    sys.exit(main())",
+        "detail": ".venv.bin.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "OUTPUT_TYPES",
+        "kind": 5,
+        "importPath": ".venv.bin.pdf2txt",
+        "description": ".venv.bin.pdf2txt",
+        "peekOfCode": "OUTPUT_TYPES = ((\".htm\", \"html\"), (\".html\", \"html\"), (\".xml\", \"xml\"), (\".tag\", \"tag\"))\ndef float_or_disabled(x: str) -> float | None:\n    if x.lower().strip() == \"disabled\":\n        return None\n    try:\n        return float(x)\n    except ValueError as err:\n        raise argparse.ArgumentTypeError(f\"invalid float value: {x}\") from err\ndef extract_text(\n    files: Iterable[str] = [],",
+        "detail": ".venv.bin.pdf2txt",
+        "documentation": {}
+    },
+    {
         "label": "upgrade",
         "kind": 2,
         "importPath": "backend.alembic.versions.0001_initial",
@@ -3937,6 +4987,42 @@
         "description": "backend.alembic.versions.0001_initial",
         "peekOfCode": "def downgrade() -> None:\n    op.drop_table(\"refresh_tokens\")\n    op.drop_table(\"users\")",
         "detail": "backend.alembic.versions.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "upgrade",
+        "kind": 2,
+        "importPath": "backend.alembic.versions.0002_stored_resumes",
+        "description": "backend.alembic.versions.0002_stored_resumes",
+        "peekOfCode": "def upgrade() -> None:\n    op.create_table(\n        \"stored_resumes\",\n        sa.Column(\"id\", sa.Uuid(), primary_key=True, nullable=False),\n        sa.Column(\"user_id\", sa.Uuid(), nullable=False, index=True),\n        sa.Column(\"original_filename\", sa.String(), nullable=False),\n        sa.Column(\"stored_filename\", sa.String(), nullable=False),\n        sa.Column(\"file_size_bytes\", sa.Integer(), nullable=False, server_default=\"0\"),\n        sa.Column(\"created_at\", sa.DateTime(timezone=True), nullable=False),\n    )",
+        "detail": "backend.alembic.versions.0002_stored_resumes",
+        "documentation": {}
+    },
+    {
+        "label": "downgrade",
+        "kind": 2,
+        "importPath": "backend.alembic.versions.0002_stored_resumes",
+        "description": "backend.alembic.versions.0002_stored_resumes",
+        "peekOfCode": "def downgrade() -> None:\n    op.drop_table(\"stored_resumes\")",
+        "detail": "backend.alembic.versions.0002_stored_resumes",
+        "documentation": {}
+    },
+    {
+        "label": "upgrade",
+        "kind": 2,
+        "importPath": "backend.alembic.versions.0003_resume_job_status",
+        "description": "backend.alembic.versions.0003_resume_job_status",
+        "peekOfCode": "def upgrade() -> None:\n    # Use batch mode for SQLite compatibility (SQLite doesn't support ALTER COLUMN directly).\n    with op.batch_alter_table(\"tailored_resumes\") as batch_op:\n        # Track background job lifecycle.\n        batch_op.add_column(\n            sa.Column(\"status\", sa.String(), nullable=False, server_default=\"queued\")\n        )\n        batch_op.add_column(\n            sa.Column(\"error_message\", sa.Text(), nullable=True)\n        )",
+        "detail": "backend.alembic.versions.0003_resume_job_status",
+        "documentation": {}
+    },
+    {
+        "label": "downgrade",
+        "kind": 2,
+        "importPath": "backend.alembic.versions.0003_resume_job_status",
+        "description": "backend.alembic.versions.0003_resume_job_status",
+        "peekOfCode": "def downgrade() -> None:\n    with op.batch_alter_table(\"tailored_resumes\") as batch_op:\n        batch_op.drop_column(\"error_message\")\n        batch_op.drop_column(\"status\")\n        batch_op.alter_column(\n            \"stored_filename\",\n            existing_type=sa.String(),\n            nullable=False,\n        )",
+        "detail": "backend.alembic.versions.0003_resume_job_status",
         "documentation": {}
     },
     {
@@ -4016,8 +5102,17 @@
         "kind": 5,
         "importPath": "backend.app.api.v1.routes.resume",
         "description": "backend.app.api.v1.routes.resume",
-        "peekOfCode": "router = APIRouter(prefix=\"/resume\", tags=[\"resume\"])\ndef _cleanup_temp_dir(dir_path: str) -> None:\n    \"\"\"Remove a temporary directory; silently ignores errors.\"\"\"\n    try:\n        shutil.rmtree(dir_path)\n    except Exception:  # noqa: BLE001\n        pass\n@router.post(\n    \"/tailor\",\n    summary=\"Tailor a PDF resume to a job description\",",
+        "peekOfCode": "router = APIRouter(prefix=\"/resume\", tags=[\"resume\"])\n# ── POST /resume/tailor ───────────────────────────────────────────────────────\n@router.post(\n    \"/tailor\",\n    summary=\"Submit a resume-tailoring job\",\n    status_code=status.HTTP_202_ACCEPTED,\n)\n@limiter.limit(\"10/minute\")\nasync def tailor_resume(\n    request: Request,",
         "detail": "backend.app.api.v1.routes.resume",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "backend.app.api.v1.routes.stored_resumes",
+        "description": "backend.app.api.v1.routes.stored_resumes",
+        "peekOfCode": "router = APIRouter(prefix=\"/resumes\", tags=[\"resumes\"])\n@router.post(\n    \"/upload\",\n    response_model=ApiResponse[StoredResumePublic],\n    status_code=status.HTTP_201_CREATED,\n    summary=\"Upload a PDF resume to the library\",\n)\n@limiter.limit(\"20/minute\")\nasync def upload_resume(\n    request: Request,",
+        "detail": "backend.app.api.v1.routes.stored_resumes",
         "documentation": {}
     },
     {
@@ -4043,7 +5138,7 @@
         "kind": 5,
         "importPath": "backend.app.api.v1.router",
         "description": "backend.app.api.v1.router",
-        "peekOfCode": "v1_router = APIRouter()\nv1_router.include_router(auth.router)\nv1_router.include_router(users.router)\nv1_router.include_router(uploads.router)\nv1_router.include_router(resume.router)\nv1_router.include_router(ats.router)",
+        "peekOfCode": "v1_router = APIRouter()\nv1_router.include_router(auth.router)\nv1_router.include_router(users.router)\nv1_router.include_router(uploads.router)\nv1_router.include_router(resume.router)\nv1_router.include_router(ats.router)\nv1_router.include_router(stored_resumes.router)",
         "detail": "backend.app.api.v1.router",
         "documentation": {}
     },
@@ -4223,7 +5318,7 @@
         "kind": 6,
         "importPath": "backend.app.models.resume",
         "description": "backend.app.models.resume",
-        "peekOfCode": "class TailoredResumeBase(SQLModel):\n    user_id: uuid.UUID = Field(index=True)\n    job_description: str = Field(max_length=10000)\n    provider: str\n    original_filename: str\n    stored_filename: str\n    uploaded_stored_filename: str | None = None\nclass TailoredResume(TailoredResumeBase, table=True):\n    __tablename__ = \"tailored_resumes\"\n    id: uuid.UUID = Field(",
+        "peekOfCode": "class TailoredResumeBase(SQLModel):\n    user_id: uuid.UUID = Field(index=True)\n    job_description: str = Field(max_length=10000)\n    provider: str\n    original_filename: str\n    # Set to None until the background job completes successfully.\n    stored_filename: str | None = Field(default=None)\n    uploaded_stored_filename: str | None = None\nclass TailoredResume(TailoredResumeBase, table=True):\n    __tablename__ = \"tailored_resumes\"",
         "detail": "backend.app.models.resume",
         "documentation": {}
     },
@@ -4232,8 +5327,26 @@
         "kind": 6,
         "importPath": "backend.app.models.resume",
         "description": "backend.app.models.resume",
-        "peekOfCode": "class TailoredResume(TailoredResumeBase, table=True):\n    __tablename__ = \"tailored_resumes\"\n    id: uuid.UUID = Field(\n        default_factory=uuid.uuid4,\n        primary_key=True,\n        index=True,\n        nullable=False,\n    )\n    created_at: datetime = Field(default_factory=_utcnow, nullable=False)",
+        "peekOfCode": "class TailoredResume(TailoredResumeBase, table=True):\n    __tablename__ = \"tailored_resumes\"\n    id: uuid.UUID = Field(\n        default_factory=uuid.uuid4,\n        primary_key=True,\n        index=True,\n        nullable=False,\n    )\n    # Job lifecycle tracking — updated by the ARQ worker task.\n    status: str = Field(default=\"queued\")",
         "detail": "backend.app.models.resume",
+        "documentation": {}
+    },
+    {
+        "label": "ResumeJobStatus",
+        "kind": 5,
+        "importPath": "backend.app.models.resume",
+        "description": "backend.app.models.resume",
+        "peekOfCode": "ResumeJobStatus = Literal[\"queued\", \"processing\", \"completed\", \"failed\"]\ndef _utcnow() -> datetime:\n    return datetime.now(UTC)\nclass TailoredResumeBase(SQLModel):\n    user_id: uuid.UUID = Field(index=True)\n    job_description: str = Field(max_length=10000)\n    provider: str\n    original_filename: str\n    # Set to None until the background job completes successfully.\n    stored_filename: str | None = Field(default=None)",
+        "detail": "backend.app.models.resume",
+        "documentation": {}
+    },
+    {
+        "label": "StoredResume",
+        "kind": 6,
+        "importPath": "backend.app.models.stored_resume",
+        "description": "backend.app.models.stored_resume",
+        "peekOfCode": "class StoredResume(SQLModel, table=True):\n    __tablename__ = \"stored_resumes\"\n    id: uuid.UUID = Field(\n        default_factory=uuid.uuid4,\n        primary_key=True,\n        index=True,\n        nullable=False,\n    )\n    user_id: uuid.UUID = Field(index=True)\n    original_filename: str",
+        "detail": "backend.app.models.stored_resume",
         "documentation": {}
     },
     {
@@ -4381,6 +5494,15 @@
         "documentation": {}
     },
     {
+        "label": "StoredResumePublic",
+        "kind": 6,
+        "importPath": "backend.app.schemas.stored_resume",
+        "description": "backend.app.schemas.stored_resume",
+        "peekOfCode": "class StoredResumePublic(BaseModel):\n    \"\"\"Safe response schema for stored resumes.\"\"\"\n    id: uuid.UUID\n    original_filename: str\n    file_size_bytes: int\n    created_at: datetime\n    model_config = {\"from_attributes\": True}",
+        "detail": "backend.app.schemas.stored_resume",
+        "documentation": {}
+    },
+    {
         "label": "logger",
         "kind": 5,
         "importPath": "backend.app.services.ats",
@@ -4453,11 +5575,20 @@
         "documentation": {}
     },
     {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "backend.app.tasks.resume",
+        "description": "backend.app.tasks.resume",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nasync def process_resume_tailor(\n    ctx: dict,\n    *,\n    tailored_resume_id: str,\n    pdf_input_path: str,\n    job_description: str,\n    provider: str,\n) -> dict:\n    \"\"\"Run the full resume tailoring pipeline as a background ARQ task.",
+        "detail": "backend.app.tasks.resume",
+        "documentation": {}
+    },
+    {
         "label": "WorkerSettings",
         "kind": 6,
         "importPath": "backend.app.workers.arq_worker",
         "description": "backend.app.workers.arq_worker",
-        "peekOfCode": "class WorkerSettings:\n    \"\"\"ARQ WorkerSettings class — discovered by the ``arq`` CLI.\"\"\"\n    # ── Registered task functions ─────────────────────────────────────────────\n    functions = [\n        send_welcome_email,\n        send_password_reset_email,\n        cleanup_expired_tokens,\n        cleanup_orphaned_uploads,\n    ]\n    # ── Scheduled (cron) tasks ────────────────────────────────────────────────",
+        "peekOfCode": "class WorkerSettings:\n    \"\"\"ARQ WorkerSettings class — discovered by the ``arq`` CLI.\"\"\"\n    # ── Registered task functions ─────────────────────────────────────────────\n    functions = [\n        send_welcome_email,\n        send_password_reset_email,\n        cleanup_expired_tokens,\n        cleanup_orphaned_uploads,\n        process_resume_tailor,\n    ]",
         "detail": "backend.app.workers.arq_worker",
         "documentation": {}
     },
@@ -4466,7 +5597,7 @@
         "kind": 5,
         "importPath": "backend.app.workers.arq_worker",
         "description": "backend.app.workers.arq_worker",
-        "peekOfCode": "_settings = get_settings()\nclass WorkerSettings:\n    \"\"\"ARQ WorkerSettings class — discovered by the ``arq`` CLI.\"\"\"\n    # ── Registered task functions ─────────────────────────────────────────────\n    functions = [\n        send_welcome_email,\n        send_password_reset_email,\n        cleanup_expired_tokens,\n        cleanup_orphaned_uploads,\n    ]",
+        "peekOfCode": "_settings = get_settings()\nclass WorkerSettings:\n    \"\"\"ARQ WorkerSettings class — discovered by the ``arq`` CLI.\"\"\"\n    # ── Registered task functions ─────────────────────────────────────────────\n    functions = [\n        send_welcome_email,\n        send_password_reset_email,\n        cleanup_expired_tokens,\n        cleanup_orphaned_uploads,\n        process_resume_tailor,",
         "detail": "backend.app.workers.arq_worker",
         "documentation": {}
     },
@@ -4536,6 +5667,33 @@
     {
         "label": "pytestmark",
         "kind": 5,
+        "importPath": "backend.tests.test_ats",
+        "description": "backend.tests.test_ats",
+        "peekOfCode": "pytestmark = pytest.mark.asyncio\n_FAKE_PDF = b\"%PDF-1.4\\n1 0 obj\\n<< /Type /Catalog >>\\nendobj\\nstartxref\\n0\\n%%EOF\"\n_FAKE_ATS_RESULT = {\n    \"overall_score\": 78,\n    \"score_label\": \"Good\",\n    \"keywords_present\": [\"Python\", \"FastAPI\", \"Docker\"],\n    \"keywords_missing\": [\"Kubernetes\", \"AWS\"],\n    \"section_scores\": {\n        \"skills_match\": 80,\n        \"experience_relevance\": 75,",
+        "detail": "backend.tests.test_ats",
+        "documentation": {}
+    },
+    {
+        "label": "_FAKE_PDF",
+        "kind": 5,
+        "importPath": "backend.tests.test_ats",
+        "description": "backend.tests.test_ats",
+        "peekOfCode": "_FAKE_PDF = b\"%PDF-1.4\\n1 0 obj\\n<< /Type /Catalog >>\\nendobj\\nstartxref\\n0\\n%%EOF\"\n_FAKE_ATS_RESULT = {\n    \"overall_score\": 78,\n    \"score_label\": \"Good\",\n    \"keywords_present\": [\"Python\", \"FastAPI\", \"Docker\"],\n    \"keywords_missing\": [\"Kubernetes\", \"AWS\"],\n    \"section_scores\": {\n        \"skills_match\": 80,\n        \"experience_relevance\": 75,\n        \"education_match\": 70,",
+        "detail": "backend.tests.test_ats",
+        "documentation": {}
+    },
+    {
+        "label": "_FAKE_ATS_RESULT",
+        "kind": 5,
+        "importPath": "backend.tests.test_ats",
+        "description": "backend.tests.test_ats",
+        "peekOfCode": "_FAKE_ATS_RESULT = {\n    \"overall_score\": 78,\n    \"score_label\": \"Good\",\n    \"keywords_present\": [\"Python\", \"FastAPI\", \"Docker\"],\n    \"keywords_missing\": [\"Kubernetes\", \"AWS\"],\n    \"section_scores\": {\n        \"skills_match\": 80,\n        \"experience_relevance\": 75,\n        \"education_match\": 70,\n        \"formatting\": 85,",
+        "detail": "backend.tests.test_ats",
+        "documentation": {}
+    },
+    {
+        "label": "pytestmark",
+        "kind": 5,
         "importPath": "backend.tests.test_auth",
         "description": "backend.tests.test_auth",
         "peekOfCode": "pytestmark = pytest.mark.asyncio\nasync def test_register_success(client: AsyncClient) -> None:\n    resp = await client.post(\n        \"/api/v1/auth/register\",\n        json={\"email\": \"alice@example.com\", \"password\": \"securepass1\"},\n    )\n    assert resp.status_code == 201\n    body = resp.json()\n    assert body[\"success\"] is True\n    assert body[\"data\"][\"email\"] == \"alice@example.com\"",
@@ -4572,9 +5730,27 @@
     {
         "label": "pytestmark",
         "kind": 5,
+        "importPath": "backend.tests.test_stored_resumes",
+        "description": "backend.tests.test_stored_resumes",
+        "peekOfCode": "pytestmark = pytest.mark.asyncio\n_FAKE_PDF = b\"%PDF-1.4\\n1 0 obj\\n<< /Type /Catalog >>\\nendobj\\nstartxref\\n0\\n%%EOF\"\ndef _auth_headers(tokens: dict) -> dict:\n    return {\"Authorization\": f\"Bearer {tokens['access_token']}\"}\nasync def test_upload_resume(client: AsyncClient) -> None:\n    \"\"\"Upload a valid PDF → 201 with resume metadata.\"\"\"\n    tokens = await register_and_login(client, \"stored1@test.com\", \"securepass1\")\n    resp = await client.post(\n        \"/api/v1/resumes/upload\",\n        headers=_auth_headers(tokens),",
+        "detail": "backend.tests.test_stored_resumes",
+        "documentation": {}
+    },
+    {
+        "label": "_FAKE_PDF",
+        "kind": 5,
+        "importPath": "backend.tests.test_stored_resumes",
+        "description": "backend.tests.test_stored_resumes",
+        "peekOfCode": "_FAKE_PDF = b\"%PDF-1.4\\n1 0 obj\\n<< /Type /Catalog >>\\nendobj\\nstartxref\\n0\\n%%EOF\"\ndef _auth_headers(tokens: dict) -> dict:\n    return {\"Authorization\": f\"Bearer {tokens['access_token']}\"}\nasync def test_upload_resume(client: AsyncClient) -> None:\n    \"\"\"Upload a valid PDF → 201 with resume metadata.\"\"\"\n    tokens = await register_and_login(client, \"stored1@test.com\", \"securepass1\")\n    resp = await client.post(\n        \"/api/v1/resumes/upload\",\n        headers=_auth_headers(tokens),\n        files={\"file\": (\"my_resume.pdf\", io.BytesIO(_FAKE_PDF), \"application/pdf\")},",
+        "detail": "backend.tests.test_stored_resumes",
+        "documentation": {}
+    },
+    {
+        "label": "pytestmark",
+        "kind": 5,
         "importPath": "backend.tests.test_tasks",
         "description": "backend.tests.test_tasks",
-        "peekOfCode": "pytestmark = pytest.mark.asyncio\nasync def test_send_welcome_email_runs_without_error() -> None:\n    \"\"\"The task must complete without raising even with the stub mailer.\"\"\"\n    # ARQ passes a context dict as the first argument.\n    ctx: dict = {}\n    # Should not raise.\n    await send_welcome_email(ctx, email=\"test@example.com\", username=\"TestUser\")",
+        "peekOfCode": "pytestmark = pytest.mark.asyncio\nasync def test_send_welcome_email_runs_without_error() -> None:\n    \"\"\"The task must complete without raising even with the stub mailer.\"\"\"\n    # ARQ passes a context dict as the first argument.\n    ctx: dict = {}\n    # Should not raise.\n    await send_welcome_email(ctx, email=\"test@example.com\", username=\"TestUser\")\nasync def test_cleanup_expired_tokens_runs() -> None:\n    \"\"\"cleanup_expired_tokens executes against DB without raising.\"\"\"\n    ctx: dict = {}",
         "detail": "backend.tests.test_tasks",
         "documentation": {}
     },
@@ -5773,6 +6949,24 @@
         "description": "playstore-production-automation.tests.test_version_agent",
         "peekOfCode": "SAMPLE_GRADLE_KTS = \"\"\"\\\nandroid {\n    compileSdk = 34\n    defaultConfig {\n        applicationId = \"com.example.app\"\n        minSdk = 21\n        targetSdk = 34\n        versionCode = 42\n        versionName = \"1.2.3\"\n    }",
         "detail": "playstore-production-automation.tests.test_version_agent",
+        "documentation": {}
+    },
+    {
+        "label": "directories",
+        "kind": 5,
+        "importPath": "fix_themes",
+        "description": "fix_themes",
+        "peekOfCode": "directories = [\n    '/Users/saibabu/AndroidStudioProjects/production/ResumeCreationApp/feature/resume/src/main/kotlin/com/softsuave/resumecreationapp/feature/resume/ui',\n    '/Users/saibabu/AndroidStudioProjects/production/ResumeCreationApp/feature/ats/src/main/kotlin/com/softsuave/resumecreationapp/feature/ats/ui'\n]\nreplacements = {\n    r'\\bAmber80\\b': 'MaterialTheme.colorScheme.primary',\n    r'\\bAmber\\b': 'MaterialTheme.colorScheme.primary',\n    r'\\bCanvas\\b(?!\\s*\\()': 'MaterialTheme.colorScheme.background',\n    r'\\bTextPrimary\\b': 'MaterialTheme.colorScheme.onBackground',\n    r'\\bTextPri\\b': 'MaterialTheme.colorScheme.onBackground',",
+        "detail": "fix_themes",
+        "documentation": {}
+    },
+    {
+        "label": "replacements",
+        "kind": 5,
+        "importPath": "fix_themes",
+        "description": "fix_themes",
+        "peekOfCode": "replacements = {\n    r'\\bAmber80\\b': 'MaterialTheme.colorScheme.primary',\n    r'\\bAmber\\b': 'MaterialTheme.colorScheme.primary',\n    r'\\bCanvas\\b(?!\\s*\\()': 'MaterialTheme.colorScheme.background',\n    r'\\bTextPrimary\\b': 'MaterialTheme.colorScheme.onBackground',\n    r'\\bTextPri\\b': 'MaterialTheme.colorScheme.onBackground',\n    r'\\bTextMuted\\b': 'MaterialTheme.colorScheme.onSurfaceVariant',\n    r'\\bSurface0\\b': 'MaterialTheme.colorScheme.surfaceVariant',\n    r'\\bSurface1\\b': 'MaterialTheme.colorScheme.surfaceVariant',\n    r'\\bSurfaceHigh\\b': 'MaterialTheme.colorScheme.surfaceVariant',",
+        "detail": "fix_themes",
         "documentation": {}
     }
 ]

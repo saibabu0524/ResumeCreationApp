@@ -33,6 +33,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.softsuave.resumecreationapp.feature.resume.ResumeUiState
 import com.softsuave.resumecreationapp.feature.resume.ResumeViewModel
 import com.softsuave.resumecreationapp.core.ui.theme.*
@@ -54,7 +55,7 @@ fun HomeScreen(
     currentThemeMode: ThemeMode = ThemeMode.System,
     onThemeChanged: (ThemeMode) -> Unit = {},
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(uiState) {
         if (uiState is ResumeUiState.Success) {

@@ -41,7 +41,16 @@ class AuthRepositoryImpl @Inject constructor(
                         DomainResult.Error(AppException.Unknown("Empty token response from server."))
                     }
                 }
-                is DomainResult.Error -> result
+                is DomainResult.Error -> {
+                    // The server correctly returns HTTP 401 for invalid credentials.
+                    // Remap to a user-friendly message so the UI doesn't show
+                    // "Unauthorized. Please sign in again." for a wrong password.
+                    if (result.exception is AppException.Unauthorized) {
+                        DomainResult.Error(AppException.Unauthorized("Invalid email or password."))
+                    } else {
+                        result
+                    }
+                }
                 is DomainResult.Loading -> DomainResult.Error(AppException.Unknown())
             }
         }

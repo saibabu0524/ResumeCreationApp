@@ -24,6 +24,7 @@ from arq.connections import RedisSettings
 from app.core.config import get_settings
 from app.tasks.cleanup import cleanup_expired_tokens, cleanup_orphaned_uploads
 from app.tasks.email import send_password_reset_email, send_welcome_email
+from app.tasks.resume import process_resume_tailor
 
 
 async def startup(ctx: dict) -> None:
@@ -48,6 +49,7 @@ class WorkerSettings:
         send_password_reset_email,
         cleanup_expired_tokens,
         cleanup_orphaned_uploads,
+        process_resume_tailor,
     ]
 
     # ── Scheduled (cron) tasks ────────────────────────────────────────────────
@@ -62,9 +64,9 @@ class WorkerSettings:
     redis_settings = RedisSettings.from_dsn(_settings.REDIS_URL)
 
     # ── Retry / timeout ───────────────────────────────────────────────────────
-    max_tries = 3
-    job_timeout = 300  # seconds
-    keep_result = 3600  # seconds to retain job result in Redis
+    max_tries = 1          # Resume jobs should not auto-retry — failures are reported to the user via DB status.
+    job_timeout = 600      # 10 minutes — covers worst-case 2-stage LLM + pdflatex pipeline.
+    keep_result = 86400    # Keep job result in Redis for 24 hours so clients can poll.
 
     # ── Lifecycle hooks ───────────────────────────────────────────────────────
     on_startup = startup

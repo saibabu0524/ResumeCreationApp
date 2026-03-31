@@ -47,8 +47,9 @@ services:
   # ── Redis ──────────────────────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
+    # Port is intentionally not exposed to the host — containers communicate
+    # over the internal Docker network. Remove the host port mapping to avoid
+    # conflicts with a locally-running Redis instance.
     volumes:
       - redis_data:/data
     healthcheck:

@@ -19,6 +19,14 @@ class AuthInterceptor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
+
+        // Safety net: never attach a Bearer token to public auth endpoints.
+        // In practice these routes use the unauthenticated Retrofit client, but this
+        // guard prevents accidental token attachment if routing is ever misconfigured.
+        if (AUTH_PATHS.any { originalRequest.url.encodedPath.contains(it) }) {
+            return chain.proceed(originalRequest)
+        }
+
         val token = tokenProvider() ?: return chain.proceed(originalRequest)
 
         val authenticatedRequest = originalRequest.newBuilder()
@@ -26,5 +34,14 @@ class AuthInterceptor(
             .build()
 
         return chain.proceed(authenticatedRequest)
+    }
+
+    private companion object {
+        val AUTH_PATHS = setOf(
+            "/auth/login",
+            "/auth/register",
+            "/auth/refresh",
+            "/auth/logout",
+        )
     }
 }

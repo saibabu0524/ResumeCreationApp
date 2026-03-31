@@ -25,6 +25,7 @@ dependencies = [
     "passlib[bcrypt]>=1.7.4",
     # Config
     "pydantic-settings>=2.4",
+    "python-dotenv>=1.0",
     # Rate limiting
     "slowapi>=0.1.9",
     # Background tasks
@@ -54,6 +55,9 @@ dev = [
 ]
 
 # ── Ruff ──────────────────────────────────────────────────────────────────────
+[tool.setuptools.packages.find]
+include = ["app*"]
+
 [tool.ruff]
 target-version = "py312"
 line-length = 100

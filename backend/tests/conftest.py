@@ -25,6 +25,8 @@ from sqlmodel import SQLModel
 # Import all models so metadata contains all tables before create_all.
 import app.models.user  # noqa: F401
 import app.models.token  # noqa: F401
+import app.models.resume  # noqa: F401
+import app.models.stored_resume  # noqa: F401
 
 from app.core.limiter import limiter
 from app.db.session import get_db
