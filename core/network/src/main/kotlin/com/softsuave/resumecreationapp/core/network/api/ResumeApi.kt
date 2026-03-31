@@ -48,12 +48,12 @@ data class JobStatusDto(
 data class ResumeHistoryItemDto(
     val id: String,
     val status: String = "completed",
-    @SerialName("job_description") val jobDescription: String,
-    val provider: String,
-    @SerialName("original_filename") val originalFilename: String,
+    @SerialName("job_description") val jobDescription: String = "",
+    val provider: String = "",
+    @SerialName("original_filename") val originalFilename: String = "",
     @SerialName("stored_filename") val storedFilename: String? = null,
     @SerialName("uploaded_stored_filename") val uploadedStoredFilename: String? = null,
-    @SerialName("created_at") val createdAt: String,
+    @SerialName("created_at") val createdAt: String = "",
 )
 
 // ── API interface ─────────────────────────────────────────────────────────────

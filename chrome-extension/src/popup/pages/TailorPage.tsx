@@ -14,6 +14,7 @@ export function TailorPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [progressMsg, setProgressMsg] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   // Load extracted JD + stored resumes on mount
@@ -66,6 +67,7 @@ export function TailorPage() {
     setLoading(true);
     setError("");
     setSuccess("");
+    setProgressMsg("Uploading resume\u2026");
 
     try {
       const blob = await tailorResume({
@@ -73,6 +75,7 @@ export function TailorPage() {
         file: useUpload ? uploadFile! : undefined,
         jobDescription,
         provider,
+        onProgress: setProgressMsg,
       });
 
       // Download the tailored PDF
@@ -85,9 +88,10 @@ export function TailorPage() {
       setSuccess("Tailored resume downloaded!");
     } catch (err: any) {
       const detail = err?.response?.data?.detail;
-      setError(typeof detail === "string" ? detail : "Tailoring failed. Please try again.");
+      setError(typeof detail === "string" ? detail : err?.message ?? "Tailoring failed. Please try again.");
     } finally {
       setLoading(false);
+      setProgressMsg("");
     }
   };
 
@@ -185,12 +189,18 @@ export function TailorPage() {
         </select>
       </div>
 
+      {loading && progressMsg && (
+        <div className="p-2 bg-blue-50 text-blue-700 text-xs rounded text-center">
+          {progressMsg}
+        </div>
+      )}
+
       <button
         onClick={handleTailor}
         disabled={loading}
         className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? "Tailoring... (this may take a minute)" : "Tailor Resume"}
+        {loading ? "Processing…" : "Tailor Resume"}
       </button>
     </div>
   );

@@ -1,22 +1,24 @@
-"""Integration tests for POST /api/v1/resume/tailor.
+"""Integration tests for the resume tailoring endpoints.
 
 Coverage
 --------
-- Unauthenticated request → 403.
-- Non-PDF file upload → 415.
-- Happy path (Gemini provider): returns a PDF stream.
-- Happy path (Ollama provider): returns a PDF stream.
-- Stage pipeline returns None (LLM/compile failure) → 500.
-- PDF extraction fails (corrupt PDF) → 400.
-- Provider error (Gemini not configured) → 503.
+- POST /api/v1/resume/tailor:
+  - Unauthenticated request → 401.
+  - Non-PDF file upload → 415.
+  - Happy path: enqueues a job and returns 202 + job_id.
+  - Missing job_description → 422.
+- GET /api/v1/resume/jobs/{job_id}:
+  - Known job → returns status.
+  - Unknown job → 404.
+- GET /api/v1/resume/jobs/{job_id}/download:
+  - Job not completed → 409.
 """
 
 from __future__ import annotations
 
 import io
-import tempfile
-from pathlib import Path
-from unittest.mock import AsyncMock, patch
+import uuid
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from httpx import AsyncClient
@@ -46,22 +48,18 @@ def _tailor_data(
     return {"job_description": job_description, "provider": provider}
 
 
-def _make_fake_pipeline(pdf_content: bytes = b"%PDF-1.4 tailored" + b"x" * 2000):
-    """Return an async function that writes a fake PDF and returns LaTeX."""
-
-    async def _fake_pipeline(pdf_bytes, job_description, provider, work_dir, request_id):
-        # Write a fake compiled PDF so the route can read it back.
-        Path(work_dir, "resume.pdf").write_bytes(pdf_content)
-        return r"\documentclass{article}\begin{document}Tailored\end{document}"
-
-    return _fake_pipeline
+def _mock_arq_pool() -> MagicMock:
+    """Create a mock ARQ pool whose enqueue_job returns a fake job."""
+    pool = AsyncMock()
+    pool.enqueue_job = AsyncMock(return_value=MagicMock(job_id="fake"))
+    return pool
 
 
-# --- Tests --------------------------------------------------------------------
+# --- Tests — POST /resume/tailor ─────────────────────────────────────────────
 
 
 async def test_tailor_unauthenticated(client: AsyncClient) -> None:
-    """No Authorization header → 403."""
+    """No Authorization header → 401."""
     resp = await client.post(
         "/api/v1/resume/tailor",
         files=_pdf_file(),
@@ -93,127 +91,44 @@ async def test_tailor_non_pdf_file(client: AsyncClient) -> None:
     assert resp.status_code == 415
 
 
-async def test_tailor_happy_path_gemini(client: AsyncClient) -> None:
-    """Full happy path with Gemini provider returns a PDF stream."""
+async def test_tailor_happy_path_enqueues_job(client: AsyncClient) -> None:
+    """Happy path with Gemini provider returns 202 + job_id."""
     tokens = await register_and_login(client, "tailor2@test.com", "securepass1")
 
-    with patch(
-        "app.api.v1.routes.resume.tailor_resume_pipeline",
-        side_effect=_make_fake_pipeline(),
-    ):
-        resp = await client.post(
-            "/api/v1/resume/tailor",
-            headers=_auth_headers(tokens),
-            files=_pdf_file(),
-            data=_tailor_data(provider="gemini"),
-        )
+    mock_pool = _mock_arq_pool()
+    client._transport.app.state.arq_pool = mock_pool  # type: ignore[union-attr]
 
-    assert resp.status_code == 200
-    assert resp.headers["content-type"] == "application/pdf"
-    assert b"%PDF" in resp.content
-    assert "tailored_resume.pdf" in resp.headers.get("content-disposition", "")
+    resp = await client.post(
+        "/api/v1/resume/tailor",
+        headers=_auth_headers(tokens),
+        files=_pdf_file(),
+        data=_tailor_data(provider="gemini"),
+    )
+
+    assert resp.status_code == 202
+    body = resp.json()
+    assert body["data"]["status"] == "queued"
+    assert "job_id" in body["data"]
+    mock_pool.enqueue_job.assert_awaited_once()
 
 
 async def test_tailor_happy_path_ollama(client: AsyncClient) -> None:
-    """Full happy path with Ollama provider returns a PDF stream."""
+    """Happy path with Ollama provider returns 202 + job_id."""
     tokens = await register_and_login(client, "tailor3@test.com", "securepass1")
 
-    with patch(
-        "app.api.v1.routes.resume.tailor_resume_pipeline",
-        side_effect=_make_fake_pipeline(),
-    ):
-        resp = await client.post(
-            "/api/v1/resume/tailor",
-            headers=_auth_headers(tokens),
-            files=_pdf_file(),
-            data=_tailor_data(provider="ollama"),
-        )
+    mock_pool = _mock_arq_pool()
+    client._transport.app.state.arq_pool = mock_pool  # type: ignore[union-attr]
 
-    assert resp.status_code == 200
-    assert resp.headers["content-type"] == "application/pdf"
+    resp = await client.post(
+        "/api/v1/resume/tailor",
+        headers=_auth_headers(tokens),
+        files=_pdf_file(),
+        data=_tailor_data(provider="ollama"),
+    )
 
-
-async def test_tailor_pipeline_compile_failure(client: AsyncClient) -> None:
-    """Pipeline returns None (all retries exhausted) → 500."""
-    tokens = await register_and_login(client, "tailor4@test.com", "securepass1")
-
-    from fastapi import HTTPException
-
-    async def _failing_pipeline(**kwargs):
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to generate valid structured LaTeX from resume after retries.",
-        )
-
-    with patch("app.api.v1.routes.resume.tailor_resume_pipeline", side_effect=_failing_pipeline):
-        resp = await client.post(
-            "/api/v1/resume/tailor",
-            headers=_auth_headers(tokens),
-            files=_pdf_file(),
-            data=_tailor_data(),
-        )
-
-    assert resp.status_code == 500
-
-
-async def test_tailor_corrupt_pdf(client: AsyncClient) -> None:
-    """Corrupt PDF that can't be parsed → 400."""
-    tokens = await register_and_login(client, "tailor5@test.com", "securepass1")
-
-    from fastapi import HTTPException
-
-    async def _extract_fails(**kwargs):
-        raise HTTPException(status_code=400, detail="Could not extract text from PDF.")
-
-    with patch("app.api.v1.routes.resume.tailor_resume_pipeline", side_effect=_extract_fails):
-        resp = await client.post(
-            "/api/v1/resume/tailor",
-            headers=_auth_headers(tokens),
-            files={"resume": ("resume.pdf", io.BytesIO(b"not a pdf"), "application/pdf")},
-            data=_tailor_data(),
-        )
-
-    assert resp.status_code == 400
-
-
-async def test_tailor_gemini_not_configured(client: AsyncClient) -> None:
-    """Gemini API key missing → 503."""
-    tokens = await register_and_login(client, "tailor6@test.com", "securepass1")
-
-    from fastapi import HTTPException
-
-    async def _no_key(**kwargs):
-        raise HTTPException(status_code=503, detail="GEMINI_API_KEY not configured.")
-
-    with patch("app.api.v1.routes.resume.tailor_resume_pipeline", side_effect=_no_key):
-        resp = await client.post(
-            "/api/v1/resume/tailor",
-            headers=_auth_headers(tokens),
-            files=_pdf_file(),
-            data=_tailor_data(provider="gemini"),
-        )
-
-    assert resp.status_code == 503
-
-
-async def test_tailor_unknown_provider(client: AsyncClient) -> None:
-    """Unrecognised provider string → 400."""
-    tokens = await register_and_login(client, "tailor7@test.com", "securepass1")
-
-    from fastapi import HTTPException
-
-    async def _bad_provider(**kwargs):
-        raise HTTPException(status_code=400, detail="Invalid provider.")
-
-    with patch("app.api.v1.routes.resume.tailor_resume_pipeline", side_effect=_bad_provider):
-        resp = await client.post(
-            "/api/v1/resume/tailor",
-            headers=_auth_headers(tokens),
-            files=_pdf_file(),
-            data=_tailor_data(provider="openai"),
-        )
-
-    assert resp.status_code == 400
+    assert resp.status_code == 202
+    body = resp.json()
+    assert body["data"]["status"] == "queued"
 
 
 async def test_tailor_missing_job_description(client: AsyncClient) -> None:
@@ -227,3 +142,65 @@ async def test_tailor_missing_job_description(client: AsyncClient) -> None:
         data={"provider": "gemini"},
     )
     assert resp.status_code == 422
+
+
+# --- Tests — GET /resume/jobs/{job_id} ────────────────────────────────────────
+
+
+async def test_job_status_not_found(client: AsyncClient) -> None:
+    """Unknown job_id → 404."""
+    tokens = await register_and_login(client, "poll1@test.com", "securepass1")
+    fake_id = str(uuid.uuid4())
+    resp = await client.get(
+        f"/api/v1/resume/jobs/{fake_id}",
+        headers=_auth_headers(tokens),
+    )
+    assert resp.status_code == 404
+
+
+async def test_job_status_after_submit(client: AsyncClient) -> None:
+    """After submitting a job, polling returns 'queued' status."""
+    tokens = await register_and_login(client, "poll2@test.com", "securepass1")
+
+    mock_pool = _mock_arq_pool()
+    client._transport.app.state.arq_pool = mock_pool  # type: ignore[union-attr]
+
+    submit_resp = await client.post(
+        "/api/v1/resume/tailor",
+        headers=_auth_headers(tokens),
+        files=_pdf_file(),
+        data=_tailor_data(),
+    )
+    job_id = submit_resp.json()["data"]["job_id"]
+
+    status_resp = await client.get(
+        f"/api/v1/resume/jobs/{job_id}",
+        headers=_auth_headers(tokens),
+    )
+    assert status_resp.status_code == 200
+    assert status_resp.json()["data"]["status"] == "queued"
+
+
+# --- Tests — GET /resume/jobs/{job_id}/download ──────────────────────────────
+
+
+async def test_download_not_completed(client: AsyncClient) -> None:
+    """Downloading before job is completed → 409."""
+    tokens = await register_and_login(client, "dl1@test.com", "securepass1")
+
+    mock_pool = _mock_arq_pool()
+    client._transport.app.state.arq_pool = mock_pool  # type: ignore[union-attr]
+
+    submit_resp = await client.post(
+        "/api/v1/resume/tailor",
+        headers=_auth_headers(tokens),
+        files=_pdf_file(),
+        data=_tailor_data(),
+    )
+    job_id = submit_resp.json()["data"]["job_id"]
+
+    dl_resp = await client.get(
+        f"/api/v1/resume/jobs/{job_id}/download",
+        headers=_auth_headers(tokens),
+    )
+    assert dl_resp.status_code == 409

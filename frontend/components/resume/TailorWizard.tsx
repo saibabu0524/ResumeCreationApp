@@ -24,7 +24,7 @@ export function TailorWizard() {
     const [jdError, setJdError] = useState<string | null>(null);
     const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
-    const { mutate, isPending, isError, error } = useTailorJob();
+    const { mutate, isPending, isError, error, progressMessage } = useTailorJob();
 
     const onDrop = useCallback((accepted: File[], rejected: FileRejection[]) => {
         setFileError(null);
@@ -212,7 +212,9 @@ export function TailorWizard() {
                             </div>
                             <div>
                                 <p className="text-lg font-semibold text-foreground">AI is tailoring your resume…</p>
-                                <p className="mt-1 text-sm text-muted-foreground">This usually takes 10–20 seconds</p>
+                                <p className="mt-1 text-sm text-muted-foreground">
+                                    {progressMessage ?? "This usually takes 10–20 seconds"}
+                                </p>
                             </div>
                             <div className="mx-auto max-w-sm space-y-2">
                                 <div className="skeleton h-3 w-full rounded" />

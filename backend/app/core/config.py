@@ -75,7 +75,7 @@ class Settings(BaseSettings):
     # ── AI / LLM providers ───────────────────────────────────────────────────
     # Gemini
     GEMINI_API_KEY: str | None = None
-    GEMINI_MODEL: str = "gemini-2.5-flash"
+    GEMINI_MODEL: str = "gemini-2.0-flash"
 
     # Ollama (local or remote)
     OLLAMA_BASE_URL: str = "http://localhost:11434"
@@ -87,8 +87,13 @@ class Settings(BaseSettings):
     CLOUD_BASE_URL: str = "https://api.moonshot.cn/v1"
     CLOUD_MODEL: str = "moonshot-v1-8k"
 
+    # Qwen via SiliconFlow (OpenAI-compatible)
+    QWEN_API_KEY: str | None = None
+    QWEN_BASE_URL: str = "https://api.siliconflow.cn/v1"
+    QWEN_MODEL: str = "Qwen/Qwen2.5-72B-Instruct"
+
     # ── Resume processing ────────────────────────────────────────────────────
-    LLM_RETRY_ATTEMPTS: int = 2
+    LLM_RETRY_ATTEMPTS: int = 1
 
     # ── Derived helpers ──────────────────────────────────────────────────────
     @property
